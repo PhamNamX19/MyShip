@@ -13,7 +13,7 @@ public class Signup extends AppCompatActivity {
     private EditText edPass;
     private EditText edRePass;
     private EditText edPhone;
-    private EditText hihi;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
