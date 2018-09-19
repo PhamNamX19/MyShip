@@ -42,6 +42,8 @@ public class VerifyPhone extends AppCompatActivity {
         user = intent.getStringExtra("user");
         pass = intent.getStringExtra("pass");
         phone = intent.getStringExtra("phone");
+        phone = intent.getStringExtra("tesst");
+
 
         // hkoi toa doi tuong
         edCodeVerify = findViewById(R.id.edVerify);
