@@ -35,14 +35,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Anhxa();
+        Initialization();
 
         //xin quyền facebook
         loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
         setLogin_Button();
     }
 
-    private void Anhxa() {
+    private void Initialization() {
         Log.d("anhxa","anhxathanhcong");
         edLoginUser = (EditText) findViewById(R.id.edLoginUser);
         edLoginPass = (EditText) findViewById(R.id.edLoginPass);
