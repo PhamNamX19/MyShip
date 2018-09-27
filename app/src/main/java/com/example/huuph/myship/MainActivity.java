@@ -113,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onclickLogin(View view) {
         //TODO gửi lên firrebase và check acc (Phước)
+        Intent intent = new Intent(this,DebugFirebase.class);
+        startActivity(intent);
     }
 
 
