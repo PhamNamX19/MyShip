@@ -25,6 +25,7 @@ public class FragmentNews extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ui_news,container,false);
+        innit();
         return view;
     }
 
