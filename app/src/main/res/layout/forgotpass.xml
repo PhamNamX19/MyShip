@@ -56,7 +56,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/duongvien_goctron"
+                android:background="@drawable/selector_button"
                 android:onClick="ocClickXacNhan"
                 android:text="@string/xac_nhan"
                 android:textAllCaps="false"

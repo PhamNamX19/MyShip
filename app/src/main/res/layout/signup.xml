@@ -73,7 +73,7 @@
                 android:onClick="onClickedSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/duongvien_goctron"
+                android:background="@drawable/selector_button"
                 android:text="@string/sign_up"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
