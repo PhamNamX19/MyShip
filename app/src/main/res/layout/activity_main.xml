@@ -8,27 +8,31 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/background">
 
         <LinearLayout
+            android:id="@+id/logo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/ll"
-            android:gravity="center">
+            android:gravity="center"
+
+            >
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/logo2" />
+                android:src="@drawable/logo3" />
         </LinearLayout>
 
         <LinearLayout
+
             android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
             android:orientation="vertical">
@@ -69,30 +73,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="30dp" />
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp" />
 
 
             <TextView
-                android:onClick="onClickSignUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:onClick="onClickSignUp"
                 android:text="@string/sign_up"
-                android:textColor="#357493" />
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:onClick="onClickFogotpass"
+                android:text="@string/forgot_pass"
+                android:textColor="@color/white" />
 
         </LinearLayout>
-
-
-        <TextView
-            android:onClick="onClickFogotpass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_margin="5dp"
-            android:text="@string/forgot_pass"
-            android:textColor="#e82337" />
 
 
     </RelativeLayout>
