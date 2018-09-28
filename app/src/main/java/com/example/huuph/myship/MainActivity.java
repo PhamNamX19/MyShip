@@ -126,5 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickFogotpass(View view) {
         //TODO Chuyển sang layout quên mật khẩu
+        Intent intent = new Intent(this,ForgotPass.class);
+        startActivity(intent);
     }
 }
