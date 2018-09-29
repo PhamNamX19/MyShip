@@ -1,4 +1,4 @@
-package com.example.huuph.myship;
+package com.example.huuph.myship.uis.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,13 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FragmentFavorite extends Fragment {
-    private static FragmentFavorite instance;
+import com.example.huuph.myship.R;
 
+public class FragmentNews extends Fragment {
+    private static FragmentNews instance;
 
-    public static FragmentFavorite getInstance() {
-        if (instance == null){
-            instance = new FragmentFavorite();
+    private int number = 0;
+
+    public static FragmentNews getInstance() {
+        if (instance == null) {
+            instance = new FragmentNews();
         }
         return instance;
     }
@@ -22,7 +25,12 @@ public class FragmentFavorite extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.ui_favorite,container,false);
+        View view = inflater.inflate(R.layout.ui_news,container,false);
+
         return view;
     }
+
+
+
+
 }

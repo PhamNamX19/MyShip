@@ -1,4 +1,4 @@
-package com.example.huuph.myship;
+package com.example.huuph.myship.FirebaseHelper;
 
 import android.app.Application;
 
