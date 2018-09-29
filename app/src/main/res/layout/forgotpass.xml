@@ -60,7 +60,7 @@
                 android:onClick="ocClickXacNhan"
                 android:text="@string/xac_nhan"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
+                android:textColor="@color/text_color"
                 android:textSize="20dp" />
 
 
