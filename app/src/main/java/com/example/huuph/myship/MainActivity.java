@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.huuph.myship.FirebaseHelper.main_main;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onclickLogin(View view) {
         //TODO gửi lên firrebase và check acc (Phước)
-        Intent intent = new Intent(this,DebugFirebase.class);
+        Intent intent = new Intent(this,main_main.class);
         startActivity(intent);
     }
 

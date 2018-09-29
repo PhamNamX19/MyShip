@@ -26,7 +26,7 @@ public class VerifyPhone extends AppCompatActivity {
     private String phone;
     private String codeVerify;
     private String mVerificationId;
-    private String mVerificationIfd;
+
 
     private PhoneAuthCredential credential;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;

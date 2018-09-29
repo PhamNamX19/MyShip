@@ -1,4 +1,4 @@
-package com.example.huuph.myship;
+package com.example.huuph.myship.FirebaseHelper;
 
 
 import android.os.Bundle;
@@ -9,6 +9,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Toolbar;
+
+import com.example.huuph.myship.FragmentNews;
+import com.example.huuph.myship.PageAdapter;
+import com.example.huuph.myship.R;
 
 public class main_main extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
@@ -18,6 +23,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     private DrawerLayout drawerLayout;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    private ActionBarDrawerToggle actionbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +76,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     @Override
     public void onPageSelected(int i) {
         if (i ==0){
-            FragmentNews.getInstance().setNumber();
+            FragmentNews.getInstance();
         }
     }
 

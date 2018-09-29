@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class FragmentNews extends Fragment {
     private static FragmentNews instance;
-    private TextView tvNumber;
+
     private int number = 0;
 
     public static FragmentNews getInstance() {
@@ -25,14 +25,11 @@ public class FragmentNews extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.ui_news,container,false);
-        tvNumber  = (TextView)view.findViewById(R.id.tv_number);
+
         return view;
     }
 
 
 
-    public void setNumber() {
-        number++;
-        tvNumber.setText(number + "");
-    }
+
 }

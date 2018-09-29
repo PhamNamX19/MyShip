@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">My Ship</string>
+    <string name="app_name"></string>
     <string name="sign_up">Đăng Ký</string>
     <string name="log_in">Đăng Nhập</string>
     <string name="Email">Tài khoản hoặc email</string>
