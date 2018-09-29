@@ -1,4 +1,4 @@
-package com.example.huuph.myship;
+package com.example.huuph.myship.uis.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.huuph.myship.FirebaseHelper.main_main;
+import com.example.huuph.myship.ForgotPass;
+import com.example.huuph.myship.R;
+import com.example.huuph.myship.Signup;
+import com.example.huuph.myship.uis.main_main;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;

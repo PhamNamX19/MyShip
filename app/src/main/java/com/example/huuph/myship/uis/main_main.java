@@ -1,4 +1,4 @@
-package com.example.huuph.myship.FirebaseHelper;
+package com.example.huuph.myship.uis;
 
 
 import android.os.Bundle;
@@ -9,10 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.Toolbar;
 
-import com.example.huuph.myship.FragmentNews;
-import com.example.huuph.myship.PageAdapter;
+import com.example.huuph.myship.uis.fragment.FragmentNews;
+import com.example.huuph.myship.adapter.PageAdapter;
 import com.example.huuph.myship.R;
 
 public class main_main extends AppCompatActivity implements ViewPager.OnPageChangeListener {

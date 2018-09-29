@@ -1,9 +1,13 @@
-package com.example.huuph.myship;
+package com.example.huuph.myship.adapter;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.huuph.myship.uis.fragment.FragmentFavorite;
+import com.example.huuph.myship.uis.fragment.FragmentNews;
+import com.example.huuph.myship.uis.fragment.FragmentSaved;
 
 public class PageAdapter extends FragmentPagerAdapter {
     public PageAdapter(FragmentManager fm) {

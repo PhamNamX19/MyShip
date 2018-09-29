@@ -1,4 +1,4 @@
-package com.example.huuph.myship;
+package com.example.huuph.myship.FirebaseHelper;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.huuph.myship.R;
+import com.example.huuph.myship.UserManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
