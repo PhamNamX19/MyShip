@@ -1,9 +1,13 @@
 package com.example.huuph.myship.uis.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -35,6 +39,8 @@ import com.google.firebase.auth.FirebaseUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
@@ -53,9 +59,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        FacebookSdk.sdkInitialize(getApplicationContext());
-//        AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_main);
         Initialization();
 
@@ -64,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void Initialization() {
         Log.d("anhxa", "anhxathanhcong");
-        edLoginUser = (EditText) findViewById(R.id.edLoginUser);
-        edLoginPass = (EditText) findViewById(R.id.edLoginPass);
+        edLoginUser = findViewById(R.id.edLoginUser);
+        edLoginPass = findViewById(R.id.edLoginPass);
 
 
         //đăng nhập lại mỗi khi vào ứng dụng
