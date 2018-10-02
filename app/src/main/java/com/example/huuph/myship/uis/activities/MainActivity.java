@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.huuph.myship.ForgotPass;
 import com.example.huuph.myship.R;
@@ -20,6 +21,7 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.login.widget.ProfilePictureView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +31,8 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
     private EditText edLoginUser;
     private EditText edLoginPass;
+
+    private ProfilePictureView profile;
 
     private CallbackManager callbackManager;
     private LoginButton loginButton;
@@ -47,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Initialization() {
-        Log.d("anhxa","anhxathanhcong");
+        Log.d("TAG","Init successfull");
         edLoginUser = (EditText) findViewById(R.id.edLoginUser);
         edLoginPass = (EditText) findViewById(R.id.edLoginPass);
         callbackManager = CallbackManager.Factory.create();
@@ -89,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     email = object.getString("email");
                     name = object.getString("name");
                     id_facebook = object.getString("id");
+                    Toast.makeText(MainActivity.this, email, Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
