@@ -144,11 +144,10 @@ public class Signup extends AppCompatActivity {
         });
     }
     private void creatAcc(String mEmail, String mPass){
-        SignUpHelper.signUp(mEmail,mPass, Signup.this);
+        SignUpHelper.signUpWithEmail(mEmail,mPass, Signup.this);
         progressDialog.hide();
         Log.d("TAG","Created account");
     }
 
 
 }
-

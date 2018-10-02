@@ -11,7 +11,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpHelper {
-    public static void signUp(String email, String pass, final Activity activity) {
+    public static void signUpWithEmail(String email, String pass, final Activity activity) {
 
         FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseAuth.createUserWithEmailAndPassword(email,pass)
