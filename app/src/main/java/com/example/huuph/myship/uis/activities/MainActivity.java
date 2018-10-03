@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -46,6 +48,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
     private EditText edLoginUser;
     private EditText edLoginPass;
+    private Button btfacebook;
 
     private CallbackManager callbackManager;
     private LoginButton loginButton;
@@ -59,17 +62,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Initialization();
 
+        setContentView(R.layout.activity_main);
+
+        Initialization();
         setLogin_Button();
+        //an button facebook mac dinh
+        loginButton.setVisibility(View.GONE);
     }
 
     private void Initialization() {
         Log.d("anhxa", "anhxathanhcong");
         edLoginUser = findViewById(R.id.edLoginUser);
         edLoginPass = findViewById(R.id.edLoginPass);
-
+        btfacebook = (Button) findViewById(R.id.btfacebook);
 
         //đăng nhập lại mỗi khi vào ứng dụng
         //onStart();
@@ -108,12 +114,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
+                if (user != null) {
                     //dang nhap thanh cong
                     //todo lay thong tin avatar, mail
-                    Log.d(TAG,"onAuthStateChanged:signed_in"+ user.getUid());
-                }else{
-                    Log.d(TAG,"onAuthStateChanged:signed_out");
+                    Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
+                } else {
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
 
                 }
 
@@ -193,7 +199,6 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
-
     public void onclickLogin(View view) {
         //TODO gửi lên firrebase và check acc (Phước)
         Intent intent = new Intent(this, main_main.class);
@@ -211,5 +216,14 @@ public class MainActivity extends AppCompatActivity {
         //TODO Chuyển sang layout quên mật khẩu
         Intent intent = new Intent(this, ForgotPass.class);
         startActivity(intent);
+    }
+
+    public void login_fabook_custom(View view) {
+        if (view == btfacebook) {
+            loginButton.performClick();
+        }
+    }
+
+    public void onCheckboxClicked(View view) {
     }
 }
