@@ -22,7 +22,6 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     private DrawerLayout drawerLayout;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private ActionBarDrawerToggle actionbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
