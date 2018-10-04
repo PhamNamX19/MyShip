@@ -7,6 +7,7 @@ import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+
+
     String email, name, id_facebook; //mail va name facebook
 
     @Override
@@ -76,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         edLoginUser = findViewById(R.id.edLoginUser);
         edLoginPass = findViewById(R.id.edLoginPass);
         btfacebook = (Button) findViewById(R.id.btfacebook);
+
 
         //đăng nhập lại mỗi khi vào ứng dụng
         //onStart();

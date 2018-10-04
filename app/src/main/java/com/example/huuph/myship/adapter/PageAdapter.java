@@ -39,7 +39,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 0:
                 return "News";
             case 1:
-                return "Saved";
+                return "Map";
             case 2:
                 return "Favorite";
         }
