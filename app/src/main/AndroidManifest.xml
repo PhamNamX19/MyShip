@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.huuph.myship">
-
     <permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".FirebaseHelper.ShipApplication"
         android:allowBackup="true"
@@ -14,7 +13,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ForgotPass"></activity>
         <activity android:name=".Signup"></activity>
-        <activity android:name=".FirebaseHelper.VerifyPhone"></activity>
         <activity android:name=".uis.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FirebaseHelper.VerifyPhone"
-            tools:ignore="DuplicateActivity"></activity>
+
         <activity android:name=".FirebaseHelper.DebugFirebase"></activity>
         <activity android:name=".uis.main_main"></activity>
 

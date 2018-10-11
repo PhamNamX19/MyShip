@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.huuph.myship.uis.fragment.FragmentNews;
@@ -22,6 +23,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     private DrawerLayout drawerLayout;
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,12 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         drawerLayout = findViewById(R.id.drawer_layout);
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tab_layout);
+        toolbar = findViewById(R.id.toolbar);
         // main = findViewById(R.id.main);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(this);
         tabLayout.setupWithViewPager(viewPager);
+
     }
 
     private void initSliding() {
@@ -54,6 +58,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
     private void setUpActionBar() {
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

@@ -2,96 +2,153 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/background"
-    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/logo"
+    >
+
+    <ImageView
+        android:src="@drawable/logo4"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="23dp"
-        android:layout_weight="1">
+        android:layout_height="140dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+         />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo3" />
-    </LinearLayout>
+    <EditText
 
-    <LinearLayout
-
-        android:id="@+id/ll"
+        android:id="@+id/edLoginUser"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:paddingLeft="25dp"
+        android:drawableLeft="@drawable/icon_email"
+        android:drawablePadding="20dp"
+        android:hint="@string/Email"
+        android:textColorHint="#999999"
+        android:background="@drawable/backgroud_edittext"
+        />
+
+    <EditText
+        android:id="@+id/edLoginPass"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/icon_matkhau"
+        android:paddingLeft="25dp"
+        android:drawablePadding="15dp"
+        android:hint="Password"
+        android:textColorHint="#999999"
+        android:background="@drawable/backgroud_edittext"
+        />
+
+    <CheckBox
+        android:id="@+id/checkbox_remenber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:onClick="onCheckboxClicked"
+        android:text="Remember me" />
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_button"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_weight="3"
-        android:orientation="vertical">
+        android:onClick="onclickLogin"
+        android:text="Login"
+        android:textColor="@color/text_color"
+        android:textAllCaps="true" />
 
-        <EditText
-            android:id="@+id/edLoginUser"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="15dp"
-            android:hint="@string/Email"
-            android:paddingLeft="10dp"
-            android:textColor="@color/black" />
+    <TextView
 
-        <EditText
-            android:id="@+id/edLoginPass"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="15dp"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:paddingLeft="10dp"
-            android:textColor="@color/black" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Or login with"
+        android:textColor="#999999"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/selector_button"
-            android:onClick="onclickLogin"
-            android:text="@string/log_in"
+            android:id="@+id/btfacebook"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/icon_facebook"
+            android:paddingLeft="25dp"
+            android:onClick="login_fabook_custom"
+            android:text="Facebook"
+            android:textColor="#3f5997"
             android:textAllCaps="false"
-            android:textColor="@color/text_color"
-            android:textSize="25sp" />
+            android:background="@drawable/selector_button_fb_google"
 
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_facebook"
+
+            />
+
+        <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp" />
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/icon_google"
+            android:paddingLeft="25dp"
+            android:textColor="#4c8bf5"
+            android:text="Google"
+            android:textAllCaps="false"
+            android:background="@drawable/selector_button_fb_google"
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="onClickSignUp"
-            android:text="@string/sign_up"
-            android:textColor="@color/text_color" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:layout_margin="15dp"
-            android:onClick="onClickFogotpass"
-            android:text="@string/forgot_pass"
-            android:textColor="@color/text_color" />
+            />
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:text="Not a member?" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickSignUp"
+            android:text="Sign up now"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <com.facebook.login.widget.LoginButton
+
+        android:id="@+id/login_facebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
