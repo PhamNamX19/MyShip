@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
 
 
-
     String email, name, id_facebook; //mail va name facebook
 
     @Override
@@ -131,20 +130,6 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if(mAuthListener != null){
-//            mAuth.removeAuthStateListener(mAuthListener);
-//        }
-//    }
-
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
@@ -174,35 +159,6 @@ public class MainActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-
-    //log thong tin nguoi dung ve
-//
-//    private void result() {
-//        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-//            @Override
-//            public void onCompleted(JSONObject object, GraphResponse response) {
-//
-//                //xuất ra log thông tin id, name, mail khi đăng nhập thành công
-//                Log.d("JSON", response.getJSONObject().toString());
-//                //thấy thông tin
-//                try {
-//                    email = object.getString("email");
-//                    name = object.getString("name");
-//                    id_facebook = object.getString("id");
-//
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//
-//        Bundle parameters = new Bundle();
-//        parameters.putString("fields", "id,name,email");
-//        graphRequest.setParameters(parameters);
-//        graphRequest.executeAsync();
-//    }
-
-
     public void onclickLogin(View view) {
         //TODO gửi lên firrebase và check acc (Phước)
         Intent intent = new Intent(this, main_main.class);
@@ -230,5 +186,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onCheckboxClicked(View view) {
 
+    }
+
+    public void LoginGoogle(View view) {
+        Toast.makeText(MainActivity.this, "Chức năng đang xây dựng", Toast.LENGTH_LONG);
     }
 }

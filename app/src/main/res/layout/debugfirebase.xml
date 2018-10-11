@@ -4,6 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background">
+    <ImageView
+        android:src="@drawable/logo4"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        />
     <EditText
         android:id="@+id/edDbU"
         android:layout_width="match_parent"
