@@ -189,6 +189,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void LoginGoogle(View view) {
-        Toast.makeText(MainActivity.this, "Chức năng đang xây dựng", Toast.LENGTH_LONG);
+        Toast.makeText(MainActivity.this, "Chức năng đang xây dựng", Toast.LENGTH_SHORT).show();
     }
 }
