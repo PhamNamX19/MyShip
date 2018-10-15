@@ -1,34 +1,21 @@
 package com.example.huuph.myship.uis.activities;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.huuph.myship.ForgotPass;
 import com.example.huuph.myship.R;
-import com.example.huuph.myship.Signup;
 import com.example.huuph.myship.uis.main_main;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -39,11 +26,6 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
 
 
     String email, name, id_facebook; //mail va name facebook
@@ -204,9 +185,36 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onclickLogin(View view) {
-        //TODO gửi lên firrebase và check acc (Phước)
-        Intent intent = new Intent(this, main_main.class);
+//        //TODO gửi lên firrebase và check acc (Phước)
+        Intent intent = new Intent(MainActivity.this, main_main.class);
         startActivity(intent);
+//        FirebaseAuth mAuth;
+//        mAuth = FirebaseAuth.getInstance();
+//
+//        String user = edLoginUser.getText().toString().trim();
+//        String pass = edLoginPass.getText().toString().trim();
+//        if(user.equals("")||pass.equals("")){
+//            Toast.makeText(this, "Please input yours info", Toast.LENGTH_SHORT).show();
+//        }
+//        else {
+//            mAuth.signInWithEmailAndPassword(user,pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                @Override
+//                public void onComplete(@NonNull Task<AuthResult> task) {
+//                    if(task.isSuccessful()){
+//                        Log.d(TAG,"Loged in");
+//                        // chuyen sang cativity main
+//                        Toast.makeText(MainActivity.this, "Login successful. Please wait...", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(MainActivity.this,main_main.class);
+//                        startActivity(intent);
+//                    }
+//                    else {
+//                        Log.d(TAG,"Login fail");
+//                        Log.d(TAG,task.toString());
+//                        Log.d(TAG,task.getException().toString());
+//                    }
+//                }
+//            });
+//        }
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.huuph.myship;
+package com.example.huuph.myship.uis.activities;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.huuph.myship.FirebaseHelper.SignUpHelper;
-import com.google.android.gms.common.oob.SignUp;
+import com.example.huuph.myship.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;

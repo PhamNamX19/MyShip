@@ -17,4 +17,5 @@
     <string name="hint_verify_code">Mã xác nhận</string>
     <string name="verify">Xác nhận</string>
     <string name="sent_code">Đã gửi mã xác minh đến số điện thoại của bạn</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

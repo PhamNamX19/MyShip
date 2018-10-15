@@ -1,4 +1,4 @@
-package com.example.huuph.myship;
+package com.example.huuph.myship.uis.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.huuph.myship.R;
 
 public class ForgotPass extends AppCompatActivity{
     private EditText edForgotUser;

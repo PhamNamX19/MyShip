@@ -9,6 +9,8 @@ import com.example.huuph.myship.uis.fragment.FragmentFavorite;
 import com.example.huuph.myship.uis.fragment.FragmentNews;
 import com.example.huuph.myship.uis.fragment.FragmentSaved;
 
+import static com.example.huuph.myship.uis.fragment.FragmentNews.getInstance;
+
 public class PageAdapter extends FragmentPagerAdapter {
     public PageAdapter(FragmentManager fm) {
         super(fm);
