@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical">
+    <ImageView
+        android:src="@drawable/logo4"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        />
     <TextView
         android:layout_width="match_parent"
         android:text="Xác thực tài khoản"

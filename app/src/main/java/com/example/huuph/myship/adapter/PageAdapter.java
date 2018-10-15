@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.huuph.myship.uis.fragment.FragmentFavorite;
 import com.example.huuph.myship.uis.fragment.FragmentNews;
-import com.example.huuph.myship.uis.fragment.FragmentSaved;
+import com.example.huuph.myship.uis.fragment.FragmentMap;
 
 import static com.example.huuph.myship.uis.fragment.FragmentNews.getInstance;
 
@@ -22,7 +22,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 0:
                 return FragmentNews.getInstance();
             case 1:
-                return FragmentSaved.getInstance();
+                return FragmentMap.getInstance();
             case 2:
                 return FragmentFavorite.getInstance();
         }

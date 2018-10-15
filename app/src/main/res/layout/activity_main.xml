@@ -118,7 +118,7 @@
             android:text="Google"
             android:textAllCaps="false"
             android:background="@drawable/selector_button_fb_google"
-
+            android:onClick="LoginGoogle"
             />
 
     </LinearLayout>

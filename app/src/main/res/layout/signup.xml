@@ -5,84 +5,76 @@
     android:fillViewport="true"
     android:scrollbars="none">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:layout_above="@+id/ll"
-            android:gravity="center">
+            android:layout_height="140dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/logo4"
+            android:textColor="#333333"
+            android:textSize="50sp"
+            android:textStyle="bold" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/logo3" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll"
+        <EditText
+            android:id="@+id/edSignupUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:orientation="vertical">
+            android:layout_marginBottom="15dp"
+            android:hint="@string/Email"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black" />
 
-            <EditText
-                android:id="@+id/edSignupUser"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:hint="@string/Email"
-                android:paddingLeft="10dp"
-                android:textColor="@color/black" />
+        <EditText
+            android:id="@+id/edSignupPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black" />
 
-            <EditText
-                android:id="@+id/edSignupPass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:paddingLeft="10dp"
-                android:textColor="@color/black" />
+        <EditText
+            android:id="@+id/edSignupRePass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:hint="@string/nhap_lai_mk"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black" />
 
-            <EditText
-                android:id="@+id/edSignupRePass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:hint="@string/nhap_lai_mk"
-                android:inputType="textPassword"
-                android:paddingLeft="10dp"
-                android:textColor="@color/black" />
+        <EditText
+            android:id="@+id/edSignupPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black" />
 
-            <EditText
-                android:id="@+id/edSignupPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
-                android:hint="@string/phone"
-                android:paddingLeft="10dp"
-                android:textColor="@color/black"
-                android:inputType="phone"/>
-
-            <Button
-                android:onClick="onClickedSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/selector_button"
-                android:text="@string/sign_up"
-                android:textAllCaps="false"
-                android:textColor="@color/text_color"
-                android:textSize="20dp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_button"
+            android:onClick="onClickedSignUp"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
+            android:textColor="@color/text_color"
+            android:textSize="20dp" />
 
 
-        </LinearLayout>
+    </LinearLayout>
 
 
-    </RelativeLayout>
 </ScrollView>
