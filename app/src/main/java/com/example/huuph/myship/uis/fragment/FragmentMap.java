@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 
 import com.example.huuph.myship.R;
 
-public class FragmentSaved extends Fragment {
-    private static FragmentSaved instance;
+public class FragmentMap extends Fragment {
+    private static FragmentMap instance;
 
 
-    public static FragmentSaved getInstance() {
+    public static FragmentMap getInstance() {
         if (instance == null){
-            instance = new FragmentSaved();
+            instance = new FragmentMap();
         }
         return instance;
     }
@@ -24,7 +24,7 @@ public class FragmentSaved extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.ui_saved,container,false);
+        View view = inflater.inflate(R.layout.ui_map,container,false);
         return view;
     }
 }
