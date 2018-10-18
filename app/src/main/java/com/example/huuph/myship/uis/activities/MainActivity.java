@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
     //mail va name ...facebook
     String email, name, id_facebook;
+    //ma token facebook
+    String token;
 
 
     @Override
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO đăng nhập fb thành công
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
+                token = loginResult.getAccessToken().getToken();
 
                 result();
 
@@ -202,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //xuất ra log thông tin id, name, mail khi đăng nhập thành công
                 Log.d("JSON", response.getJSONObject().toString());
+
                 //thấy thông tin
                 try {
                     Intent intent = new Intent(MainActivity.this, main_main.class);
@@ -211,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("email", email);
                     intent.putExtra("name", name);
                     intent.putExtra("id_facebook", id_facebook);
+                    intent.putExtra("token", token);
                     startActivity(intent);
 
                 } catch (JSONException e) {

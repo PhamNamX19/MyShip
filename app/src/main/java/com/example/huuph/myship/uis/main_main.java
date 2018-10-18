@@ -33,6 +33,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
 
 
     String email, name, id_facebook;
+    String token;
     ProfilePictureView profilePicture;
 
     @Override
@@ -48,6 +49,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         initSliding();
         //nhan thong tin nguoi dung
         getInfo();
+
 
     }
 
@@ -65,7 +67,9 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         name = getIntent().getStringExtra("name");
         email = getIntent().getStringExtra("email");
         id_facebook = getIntent().getStringExtra("id_facebook");
+        token = getIntent().getStringExtra("token");
         Log.d("JSONs", "ten" + name + "email" + email + "idfb:" + id_facebook);
+        Log.d("TOKENS", token);
         tvUsername.setText(name);
         tvUserEmail.setText(email);
         profilePicture.setProfileId(id_facebook);
