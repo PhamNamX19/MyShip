@@ -40,12 +40,13 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_main);
 
-        //nhan thong tin nguoi dung
+
 
         anhxa();
         initPager();
         setUpActionBar();
         initSliding();
+        //nhan thong tin nguoi dung
         getInfo();
 
     }
