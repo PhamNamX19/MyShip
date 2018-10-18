@@ -53,17 +53,16 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector_button_fb_google"
                 android:drawableLeft="@drawable/icon_fb_black"
-                android:text="Gọi"
+                android:paddingLeft="20dp"
+                android:text="Nhận"
                 android:textSize="10sp" />
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector_button_fb_google"
                 android:drawableLeft="@drawable/ic_phone_black"
@@ -74,7 +73,6 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/selector_button_fb_google"
                 android:drawableLeft="@drawable/ic_hystory_black"
