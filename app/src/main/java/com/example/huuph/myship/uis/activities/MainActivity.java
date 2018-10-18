@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huuph.myship.R;
@@ -16,8 +17,12 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.login.widget.ProfilePictureView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -26,12 +31,16 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private EditText edLoginUser;
     private EditText edLoginPass;
     private Button btfacebook;
+    private TextView tvtes;
 
     private CallbackManager callbackManager;
     private LoginButton loginButton;
@@ -40,14 +49,16 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    //mail va name ...facebook
+    String email, name, id_facebook;
 
-    String email, name, id_facebook; //mail va name facebook
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
 
         Initialization();
         setLogin_Button();
@@ -60,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         edLoginUser = findViewById(R.id.edLoginUser);
         edLoginPass = findViewById(R.id.edLoginPass);
         btfacebook = (Button) findViewById(R.id.btfacebook);
+        tvtes = findViewById(R.id.tvtes);
 
 
         //đăng nhập lại mỗi khi vào ứng dụng
@@ -78,7 +90,12 @@ public class MainActivity extends AppCompatActivity {
                 //TODO đăng nhập fb thành công
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
-                //result();
+
+                result();
+
+
+                //chuyen activity
+
 
             }
 
@@ -94,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO lỗi
             }
         });
+
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -111,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
     }
+
 
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
@@ -145,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
 //        //TODO gửi lên firrebase và check acc (Phước)
         Intent intent = new Intent(MainActivity.this, main_main.class);
         startActivity(intent);
+        finish();
 //        FirebaseAuth mAuth;
 //        mAuth = FirebaseAuth.getInstance();
 //
@@ -174,11 +194,51 @@ public class MainActivity extends AppCompatActivity {
 //        }
     }
 
+    //lay thong tin avartar, name facfebook
+    private void result() {
+        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+
+                //xuất ra log thông tin id, name, mail khi đăng nhập thành công
+                Log.d("JSON", response.getJSONObject().toString());
+                //thấy thông tin
+                try {
+                    Intent intent = new Intent(MainActivity.this, main_main.class);
+                    email = object.getString("email");
+                    name = object.getString("name");
+                    id_facebook = object.getString("id");
+                    intent.putExtra("email", email);
+                    intent.putExtra("name", name);
+                    intent.putExtra("id_facebook", id_facebook);
+                    startActivity(intent);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,email,birthday");
+        graphRequest.setParameters(parameters);
+        graphRequest.executeAsync();
+
+
+        //chuyen thong tin nguoi dung sang activity moi
+
+
+        //startActivity(intent);
+
+    }
+
 
     public void onClickSignUp(View view) {
         //TODO Chuyển sang activity đăng kí
         Intent intent = new Intent(this, Signup.class);
         startActivity(intent);
+
     }
 
     public void onClickFogotpass(View view) {

@@ -9,11 +9,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.huuph.myship.uis.fragment.FragmentNews;
 import com.example.huuph.myship.adapter.PageAdapter;
 import com.example.huuph.myship.R;
+import com.facebook.Profile;
+import com.facebook.login.widget.ProfilePictureView;
 
 public class main_main extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
@@ -24,14 +28,47 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     private ViewPager viewPager;
     private TabLayout tabLayout;
     Toolbar toolbar;
+    private TextView tvUsername;
+    private TextView tvUserEmail;
+
+
+    String email, name, id_facebook;
+    ProfilePictureView profilePicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_main);
+
+
+
+        anhxa();
         initPager();
         setUpActionBar();
         initSliding();
+        //nhan thong tin nguoi dung
+        getInfo();
+
+    }
+
+    private void anhxa() {
+        profilePicture = (ProfilePictureView) findViewById(R.id.profilePicture);
+        tvUsername = findViewById(R.id.tvUsername);
+        tvUserEmail = findViewById(R.id.tvUserEmail);
+        profilePicture = findViewById(R.id.profilePicture);
+
+
+    }
+
+    private void getInfo() {
+        //  id_facebook = getIntent().getStringExtra("id");
+        name = getIntent().getStringExtra("name");
+        email = getIntent().getStringExtra("email");
+        id_facebook = getIntent().getStringExtra("id_facebook");
+        Log.d("JSONs", "ten" + name + "email" + email + "idfb:" + id_facebook);
+        tvUsername.setText(name);
+        tvUserEmail.setText(email);
+        profilePicture.setProfileId(id_facebook);
 
     }
 
@@ -64,7 +101,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle.onOptionsItemSelected(item)){
+        if (toggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -78,7 +115,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
 
     @Override
     public void onPageSelected(int i) {
-        if (i ==0){
+        if (i == 0) {
             FragmentNews.getInstance();
         }
     }

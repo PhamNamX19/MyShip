@@ -36,22 +36,13 @@ public class FragmentNews extends Fragment {
         lvNew = view.findViewById(R.id.lvNew);
         dataNews = new ArrayList<>();
         FakeDataNew data1 = new FakeDataNew("Đoàn Hữu Phước","post ở đây");
-        FakeDataNew data2 = new FakeDataNew("Đoàn Hữu Phước","post ở đây2");
-        FakeDataNew data3 = new FakeDataNew("Đoàn Hữu Phước","post ở đây3");
         dataNews.add(data1);
-        dataNews.add(data2);
-        dataNews.add(data3);
-        dataNews.add(data3);
-        dataNews.add(data3);
-        dataNews.add(data3);
-        dataNews.add(data3);
-        dataNews.add(data3);
-        dataNews.add(data3);
-        dataNews.add(data3);
-        dataNews.add(data3);
-        dataNews.add(data3);
-        dataNews.add(data3);
-        dataNews.add(data3);
+        dataNews.add(data1);
+        dataNews.add(data1);
+        dataNews.add(data1);
+        dataNews.add(data1);
+        dataNews.add(data1);
+
 
         adapter = new NewLvAdapter(getContext(),R.layout.item_listview,dataNews);
         lvNew.setAdapter(adapter);
