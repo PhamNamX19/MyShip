@@ -4,14 +4,6 @@ public class FakeDataNew {
     private String name;
     private String post;
 
-    public FakeDataNew() {
-    }
-
-    public FakeDataNew(String name, String post) {
-        this.name = name;
-        this.post = post;
-    }
-
     public String getName() {
         return name;
     }
@@ -26,5 +18,15 @@ public class FakeDataNew {
 
     public void setPost(String post) {
         this.post = post;
+    }
+
+    public FakeDataNew(String name, String post) {
+
+        this.name = name;
+        this.post = post;
+    }
+
+    public FakeDataNew() {
+
     }
 }

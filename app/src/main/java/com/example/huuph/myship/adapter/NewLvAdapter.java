@@ -44,8 +44,6 @@ public class NewLvAdapter extends ArrayAdapter<FakeDataNew> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         FakeDataNew dataNew = listData.get(position);
-
-
         viewHolder.tvUser.setText(dataNew.getName());
         viewHolder.tvPost.setText(dataNew.getPost());
         return convertView;
