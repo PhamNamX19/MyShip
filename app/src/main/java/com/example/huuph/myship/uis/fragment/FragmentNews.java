@@ -43,6 +43,15 @@ public class FragmentNews extends Fragment {
         dataNews.add(data3);
         dataNews.add(data3);
         dataNews.add(data3);
+        dataNews.add(data3);
+        dataNews.add(data3);
+        dataNews.add(data3);
+        dataNews.add(data3);
+        dataNews.add(data3);
+        dataNews.add(data3);
+        dataNews.add(data3);
+        dataNews.add(data3);
+        dataNews.add(data3);
 
         adapter = new NewLvAdapter(getContext(),R.layout.item_listview,dataNews);
         lvNew.setAdapter(adapter);
