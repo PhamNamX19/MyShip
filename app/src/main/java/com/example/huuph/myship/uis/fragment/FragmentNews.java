@@ -37,6 +37,11 @@ public class FragmentNews extends Fragment {
         dataNews = new ArrayList<>();
         FakeDataNew data1 = new FakeDataNew("Đoàn Hữu Phước","post ở đây");
         dataNews.add(data1);
+        dataNews.add(data1);
+        dataNews.add(data1);
+        dataNews.add(data1);
+        dataNews.add(data1);
+        dataNews.add(data1);
 
 
         adapter = new NewLvAdapter(getContext(),R.layout.item_listview,dataNews);

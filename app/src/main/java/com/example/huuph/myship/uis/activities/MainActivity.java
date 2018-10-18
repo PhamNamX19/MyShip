@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huuph.myship.R;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText edLoginUser;
     private EditText edLoginPass;
     private Button btfacebook;
+    private TextView tvtes;
 
     private CallbackManager callbackManager;
     private LoginButton loginButton;
@@ -48,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     //mail va name ...facebook
-    String email, name, id_facebook,birthday;
-
+    String email, name, id_facebook;
 
 
     @Override
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
 
         Initialization();
         setLogin_Button();
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         edLoginUser = findViewById(R.id.edLoginUser);
         edLoginPass = findViewById(R.id.edLoginPass);
         btfacebook = (Button) findViewById(R.id.btfacebook);
+        tvtes = findViewById(R.id.tvtes);
 
 
         //đăng nhập lại mỗi khi vào ứng dụng
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_facebook);
-        loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_friends"));
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -89,17 +92,9 @@ public class MainActivity extends AppCompatActivity {
                 handleFacebookAccessToken(loginResult.getAccessToken());
 
                 result();
+
+
                 //chuyen activity
-                Intent intent = new Intent(MainActivity.this, main_main.class);
-
-                //chuyen thong tin nguoi dung sang activity moi
-                intent.putExtra("email",email);
-                intent.putExtra("name",name);
-                intent.putExtra("id",id_facebook);
-                intent.putExtra("birthday",birthday);
-
-                startActivity(intent);
-                finish();
 
 
             }
@@ -209,10 +204,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("JSON", response.getJSONObject().toString());
                 //thấy thông tin
                 try {
+                    Intent intent = new Intent(MainActivity.this, main_main.class);
                     email = object.getString("email");
                     name = object.getString("name");
                     id_facebook = object.getString("id");
-                    birthday = object.getString("birthday");
+                    intent.putExtra("email", email);
+                    intent.putExtra("name", name);
+                    intent.putExtra("id_facebook", id_facebook);
+                    startActivity(intent);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -220,10 +219,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         Bundle parameters = new Bundle();
         parameters.putString("fields", "id,name,email,birthday");
         graphRequest.setParameters(parameters);
         graphRequest.executeAsync();
+
+
+        //chuyen thong tin nguoi dung sang activity moi
+
+
+        //startActivity(intent);
 
     }
 
