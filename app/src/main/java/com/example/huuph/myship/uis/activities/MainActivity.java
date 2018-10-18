@@ -16,8 +16,12 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.login.widget.ProfilePictureView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -25,6 +29,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -40,8 +47,10 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    //mail va name ...facebook
+    String email, name, id_facebook,birthday;
 
-    String email, name, id_facebook; //mail va name facebook
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,14 +80,27 @@ public class MainActivity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_facebook);
-        loginButton.setReadPermissions(Arrays.asList("public_profile", "email"));
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_friends"));
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 //TODO đăng nhập fb thành công
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
-                //result();
+
+                result();
+                //chuyen activity
+                Intent intent = new Intent(MainActivity.this, main_main.class);
+
+                //chuyen thong tin nguoi dung sang activity moi
+                intent.putExtra("email",email);
+                intent.putExtra("name",name);
+                intent.putExtra("id",id_facebook);
+                intent.putExtra("birthday",birthday);
+
+                startActivity(intent);
+                finish();
+
 
             }
 
@@ -94,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO lỗi
             }
         });
+
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -111,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
     }
+
 
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
@@ -145,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
 //        //TODO gửi lên firrebase và check acc (Phước)
         Intent intent = new Intent(MainActivity.this, main_main.class);
         startActivity(intent);
+        finish();
 //        FirebaseAuth mAuth;
 //        mAuth = FirebaseAuth.getInstance();
 //
@@ -174,11 +199,40 @@ public class MainActivity extends AppCompatActivity {
 //        }
     }
 
+    //lay thong tin avartar, name facfebook
+    private void result() {
+        GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+
+                //xuất ra log thông tin id, name, mail khi đăng nhập thành công
+                Log.d("JSON", response.getJSONObject().toString());
+                //thấy thông tin
+                try {
+                    email = object.getString("email");
+                    name = object.getString("name");
+                    id_facebook = object.getString("id");
+                    birthday = object.getString("birthday");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,email,birthday");
+        graphRequest.setParameters(parameters);
+        graphRequest.executeAsync();
+
+    }
+
 
     public void onClickSignUp(View view) {
         //TODO Chuyển sang activity đăng kí
         Intent intent = new Intent(this, Signup.class);
         startActivity(intent);
+
     }
 
     public void onClickFogotpass(View view) {

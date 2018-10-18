@@ -24,14 +24,28 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     private ViewPager viewPager;
     private TabLayout tabLayout;
     Toolbar toolbar;
+    String email, name, id_facebook,birthday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_main);
+
+        //nhan thong tin nguoi dung
+        getInfo();
         initPager();
         setUpActionBar();
         initSliding();
+
+    }
+
+    private void getInfo() {
+        id_facebook = getIntent().getStringExtra("id");
+        email = getIntent().getStringExtra("email");
+        name = getIntent().getStringExtra("name");
+        birthday = getIntent().getStringExtra("birthday");
+
+
 
     }
 
