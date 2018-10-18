@@ -18,10 +18,12 @@
             android:id="@+id/imProfile"/>
 
         <TextView
+            android:layout_marginTop="7dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Đoàn Hữu Phước"
+            android:textSize="10dp"
             android:id="@+id/tvName"/>
 
     </LinearLayout>
@@ -29,7 +31,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="5"
+        android:layout_weight="3"
         android:orientation="vertical">
 
         <TextView
@@ -48,20 +50,20 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
                 android:src="@drawable/icon_fb_black" />
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:src="@drawable/ic_phone_black" />
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
                 android:src="@drawable/ic_hystory_black" />
         </LinearLayout>
     </LinearLayout>
