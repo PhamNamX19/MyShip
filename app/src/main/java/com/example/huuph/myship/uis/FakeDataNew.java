@@ -3,6 +3,13 @@ package com.example.huuph.myship.uis;
 public class FakeDataNew {
     private String name;
     private String post;
+    private String time;
+
+    public FakeDataNew(String name, String post, String time) {
+        this.name = name;
+        this.post = post;
+        this.time = time;
+    }
 
     public String getName() {
         return name;
@@ -20,13 +27,11 @@ public class FakeDataNew {
         this.post = post;
     }
 
-    public FakeDataNew(String name, String post) {
-
-        this.name = name;
-        this.post = post;
+    public String getTime() {
+        return time;
     }
 
-    public FakeDataNew() {
-
+    public void setTime(String time) {
+        this.time = time;
     }
 }

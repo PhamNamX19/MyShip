@@ -36,7 +36,7 @@ public class FragmentNews extends Fragment {
         View view = inflater.inflate(R.layout.ui_news, container, false);
         lvNew = view.findViewById(R.id.lvNew);
         dataNews = new ArrayList<>();
-        FakeDataNew data1 = new FakeDataNew("Haang Binh", "136 trieu khuc di linh dam");
+        FakeDataNew data1 = new FakeDataNew("Haang Binh", "136 trieu khuc di linh dam","19:26");
 
         dataNews.add(data1);
         dataNews.add(data1);
