@@ -1,11 +1,9 @@
-
 package com.example.huuph.myship.data.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Datum {
-
     @SerializedName("id")
     @Expose
     private String id;
@@ -16,18 +14,18 @@ public class Datum {
     @Expose
     private String updatedTime;
 
-    public Datum(String id, String message, String updatedTime) {
-        this.id = id;
+    public Datum(String name, String message, String updatedTime) {
+        this.id = name;
         this.message = message;
         this.updatedTime = updatedTime;
     }
 
-    public String getId() {
+    public String getName() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setName(String name) {
+        this.id = name;
     }
 
     public String getMessage() {
@@ -45,5 +43,4 @@ public class Datum {
     public void setUpdatedTime(String updatedTime) {
         this.updatedTime = updatedTime;
     }
-
 }
