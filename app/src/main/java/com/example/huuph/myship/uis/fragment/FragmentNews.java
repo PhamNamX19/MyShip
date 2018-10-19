@@ -50,18 +50,10 @@ public class FragmentNews extends Fragment {
         View view = inflater.inflate(R.layout.ui_news, container, false);
         lvNew = view.findViewById(R.id.lvNew);
         dataNews = new ArrayList<>();
-        Datum data1 = new Datum("Haang Binh", "136 trieu khuc di linh dam", "19:26");
-//
-//        dataNews.add(data1);
-//        dataNews.add(data1);
-//        dataNews.add(data1);
-//        dataNews.add(data1);
-//        dataNews.add(data1);
-//        dataNews.add(data1);
-//        dataNews.add(data1);
         getDataFeed();
-
         return view;
+
+
     }
 
     //get data json
@@ -72,11 +64,12 @@ public class FragmentNews extends Fragment {
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                 JsonElement jsonElement = response.body();
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
+
                 JsonArray datums = jsonObject.getAsJsonArray("data");
                 for (int i = 0; i < datums.size(); i++) {
 
                     ///trycath
-                    JsonObject datal = datums.get(0).getAsJsonObject();
+                    JsonObject datal = datums.get(i).getAsJsonObject();
                     id = datal.get("id").getAsString();
                     message = datal.get("message").getAsString();
                     updatedTime = datal.get("updated_time").getAsString();

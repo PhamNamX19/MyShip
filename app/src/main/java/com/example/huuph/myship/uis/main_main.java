@@ -47,6 +47,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         initPager();
         setUpActionBar();
         initSliding();
+
         //nhan thong tin nguoi dung
         getInfo();
 
@@ -73,6 +74,12 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         tvUsername.setText(name);
         tvUserEmail.setText(email);
         profilePicture.setProfileId(id_facebook);
+        //gui du lieu sang fragment
+        Bundle bundle = new Bundle();
+        bundle.putString("Token",token);
+        FragmentNews fragmentNews = new FragmentNews();
+        fragmentNews.setArguments(bundle);
+
 
     }
 

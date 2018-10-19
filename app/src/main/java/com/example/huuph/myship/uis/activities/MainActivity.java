@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     private CallbackManager callbackManager;
     private LoginButton loginButton;
-    private String TAG = "MainActivity";
+    private String TAG = "TEST";
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -75,9 +75,8 @@ public class MainActivity extends AppCompatActivity {
         btfacebook = (Button) findViewById(R.id.btfacebook);
         tvtes = findViewById(R.id.tvtes);
 
-
-        //đăng nhập lại mỗi khi vào ứng dụng
-        //onStart();
+        //Đăng nhập lại mỗi khi vào ứng dụng
+        onStart();
     }
 
     //login facebook
@@ -93,13 +92,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
                 token = loginResult.getAccessToken().getToken();
-
+                //lay thong tin nguoi dung
                 result();
-
-
-                //chuyen activity
-
-
             }
 
             @Override
@@ -126,13 +120,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-
                 }
-
             }
         };
     }
-
 
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
@@ -150,9 +141,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.w(TAG, "signInWithCredential:failure", task.getException());
                     Toast.makeText(MainActivity.this, "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
-
                 }
-
             }
         });
     }
@@ -164,10 +153,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onclickLogin(View view) {
-//        //TODO gửi lên firrebase và check acc (Phước)
-        Intent intent = new Intent(MainActivity.this, main_main.class);
-        startActivity(intent);
-        finish();
+        //TODO gửi lên firrebase và check acc (Phước)
+        Intent intent1 = new Intent(MainActivity.this, main_main.class);
+        startActivity(intent1);
+        //finish();
 //        FirebaseAuth mAuth;
 //        mAuth = FirebaseAuth.getInstance();
 //
@@ -229,13 +218,6 @@ public class MainActivity extends AppCompatActivity {
         parameters.putString("fields", "id,name,email,birthday");
         graphRequest.setParameters(parameters);
         graphRequest.executeAsync();
-
-
-        //chuyen thong tin nguoi dung sang activity moi
-
-
-        //startActivity(intent);
-
     }
 
 
