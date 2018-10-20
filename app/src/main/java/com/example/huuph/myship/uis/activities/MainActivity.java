@@ -12,17 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huuph.myship.R;
-import com.example.huuph.myship.uis.main_main;
+import com.example.huuph.myship.uis.fragment.main_main;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.facebook.login.widget.ProfilePictureView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;

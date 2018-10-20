@@ -24,7 +24,7 @@
         </activity>
 
         <activity android:name=".FirebaseHelper.DebugFirebase"></activity>
-        <activity android:name=".uis.main_main"></activity>
+        <activity android:name=".uis.fragment.main_main"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

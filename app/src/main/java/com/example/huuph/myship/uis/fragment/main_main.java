@@ -1,4 +1,4 @@
-package com.example.huuph.myship.uis;
+package com.example.huuph.myship.uis.fragment;
 
 
 import android.os.Bundle;
@@ -64,23 +64,23 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
     private void getInfo() {
-        //  id_facebook = getIntent().getStringExtra("id");
-        name = getIntent().getStringExtra("name");
-        email = getIntent().getStringExtra("email");
-        id_facebook = getIntent().getStringExtra("id_facebook");
-        token = getIntent().getStringExtra("token");
-        Log.d("JSONs", "ten" + name + "email" + email + "idfb:" + id_facebook);
-        Log.d("TOKENS", token);
-        tvUsername.setText(name);
-        tvUserEmail.setText(email);
-        profilePicture.setProfileId(id_facebook);
-        //gui du lieu sang fragment
-        Bundle bundle = new Bundle();
-        bundle.putString("Token",token);
-        FragmentNews fragmentNews = new FragmentNews();
-        fragmentNews.setArguments(bundle);
+        if(getIntent().getStringExtra("name")!= null){
+            name = getIntent().getStringExtra("name");
+            email = getIntent().getStringExtra("email");
+            id_facebook = getIntent().getStringExtra("id_facebook");
+            token = getIntent().getStringExtra("token");
+            Log.d("JSONs", "ten" + name + "email" + email + "idfb:" + id_facebook);
+            Log.d("TOKENS", token);
+            tvUsername.setText(name);
+            tvUserEmail.setText(email);
+            profilePicture.setProfileId(id_facebook);
+            //gui du lieu token sang fragment
 
+        }else{
+            tvUsername.setText("Vai Lozzx");
+            tvUserEmail.setText("XYZ.com");
 
+        }
     }
 
     private void initPager() {

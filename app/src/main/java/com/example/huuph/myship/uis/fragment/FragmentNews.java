@@ -58,6 +58,7 @@ public class FragmentNews extends Fragment {
 
     //get data json
     private void getDataFeed() {
+
         Call<JsonElement> call = RestClient.getAPIs().getDrirectionInfo(tokens);
         call.enqueue(new Callback<JsonElement>() {
             @Override
