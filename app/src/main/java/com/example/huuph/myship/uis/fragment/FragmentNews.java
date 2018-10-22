@@ -37,9 +37,10 @@ public class FragmentNews extends Fragment {
     private String message;
     private String updatedTime;
 
-    public static FragmentNews getInstance() {
+    public static FragmentNews getInstance(String dataSent) {
         if (instance == null) {
             instance = new FragmentNews();
+            Log.d("TAG",dataSent);
         }
         return instance;
     }
@@ -63,7 +64,7 @@ public class FragmentNews extends Fragment {
         call.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                JsonElement jsonElement = response.body();
+                final JsonElement jsonElement = response.body();
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
 
                 JsonArray datums = jsonObject.getAsJsonArray("data");
@@ -74,6 +75,24 @@ public class FragmentNews extends Fragment {
                     id = datal.get("id").getAsString();
                     message = datal.get("message").getAsString();
                     updatedTime = datal.get("updated_time").getAsString();
+
+                    //test @path
+                    Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(id,"from",tokens);
+                    jsonElementCall.enqueue(new Callback<JsonElement>() {
+                        @Override
+                        public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                            JsonElement jsonElement1 = response.body();
+                            Log.d("TAG",jsonElement1.toString());
+                        }
+
+                        @Override
+                        public void onFailure(Call<JsonElement> call, Throwable t) {
+                            Log.d("TAG", "fail");
+
+                        }
+                    });
+
+
                     //add datal vao list
                     Log.d("info", id);
                     Log.d("info", message);

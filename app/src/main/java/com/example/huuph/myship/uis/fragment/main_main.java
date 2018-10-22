@@ -21,6 +21,9 @@ import com.facebook.login.widget.ProfilePictureView;
 
 public class main_main extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
+    //test
+    String datasent ="gui tu main_main";
+
 
     private ActionBarDrawerToggle toggle;
     private PagerAdapter adapter;
@@ -84,7 +87,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
     private void initPager() {
-        adapter = new PageAdapter(getSupportFragmentManager());
+        adapter = new PageAdapter(getSupportFragmentManager(),datasent);
         drawerLayout = findViewById(R.id.drawer_layout);
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tab_layout);
@@ -127,7 +130,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     @Override
     public void onPageSelected(int i) {
         if (i == 0) {
-            FragmentNews.getInstance();
+            FragmentNews.getInstance(datasent);
         }
     }
 
