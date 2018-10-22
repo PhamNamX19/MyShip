@@ -1,4 +1,4 @@
-package com.example.huuph.myship.uis;
+package com.example.huuph.myship.uis.fragment;
 
 
 import android.os.Bundle;
@@ -33,6 +33,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
 
 
     String email, name, id_facebook;
+    String token;
     ProfilePictureView profilePicture;
 
     @Override
@@ -46,8 +47,10 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         initPager();
         setUpActionBar();
         initSliding();
+
         //nhan thong tin nguoi dung
         getInfo();
+
 
     }
 
@@ -61,15 +64,23 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
     private void getInfo() {
-        //  id_facebook = getIntent().getStringExtra("id");
-        name = getIntent().getStringExtra("name");
-        email = getIntent().getStringExtra("email");
-        id_facebook = getIntent().getStringExtra("id_facebook");
-        Log.d("JSONs", "ten" + name + "email" + email + "idfb:" + id_facebook);
-        tvUsername.setText(name);
-        tvUserEmail.setText(email);
-        profilePicture.setProfileId(id_facebook);
+        if(getIntent().getStringExtra("name")!= null){
+            name = getIntent().getStringExtra("name");
+            email = getIntent().getStringExtra("email");
+            id_facebook = getIntent().getStringExtra("id_facebook");
+            token = getIntent().getStringExtra("token");
+            Log.d("JSONs", "ten" + name + "email" + email + "idfb:" + id_facebook);
+            Log.d("TOKENS", token);
+            tvUsername.setText(name);
+            tvUserEmail.setText(email);
+            profilePicture.setProfileId(id_facebook);
+            //gui du lieu token sang fragment
 
+        }else{
+            tvUsername.setText("Vai Lozzx");
+            tvUserEmail.setText("XYZ.com");
+
+        }
     }
 
     private void initPager() {

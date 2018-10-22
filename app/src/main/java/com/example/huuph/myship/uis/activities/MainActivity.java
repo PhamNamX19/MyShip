@@ -12,17 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huuph.myship.R;
-import com.example.huuph.myship.uis.main_main;
+import com.example.huuph.myship.uis.fragment.main_main;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.facebook.login.widget.ProfilePictureView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -44,13 +42,15 @@ public class MainActivity extends AppCompatActivity {
 
     private CallbackManager callbackManager;
     private LoginButton loginButton;
-    private String TAG = "MainActivity";
+    private String TAG = "TEST";
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     //mail va name ...facebook
     String email, name, id_facebook;
+    //ma token facebook
+    String token;
 
 
     @Override
@@ -73,9 +73,8 @@ public class MainActivity extends AppCompatActivity {
         btfacebook = (Button) findViewById(R.id.btfacebook);
         tvtes = findViewById(R.id.tvtes);
 
-
-        //đăng nhập lại mỗi khi vào ứng dụng
-        //onStart();
+        //Đăng nhập lại mỗi khi vào ứng dụng
+        onStart();
     }
 
     //login facebook
@@ -90,13 +89,9 @@ public class MainActivity extends AppCompatActivity {
                 //TODO đăng nhập fb thành công
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
-
+                token = loginResult.getAccessToken().getToken();
+                //lay thong tin nguoi dung
                 result();
-
-
-                //chuyen activity
-
-
             }
 
             @Override
@@ -123,13 +118,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
-
                 }
-
             }
         };
     }
-
 
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
@@ -147,9 +139,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.w(TAG, "signInWithCredential:failure", task.getException());
                     Toast.makeText(MainActivity.this, "Authentication failed.",
                             Toast.LENGTH_SHORT).show();
-
                 }
-
             }
         });
     }
@@ -161,10 +151,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onclickLogin(View view) {
-//        //TODO gửi lên firrebase và check acc (Phước)
-        Intent intent = new Intent(MainActivity.this, main_main.class);
-        startActivity(intent);
-        finish();
+        //TODO gửi lên firrebase và check acc (Phước)
+        Intent intent1 = new Intent(MainActivity.this, main_main.class);
+        startActivity(intent1);
+        //finish();
 //        FirebaseAuth mAuth;
 //        mAuth = FirebaseAuth.getInstance();
 //
@@ -202,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //xuất ra log thông tin id, name, mail khi đăng nhập thành công
                 Log.d("JSON", response.getJSONObject().toString());
+
                 //thấy thông tin
                 try {
                     Intent intent = new Intent(MainActivity.this, main_main.class);
@@ -211,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("email", email);
                     intent.putExtra("name", name);
                     intent.putExtra("id_facebook", id_facebook);
+                    intent.putExtra("token", token);
                     startActivity(intent);
 
                 } catch (JSONException e) {
@@ -224,13 +216,6 @@ public class MainActivity extends AppCompatActivity {
         parameters.putString("fields", "id,name,email,birthday");
         graphRequest.setParameters(parameters);
         graphRequest.executeAsync();
-
-
-        //chuyen thong tin nguoi dung sang activity moi
-
-
-        //startActivity(intent);
-
     }
 
 
