@@ -55,6 +55,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         getInfo();
 
 
+
     }
 
     private void anhxa() {
@@ -67,6 +68,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
     private void getInfo() {
+
         if(getIntent().getStringExtra("name")!= null){
             name = getIntent().getStringExtra("name");
             email = getIntent().getStringExtra("email");
