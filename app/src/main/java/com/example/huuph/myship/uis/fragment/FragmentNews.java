@@ -51,6 +51,7 @@ public class FragmentNews extends Fragment {
         lvNew = view.findViewById(R.id.lvNew);
         dataNews = new ArrayList<>();
         getDataFeed();
+
         return view;
 
 
@@ -82,6 +83,7 @@ public class FragmentNews extends Fragment {
                     dataNews.add(datas);
                     adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews);
                     lvNew.setAdapter(adapter);
+
                 }
 
             }
