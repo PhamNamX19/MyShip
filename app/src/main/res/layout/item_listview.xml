@@ -51,13 +51,14 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btBinhLuan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector_button_fb_google"
                 android:drawableLeft="@drawable/icon_fb_black"
                 android:paddingLeft="20dp"
-                android:text="Nhận"
+                android:text="Bình Luận"
                 android:textSize="10sp" />
 
             <Button

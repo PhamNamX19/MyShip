@@ -4,9 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Datum {
-    @SerializedName("id")
+    @SerializedName("nameUserPost")
     @Expose
-    private String id;
+    private String nameUserPost;
     @SerializedName("message")
     @Expose
     private String message;
@@ -14,18 +14,18 @@ public class Datum {
     @Expose
     private String updatedTime;
 
-    public Datum(String name, String message, String updatedTime) {
-        this.id = name;
+    public Datum(String nameUserPost, String message, String updatedTime) {
+        this.nameUserPost = nameUserPost;
         this.message = message;
         this.updatedTime = updatedTime;
     }
 
-    public String getName() {
-        return id;
+    public String getNameUserPost() {
+        return nameUserPost;
     }
 
-    public void setName(String name) {
-        this.id = name;
+    public void setNameUserPost(String nameUserPost) {
+        this.nameUserPost = nameUserPost;
     }
 
     public String getMessage() {
