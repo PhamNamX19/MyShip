@@ -33,7 +33,7 @@ public class FragmentNews extends Fragment {
     private ListView lvNew;
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
-    private String tokens = "EAAhqYFrQulMBAMyjlQui2kL600UZAMGsdNZCGx2vLtCNJiWmSFSV6TmKPd3OZCmMoVgUFEVIQavo6qsEPRemwQrKPRv6G5OpZCOiiZAXXz3Pm4dnFRfKHR5Q1jZAf81U1oYiCkzRiFmYG5MtH9cznsfN739drhiPEJqX6cWZAZBGrjh5FsOR9QiinkPvZCujz0cUZD";
+    private String tokens = "EAAGxzui9ezkBAMEGsZBlTGJ3NWF5Um42EquUjPy1K3kULVvuYoqZB8wpMxc64wCE3bdI098vZCB4FneAWrL9sBv8ZAmj09wCZAbl4xGWrDCyj9Shjp8YCbrvVLcuhsJYZAMyd0dWHwmX2NcGRhXKDkgmDjgW6eDlZCjMqLIueOe6zES5ZCYR5TcBylqafZAIM0a4QDNbZAzz2S4gZDZD";
 
     private String idfeed;
     private String message;
@@ -97,7 +97,7 @@ public class FragmentNews extends Fragment {
                             idUserPost = from.get("id").getAsString();
                             nameUserPost = from.get("name").getAsString();
 
-                            Log.d("TAG", idUserPost+nameUserPost);
+                            Log.d("TAG", nameUserPost+idfeed);
 
                             Datum datas = new Datum(nameUserPost, message, updatedTime);
                             dataNews.add(datas);
