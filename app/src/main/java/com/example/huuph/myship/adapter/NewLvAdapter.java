@@ -61,6 +61,7 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
             }
         });
         return convertView;
+
     }
 
     public class ViewHolder {
