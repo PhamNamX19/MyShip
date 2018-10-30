@@ -27,30 +27,32 @@
             android:layout_marginBottom="23dp"
             android:orientation="vertical">
 
-
             <com.facebook.login.widget.ProfilePictureView
                 android:id="@+id/profilePicture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_margin="23dp"></com.facebook.login.widget.ProfilePictureView>
-
 
             <TextView
                 android:id="@+id/tvUsername"
                 style="?android:attr/textAppearanceLarge"
-                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp"
+                android:gravity="left"
+                android:text="Name"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tvUserEmail"
                 style="?android:attr/textAppearanceLarge"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="email.com"
+                android:layout_marginLeft="90dp"
+                android:gravity="left"
+                android:text="Email"
                 android:textSize="15sp" />
-
         </LinearLayout>
 
         <TextView
