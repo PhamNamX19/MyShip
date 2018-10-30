@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         edLoginPass = findViewById(R.id.edLoginPass);
         btfacebook = (Button) findViewById(R.id.btfacebook);
         tvtes = findViewById(R.id.tvtes);
-        cbSave = findViewById(R.id.checkbox_remember);
+        cbSave = findViewById(R.id.checkbox_remenber);
 
         sharedPreferences = getSharedPreferences("UserSP",Context.MODE_PRIVATE);
 
