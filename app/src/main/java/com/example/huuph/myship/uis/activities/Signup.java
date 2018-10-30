@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
@@ -36,6 +37,8 @@ public class Signup extends AppCompatActivity {
     private String mEmail;
     private String mPass;
 
+    private static FirebaseAuth mAuth;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,110 +47,72 @@ public class Signup extends AppCompatActivity {
         edUser = findViewById(R.id.edSignupUser);
         edPass = findViewById(R.id.edSignupPass);
         edRePass = findViewById(R.id.edSignupRePass);
-        edPhone = findViewById(R.id.edSignupPhone);
+        mAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
     }
 
     public void onClickedSignUp(View view) {
 
-        //gửi sang verify phone
         String user = edUser.getText().toString().trim();
         String pass = edPass.getText().toString().trim();
         String repass = edRePass.getText().toString().trim();
-        String phone = edPhone.getText().toString().trim();
-        if(checkData(user,pass,repass,phone)){
+        if (checkData(user, pass, repass)) {
 
-            progressDialog.setTitle("Please wait...");
-            progressDialog.show();
-            creatCode(phone,Signup.this);
-            dialogVerify = new Dialog(this);
-            dialogVerify.setContentView(R.layout.dialog_signup);
-            progressDialog.hide();
-            dialogVerify.show();
-
-            mEmail = user;
-            mPass = pass;
-
+            registerUser(user,pass);
         }
 
 
     }
-    public void onClickedButtonDialog(View view) {
-        progressDialog.show();
-        edDialogVerifyCode = dialogVerify.findViewById(R.id.edDialogVerifyCode);
-        String verifyCode = edDialogVerifyCode.getText().toString().trim();
-        checkCode(mVerificationId,verifyCode,Signup.this);
-        Log.d("TAG","Checked code");
-    }
 
-
-
-
-
-    private boolean checkData(String user,String pass,String repass,String phone){
-        // kiem tra cac bien dau vao
-        if(user.equals("")||pass.equals("")||repass.equals("")||phone.equals("")){
-            //thong bao ra man hinh
-            Toast.makeText(this, "Hãy nhập đủ thông tin", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if(pass.equals(repass) == false){
-            Toast.makeText(this, "Xác nhận mật khẩu sai", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if(pass.equals(repass)){
-            return true;
-        }
-        return false;
-    }
-
-    private void creatCode(String phoneNumber, Activity activity){
-        PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-            @Override
-            public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                //todo create acc
-                creatAcc(mEmail,mPass);
-            }
-
-            @Override
-            public void onVerificationFailed(FirebaseException e) {
-                Log.d("TAG", e.toString());
-
-            }
-
-            @Override
-            public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                super.onCodeSent(s, forceResendingToken);
-                mVerificationId = s;
-            }
-        };
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(phoneNumber, 60, TimeUnit.SECONDS, activity, mCallbacks);
-        Log.d("TAG", "Created Code");
-
-    }
-    private void checkCode(String verifycationID,String verifyCodeInput, Activity activity) {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        // Khoi tao doi tuong kiem tra: Id của sesion va code nguoi dung nhap
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verifycationID, verifyCodeInput);
-        mAuth.signInWithCredential(credential).addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
+    private void registerUser(String email, String pass) {
+        mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Log.d("TAG", task.toString());
-                    //todo: gọi phương thức tạo tài khoản từ user
-                    dialogVerify.hide();
-                    creatAcc(mEmail,mPass);
+                    Log.d("TAG", "Den doan xac minh");
+                    sendRegistrationLink();
                 } else {
-                    Log.d("TAG","Code error");
+                    Log.d("TAG", "fail");
                 }
             }
         });
     }
-    private void creatAcc(String mEmail, String mPass){
-        SignUpHelper.signUpWithEmail(mEmail,mPass, Signup.this);
-        progressDialog.hide();
-        Log.d("TAG","Created account");
+
+    private void sendRegistrationLink() {
+        final FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        firebaseUser.sendEmailVerification()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("TAG","Da gui mail");
+                            Toast.makeText(Signup.this,
+                                    "Đã gửi email xác minh đến " + firebaseUser.getEmail(),
+
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.e("TAG", "sendEmailVerification", task.getException());
+                            Toast.makeText(Signup.this,
+                                    "Vui lòng kiểm tra lại email",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
 
+    private boolean checkData(String user, String pass, String repass) {
+        // kiem tra cac bien dau vao
+        if (user.equals("") || pass.equals("") || repass.equals("")) {
+            //thong bao ra man hinh
+            Toast.makeText(this, "Hãy nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (pass.equals(repass) == false) {
+            Toast.makeText(this, "Xác nhận mật khẩu sai", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (pass.equals(repass)) {
+            return true;
+        }
+        return false;
+    }
 }

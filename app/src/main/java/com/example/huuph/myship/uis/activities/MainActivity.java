@@ -1,12 +1,17 @@
 package com.example.huuph.myship.uis.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
     private EditText edLoginPass;
     private Button btfacebook;
     private TextView tvtes;
+    private CheckBox cbSave;
+
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     private CallbackManager callbackManager;
     private LoginButton loginButton;
@@ -64,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         setLogin_Button();
         //an button facebook mac dinh
         loginButton.setVisibility(View.GONE);
+        loadData();
     }
 
     private void Initialization() {
@@ -72,9 +82,32 @@ public class MainActivity extends AppCompatActivity {
         edLoginPass = findViewById(R.id.edLoginPass);
         btfacebook = (Button) findViewById(R.id.btfacebook);
         tvtes = findViewById(R.id.tvtes);
+        cbSave = findViewById(R.id.checkbox_remember);
+
+        sharedPreferences = getSharedPreferences("UserSP",Context.MODE_PRIVATE);
 
         //Đăng nhập lại mỗi khi vào ứng dụng
         onStart();
+    }
+    //luu du lieu vao sharepreference
+    private void saveData(String username, String pass) {
+        editor = sharedPreferences.edit();
+        editor.putString("user",username);
+        editor.putString("pass",pass);
+        editor.putBoolean("remember",cbSave.isChecked());
+        editor.commit();
+    }
+    //sharepreference va tai du lieu
+    private void loadData(){
+        if (sharedPreferences.getBoolean("remember",false)){
+            edLoginUser.setText(sharedPreferences.getString("user",""));
+            edLoginPass.setText(sharedPreferences.getString("pass",""));
+            cbSave.setChecked(true);
+        }
+        else {
+            cbSave.setChecked(false);
+        }
+
     }
 
     //login facebook
@@ -152,36 +185,39 @@ public class MainActivity extends AppCompatActivity {
 
     public void onclickLogin(View view) {
         //TODO gửi lên firrebase và check acc (Phước)
-        Intent intent1 = new Intent(MainActivity.this, main_main.class);
-        startActivity(intent1);
-        //finish();
-//        FirebaseAuth mAuth;
-//        mAuth = FirebaseAuth.getInstance();
-//
-//        String user = edLoginUser.getText().toString().trim();
-//        String pass = edLoginPass.getText().toString().trim();
-//        if(user.equals("")||pass.equals("")){
-//            Toast.makeText(this, "Please input yours info", Toast.LENGTH_SHORT).show();
-//        }
-//        else {
-//            mAuth.signInWithEmailAndPassword(user,pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                @Override
-//                public void onComplete(@NonNull Task<AuthResult> task) {
-//                    if(task.isSuccessful()){
-//                        Log.d(TAG,"Loged in");
-//                        // chuyen sang cativity main
-//                        Toast.makeText(MainActivity.this, "Login successful. Please wait...", Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(MainActivity.this,main_main.class);
-//                        startActivity(intent);
-//                    }
-//                    else {
-//                        Log.d(TAG,"Login fail");
-//                        Log.d(TAG,task.toString());
-//                        Log.d(TAG,task.getException().toString());
-//                    }
-//                }
-//            });
-//        }
+//        Intent intent1 = new Intent(MainActivity.this, main_main.class);
+//        startActivity(intent1);
+        FirebaseAuth mAuth;
+        mAuth = FirebaseAuth.getInstance();
+
+        String user = edLoginUser.getText().toString().trim();
+        String pass = edLoginPass.getText().toString().trim();
+        if(user.equals("")||pass.equals("")){
+            Toast.makeText(this, "Please input yours info", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if(cbSave.isChecked()){
+                saveData(user,pass);
+                Log.d(TAG,"Saved");
+            }
+            mAuth.signInWithEmailAndPassword(user,pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        Log.d(TAG,"Loged in");
+                        // chuyen sang cativity main
+                        Toast.makeText(MainActivity.this, "Login successful. Please wait...", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this,main_main.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Log.d(TAG,"Login fail");
+                        Log.d(TAG,task.toString());
+                        Log.d(TAG,task.getException().toString());
+                    }
+                }
+            });
+        }
     }
 
     //lay thong tin avartar, name facfebook
