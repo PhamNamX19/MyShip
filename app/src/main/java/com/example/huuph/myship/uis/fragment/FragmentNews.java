@@ -33,7 +33,7 @@ public class FragmentNews extends Fragment {
     private ListView lvNew;
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
-    private String tokens = "EAAGxzui9ezkBAOAqLpCqznem2tgDvi4NaFzruFMZBpcSolDZBh2pqVnT1bLWZBZCySMqAzeItwt1Qkodwzp5GNE6VRoNXKcZA8AKju4ZA6Hulj0dXeR8uFXFnzC7rio3B9e4yJYMFaygW7nHCI0WyWzOOvuM9cllDF2rHYsCWbg5a9x5AywZCvr2FPMDzrcGMgZD";
+    private String tokens = "EAAGxzui9ezkBADjk7gZCeMMwqoctH8ZBpxeDDzsN8lILDY7PMRjlenJuYIS9vnkI60ejHzCEv1NzjJq9Kl9xhVfvOc6V8qIJeLee8q9rZBZANsvNVIsqKt1xZCfhJHnDOpSgOFbRejrrFJjoWawO8SzQEt6xmxwNwMDz55iHVKaANEV2xq3czJpZBkMpvC2h3iyZAvgK2hAGgZDZD";
 
     private String idfeed;
     private String message;
@@ -79,7 +79,6 @@ public class FragmentNews extends Fragment {
 
                 JsonArray datums = jsonObject.getAsJsonArray("data");
                 for (int i = 0; i < datums.size(); i++) {
-
                     ///trycath
                     JsonObject datal = datums.get(i).getAsJsonObject();
                     idfeed = datal.get("id").getAsString();
@@ -97,7 +96,7 @@ public class FragmentNews extends Fragment {
                             idUserPost = from.get("id").getAsString();
                             nameUserPost = from.get("name").getAsString();
 
-                            Log.d("TAG", nameUserPost+idfeed);
+                            Log.d("TAG", nameUserPost +"bbbb"+ message);
 
                             Datum datas = new Datum(nameUserPost, message, updatedTime);
                             dataNews.add(datas);
@@ -117,24 +116,7 @@ public class FragmentNews extends Fragment {
 
                         }
                     });
-
-
-                    //add datal vao list
-//                    Log.d("info", nameUserPost);
-//                    Log.d("info", message);
-//                    Log.d("info", updatedTime);
-                   /* Datum datas = new Datum(idfeed, message, updatedTime);
-                    dataNews.add(datas);
-                    adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews, new NewLvAdapter.OnPostItemClickListener() {
-                        @Override
-                        public void onPostItemClick(int pos) {
-                            getActivity().startActivity(new Intent(getActivity(), WebViewFabook.class));
-                        }
-                    });
-                    lvNew.setAdapter(adapter);*/
-
                 }
-
             }
 
             @Override
