@@ -56,6 +56,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
 
 
 
+
     }
 
     private void anhxa() {
@@ -89,7 +90,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
     private void initPager() {
-        adapter = new PageAdapter(getSupportFragmentManager(),datasent);
+        adapter = new PageAdapter(getSupportFragmentManager());
         drawerLayout = findViewById(R.id.drawer_layout);
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tab_layout);
@@ -132,12 +133,15 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     @Override
     public void onPageSelected(int i) {
         if (i == 0) {
-            FragmentNews.getInstance(datasent);
+            FragmentNews.getInstance();
         }
     }
 
     @Override
     public void onPageScrollStateChanged(int i) {
 
+    }
+    public String getToken() {
+        return token;
     }
 }

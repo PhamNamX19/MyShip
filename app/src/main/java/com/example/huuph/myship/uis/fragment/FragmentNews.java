@@ -1,5 +1,6 @@
 package com.example.huuph.myship.uis.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import com.example.huuph.myship.R;
 import com.example.huuph.myship.adapter.NewLvAdapter;
 import com.example.huuph.myship.data.model.Datum;
 import com.example.huuph.myship.rest.RestClient;
+import com.example.huuph.myship.uis.activities.WebViewFabook;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -31,16 +33,18 @@ public class FragmentNews extends Fragment {
     private ListView lvNew;
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
-    private String tokens = "EAAhqYFrQulMBAFZAsl2SKbZADiC5VPEtl4dV9XwtmR2xsqY30JshXgVt78RXNLyeNPRIbzN1vvMu8BrLRAVgIhFiNTnqQGIpYeBkL0uga8OBVyWfeV3wKuH7gInUytv7ps0yD6fB6LnQSWFdQ9WiSsZCZC14MhomxUZBHgvx23L8FTZCaIVb0mZAs1zzWDRqlWailw3fmlq1ZBZAwZBE7l40cBgUecKZBq1EQsZD";
+    private String tokens = "EAAGxzui9ezkBADjk7gZCeMMwqoctH8ZBpxeDDzsN8lILDY7PMRjlenJuYIS9vnkI60ejHzCEv1NzjJq9Kl9xhVfvOc6V8qIJeLee8q9rZBZANsvNVIsqKt1xZCfhJHnDOpSgOFbRejrrFJjoWawO8SzQEt6xmxwNwMDz55iHVKaANEV2xq3czJpZBkMpvC2h3iyZAvgK2hAGgZDZD";
 
-    private String id;
+    private String idfeed;
     private String message;
     private String updatedTime;
+    private String idUserPost;
+    private String nameUserPost;
 
-    public static FragmentNews getInstance(String dataSent) {
+    public static FragmentNews getInstance() {
         if (instance == null) {
             instance = new FragmentNews();
-            Log.d("TAG",dataSent);
+
         }
         return instance;
     }
@@ -51,8 +55,13 @@ public class FragmentNews extends Fragment {
         View view = inflater.inflate(R.layout.ui_news, container, false);
         lvNew = view.findViewById(R.id.lvNew);
         dataNews = new ArrayList<>();
-        getDataFeed();
 
+
+        main_main activity = (main_main) getActivity();
+        String token = activity.getToken();
+
+
+        getDataFeed();
         return view;
 
 
@@ -70,20 +79,35 @@ public class FragmentNews extends Fragment {
 
                 JsonArray datums = jsonObject.getAsJsonArray("data");
                 for (int i = 0; i < datums.size(); i++) {
-
                     ///trycath
                     JsonObject datal = datums.get(i).getAsJsonObject();
-                    id = datal.get("id").getAsString();
+                    idfeed = datal.get("id").getAsString();
                     message = datal.get("message").getAsString();
                     updatedTime = datal.get("updated_time").getAsString();
 
                     //test @path
-                    Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(id,"from",tokens);
+                    Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
                     jsonElementCall.enqueue(new Callback<JsonElement>() {
                         @Override
                         public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                            JsonElement jsonElement1 = response.body();
-                            Log.d("TAG",jsonElement1.toString());
+                            JsonElement jsonElement = response.body();
+                            JsonObject jsonObject1 = jsonElement.getAsJsonObject();
+                            JsonObject from = jsonObject1.getAsJsonObject("from");
+                            idUserPost = from.get("id").getAsString();
+                            nameUserPost = from.get("name").getAsString();
+
+                            Log.d("TAG", nameUserPost +"bbbb"+ message);
+
+                            Datum datas = new Datum(nameUserPost, message, updatedTime);
+                            dataNews.add(datas);
+                            adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews, new NewLvAdapter.OnPostItemClickListener() {
+                                @Override
+                                public void onPostItemClick(int pos) {
+                                    getActivity().startActivity(new Intent(getActivity(), WebViewFabook.class));
+                                }
+                            });
+                            lvNew.setAdapter(adapter);
+
                         }
 
                         @Override
@@ -92,19 +116,7 @@ public class FragmentNews extends Fragment {
 
                         }
                     });
-
-
-                    //add datal vao list
-                    Log.d("info", id);
-                    Log.d("info", message);
-                    Log.d("info", updatedTime);
-                    Datum datas = new Datum(id, message, updatedTime);
-                    dataNews.add(datas);
-                    adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews);
-                    lvNew.setAdapter(adapter);
-
                 }
-
             }
 
             @Override
@@ -115,5 +127,6 @@ public class FragmentNews extends Fragment {
 
 
     }
+
 
 }
