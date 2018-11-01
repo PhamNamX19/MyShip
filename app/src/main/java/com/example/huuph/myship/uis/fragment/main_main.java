@@ -1,7 +1,11 @@
 package com.example.huuph.myship.uis.fragment;
 
 
+import android.content.pm.PackageManager;
+import android.os.Binder;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -13,6 +17,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.huuph.myship.Manifest;
 import com.example.huuph.myship.uis.fragment.FragmentNews;
 import com.example.huuph.myship.adapter.PageAdapter;
 import com.example.huuph.myship.R;
@@ -20,9 +25,13 @@ import com.facebook.Profile;
 import com.facebook.login.widget.ProfilePictureView;
 
 public class main_main extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+    private String[] PERMISSION = {
+            android.Manifest.permission.ACCESS_COARSE_LOCATION,
+            android.Manifest.permission.ACCESS_FINE_LOCATION
+    };
 
     //test
-    String datasent ="gui tu main_main";
+    String datasent = "gui tu main_main";
 
 
     private ActionBarDrawerToggle toggle;
@@ -31,62 +40,51 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     private ViewPager viewPager;
     private TabLayout tabLayout;
     Toolbar toolbar;
-    private TextView tvUsername;
-    private TextView tvUserEmail;
+    private ActionBarDrawerToggle drawerToggle;
 
 
-    String email, name, id_facebook;
     String token;
-    ProfilePictureView profilePicture;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_main);
 
+        if (!checkPermission()) {
+            return;
+        } else {
+            initPager();
+            setUpActionBar();
+            initSliding();
+        }
 
-
-        anhxa();
-        initPager();
-        setUpActionBar();
-        initSliding();
 
         //nhan thong tin nguoi dung
-        getInfo();
-
-
 
 
     }
 
-    private void anhxa() {
-        profilePicture = (ProfilePictureView) findViewById(R.id.profilePicture);
-        tvUsername = findViewById(R.id.tvUsername);
-        tvUserEmail = findViewById(R.id.tvUserEmail);
-        profilePicture = findViewById(R.id.profilePicture);
 
-
-    }
-
-    private void getInfo() {
-
-        if(getIntent().getStringExtra("name")!= null){
-            name = getIntent().getStringExtra("name");
-            email = getIntent().getStringExtra("email");
-            id_facebook = getIntent().getStringExtra("id_facebook");
-            token = getIntent().getStringExtra("token");
-            Log.d("JSONs", "ten" + name + "email" + email + "idfb:" + id_facebook);
-            Log.d("TOKENS", token);
-            tvUsername.setText(name);
-            tvUserEmail.setText(email);
-            profilePicture.setProfileId(id_facebook);
-            //gui du lieu token sang fragment
-
-        }else{
-            tvUsername.setText("Vai Lozzx");
-            tvUserEmail.setText("XYZ.com");
-
+    public boolean checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            for (String p : PERMISSION) {
+                if (checkSelfPermission(p) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(PERMISSION, 0);
+                    return false;
+                }
+            }
         }
+        return true;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (!checkPermission()) {
+            finish();
+        }
+
     }
 
     private void initPager() {
@@ -99,6 +97,8 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(this);
         tabLayout.setupWithViewPager(viewPager);
+
+        drawerLayout.addDrawerListener(drawerToggle);
 
     }
 
@@ -141,6 +141,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     public void onPageScrollStateChanged(int i) {
 
     }
+
     public String getToken() {
         return token;
     }

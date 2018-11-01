@@ -18,4 +18,8 @@
     <string name="verify">Xác nhận</string>
     <string name="sent_code">Đã gửi mã xác minh đến số điện thoại của bạn</string>
     <string name="title_activity_maps">Map</string>
+    <string name="menu_item_search">Tìm kiếm</string>
+    <string name="menu_item_about_app">Về Ứng Dụng</string>
+    <string name="menu_item_help">Giúp Đỡ</string>
+    <string name="menu_item_version_app">Phiên bản %s</string>
 </resources>
