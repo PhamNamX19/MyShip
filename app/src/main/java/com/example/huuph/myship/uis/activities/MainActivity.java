@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 //        Intent intent1 = new Intent(MainActivity.this, main_main.class);
 //        startActivity(intent1);
         FirebaseAuth mAuth;
-        mAuth = FirebaseAuth.getInstance();
+       mAuth = FirebaseAuth.getInstance();
 
         String user = edLoginUser.getText().toString().trim();
         String pass = edLoginPass.getText().toString().trim();
