@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestClient {
     private static Retrofit retrofit;
-    private static final String BASE_API1 = "https://graph.facebook.com/v3.2/";
+    private static final String BASE_API1 = "https://graph.facebook.com/v3.1/";
 
     public static APIs getAPIs() {
         if (retrofit == null) {

@@ -57,8 +57,8 @@ public class FragmentMap extends Fragment   {
                 googleMap.setMyLocationEnabled(true);
 
                 // For dropping a marker at a point on the Map
-                LatLng sydney = new LatLng(-34, 151);
-                googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker Title").snippet("Marker Description"));
+                LatLng sydney = new LatLng(20.9835893, 105.79761588);
+                googleMap.addMarker(new MarkerOptions().position(sydney).title("Triều Khúc City").snippet("Marker Description"));
 
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
