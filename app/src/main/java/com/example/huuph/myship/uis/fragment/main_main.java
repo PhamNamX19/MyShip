@@ -42,8 +42,14 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
 
+    private TextView tvUsername;
+    private TextView tvUserEmail;
 
+
+    String email, name, id_facebook;
     String token;
+    ProfilePictureView profilePicture;
+
 
 
     @Override
@@ -54,15 +60,45 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         if (!checkPermission()) {
             return;
         } else {
+            anhxa();
             initPager();
             setUpActionBar();
             initSliding();
+            getInfo();
         }
 
 
         //nhan thong tin nguoi dung
 
 
+    }
+    private void anhxa() {
+        profilePicture = (ProfilePictureView) findViewById(R.id.profilePicture);
+        tvUsername = findViewById(R.id.tvUsername);
+        tvUserEmail = findViewById(R.id.tvUserEmail);
+        profilePicture = findViewById(R.id.profilePicture);
+
+
+    }
+    private void getInfo() {
+
+        if(getIntent().getStringExtra("name")!= null){
+            name = getIntent().getStringExtra("name");
+            email = getIntent().getStringExtra("email");
+            id_facebook = getIntent().getStringExtra("id_facebook");
+            token = getIntent().getStringExtra("token");
+            Log.d("JSONs", "ten" + name + "email" + email + "idfb:" + id_facebook);
+            Log.d("TOKENS", token);
+            tvUsername.setText(name);
+            tvUserEmail.setText(email);
+            profilePicture.setProfileId(id_facebook);
+            //gui du lieu token sang fragment
+
+        }else{
+            tvUsername.setText("Vai Lozzx");
+            tvUserEmail.setText("XYZ.com");
+
+        }
     }
 
 
