@@ -20,7 +20,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".uis.activities.ForgotPass" />
         <activity android:name=".uis.activities.Signup" />
-        <activity android:name=".uis.fragment.main_main">
+        <activity android:name=".uis.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
