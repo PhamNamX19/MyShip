@@ -51,7 +51,6 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     ProfilePictureView profilePicture;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +59,14 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         if (!checkPermission()) {
             return;
         } else {
+
             anhxa();
+
             initPager();
             setUpActionBar();
             initSliding();
             getInfo();
+
         }
 
 
@@ -72,6 +74,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
 
 
     }
+
     private void anhxa() {
         profilePicture = (ProfilePictureView) findViewById(R.id.profilePicture);
         tvUsername = findViewById(R.id.tvUsername);
@@ -80,9 +83,10 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
 
 
     }
+
     private void getInfo() {
 
-        if(getIntent().getStringExtra("name")!= null){
+        if (getIntent().getStringExtra("name") != null) {
             name = getIntent().getStringExtra("name");
             email = getIntent().getStringExtra("email");
             id_facebook = getIntent().getStringExtra("id_facebook");
@@ -94,7 +98,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
             profilePicture.setProfileId(id_facebook);
             //gui du lieu token sang fragment
 
-        }else{
+        } else {
             tvUsername.setText("Vai Lozzx");
             tvUserEmail.setText("XYZ.com");
 

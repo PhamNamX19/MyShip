@@ -27,8 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FirebaseHelper.DebugFirebase" />
-        <!--<activity android:name=".uis.fragment.main_main" />-->
+
+        <activity android:name=".FirebaseHelper.DebugFirebase"></activity>
+        <activity android:name=".uis.fragment.main_main"></activity>
+        <activity android:name=".uis.activities.WebViewFabook"></activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

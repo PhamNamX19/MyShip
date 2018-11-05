@@ -33,7 +33,7 @@ public class FragmentNews extends Fragment {
     private ListView lvNew;
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
-    private String tokens = "EAAGxzui9ezkBAAmZCVEhGYLLDsRLOwKPIMGQi6CHQhL1WEqkQ4Ra5BtOppZAoUjAXvoCuzNsUUfUeIDRNpe4n44AVgcPaU4OSdMijo6mDgVUKoxDK4ceb1ZBCPDxeiBtLVht71ZCvVmtGa9UidBzhXGZCfHrFOMLRaSkDPVxvQWTnCgH4K6QLbUHZCJ2W5xc4CpXFIOXPjrQZDZD";
+    private String tokens = "EAAGxzui9ezkBAN920EgPGyT1Vh4j7EUoljbJNuiALuRJP4myqDujGxSUfOZCfJyoSAhMb01XqKkDeNvtPFqWvytdIlXKRohfSaEdy0MJWLrMDZCyQKrmpllUgddwAGSVqZAYJNKEB9jZCeO1F9n1qDhx48W3icqiLhggE4uTwivTfkxH57LCmaatZBK9SjuQZD";
 
     private String idfeed;
     private String message;
