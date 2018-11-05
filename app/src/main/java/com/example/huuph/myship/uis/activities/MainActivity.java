@@ -211,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     else {
+                        Toast.makeText(MainActivity.this, "Login fail", Toast.LENGTH_SHORT).show();
                         Log.d(TAG,"Login fail");
                         Log.d(TAG,task.toString());
                         Log.d(TAG,task.getException().toString());

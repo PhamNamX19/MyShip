@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2018:12:16"
-                android:textSize="8sp" />
+                android:textSize="9sp" />
 
         </LinearLayout>
 

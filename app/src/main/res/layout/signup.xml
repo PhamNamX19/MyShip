@@ -52,17 +52,6 @@
             android:inputType="textPassword"
             android:paddingLeft="10dp"
             android:textColor="@color/black" />
-
-        <EditText
-            android:id="@+id/edSignupPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:hint="@string/phone"
-            android:inputType="phone"
-            android:paddingLeft="10dp"
-            android:textColor="@color/black" />
-
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
