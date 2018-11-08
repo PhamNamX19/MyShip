@@ -16,6 +16,10 @@ import com.example.huuph.myship.adapter.NewLvAdapter;
 import com.example.huuph.myship.data.model.Datum;
 import com.example.huuph.myship.rest.RestClient;
 import com.example.huuph.myship.uis.activities.WebViewFabook;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -33,7 +37,7 @@ public class FragmentNews extends Fragment {
     private ListView lvNew;
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
-    private String tokens = "EAAGxzui9ezkBAN920EgPGyT1Vh4j7EUoljbJNuiALuRJP4myqDujGxSUfOZCfJyoSAhMb01XqKkDeNvtPFqWvytdIlXKRohfSaEdy0MJWLrMDZCyQKrmpllUgddwAGSVqZAYJNKEB9jZCeO1F9n1qDhx48W3icqiLhggE4uTwivTfkxH57LCmaatZBK9SjuQZD";
+    private String tokens = "EAAGxzui9ezkBACnXuNWnkIFZBKE7cQvhZAK81XNPu5CLv7m9pPxx4sCo8DduFyyKz40jIyx1QEkvz8a5IqQv51wR8kROWJIh4dv8jY44nPJB2aKnR2sxv4rAZAdulubHJblX9vP8ZCJ1joRPim1ELyjwQOQ3nwtRimy19HtsHoDxZBYwVxYRQvZAHZBnrZB4LEMZD";
 
     private String idfeed;
     private String message;
@@ -60,7 +64,6 @@ public class FragmentNews extends Fragment {
         String token = activity.getToken();
         getDataFeed();
         return view;
-
 
     }
 
@@ -105,18 +108,17 @@ public class FragmentNews extends Fragment {
                             adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews, new NewLvAdapter.OnPostItemClickListener() {
                                 @Override
                                 public void onPostItemClick(int pos) {
-                                    getActivity().startActivity(new Intent(getActivity(), WebViewFabook.class));
+                                    Intent intent = new Intent(getActivity(), WebViewFabook.class);
+                                    intent.putExtra("idfeed",idfeed);
+                                    getActivity().startActivity(intent);
                                 }
                             });
                             lvNew.setAdapter(adapter);
-
-
                         }
 
                         @Override
                         public void onFailure(Call<JsonElement> call, Throwable t) {
                             Log.d("TAG", "fail");
-
                         }
                     });
 
@@ -129,7 +131,6 @@ public class FragmentNews extends Fragment {
 
             }
         });
-
 
     }
 
