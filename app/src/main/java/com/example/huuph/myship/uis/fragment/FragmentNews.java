@@ -33,18 +33,11 @@ import retrofit2.Response;
 
 public class FragmentNews extends Fragment {
     private static FragmentNews instance;
-    private int number = 0;
     private ListView lvNew;
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
-    private String tokens = "EAAGxzui9ezkBACnXuNWnkIFZBKE7cQvhZAK81XNPu5CLv7m9pPxx4sCo8DduFyyKz40jIyx1QEkvz8a5IqQv51wR8kROWJIh4dv8jY44nPJB2aKnR2sxv4rAZAdulubHJblX9vP8ZCJ1joRPim1ELyjwQOQ3nwtRimy19HtsHoDxZBYwVxYRQvZAHZBnrZB4LEMZD";
+    private String tokens = "EAAGxzui9ezkBALiZCoOWrxaWtiZCrZB09uKi0ZAR3KODZCmRV6y1GZAqzlHZBnJA3f4Gi9ELAGHZAeedUGvZAO5ajkGhguOJIkZAIWES1tAXKBb0SMCeGQfCejsd5ru5ZA31iOUm5ZBhfN7Ca3LTrVOKI9lAMAok3BfTcwxsyX9HZBqQ3r4cZCg5CzadNQ9uIZC3d7iO4M4njFZBNNnn2gZDZD";
 
-    private String idfeed;
-    private String message;
-    private String updatedTime;
-    private String idUserPost;
-    private String nameUserPost;
-    private Datum datas;
 
     public static FragmentNews getInstance() {
         if (instance == null) {
@@ -83,44 +76,24 @@ public class FragmentNews extends Fragment {
 
                     ///trycath
                     JsonObject datal = datums.get(i).getAsJsonObject();
-                    idfeed = datal.get("id").getAsString();
-                    message = datal.get("message").getAsString();
-                    updatedTime = datal.get("updated_time").getAsString();
+                    String idfeed = datal.get("id").getAsString();
+                    String message = datal.get("message").getAsString();
+                    String updatedTime = datal.get("updated_time").getAsString();
+                    Datum datas = new Datum(message, updatedTime, idfeed);
+                    dataNews.add(datas);
 
                     //log
                     Log.d("TAG", idfeed + message + updatedTime);
 
-                    //test @path
-                    Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
-                    jsonElementCall.enqueue(new Callback<JsonElement>() {
+                    adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews, new NewLvAdapter.OnPostItemClickListener() {
                         @Override
-                        public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                            JsonElement jsonElement = response.body();
-                            JsonObject jsonObject1 = jsonElement.getAsJsonObject();
-                            JsonObject from = jsonObject1.getAsJsonObject("from");
-                            idUserPost = from.get("id").getAsString();
-                            nameUserPost = from.get("name").getAsString();
-
-                            //log
-                            Log.d("TAF", idfeed + message + updatedTime);
-                            datas = new Datum(nameUserPost, message, updatedTime);
-                            dataNews.add(datas);
-                            adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews, new NewLvAdapter.OnPostItemClickListener() {
-                                @Override
-                                public void onPostItemClick(int pos) {
-                                    Intent intent = new Intent(getActivity(), WebViewFabook.class);
-                                    intent.putExtra("idfeed",idfeed);
-                                    getActivity().startActivity(intent);
-                                }
-                            });
-                            lvNew.setAdapter(adapter);
+                        public void onPostItemClick(int pos) {
+                            Intent intent = new Intent(getActivity(), WebViewFabook.class);
+                            intent.putExtra("idfeed", dataNews.get(pos).getPostid());
+                            getActivity().startActivity(intent);
                         }
-
-                        @Override
-                        public void onFailure(Call<JsonElement> call, Throwable t) {
-                            Log.d("TAG", "fail");
-                        }
-                    });
+                    }, tokens);
+                    lvNew.setAdapter(adapter);
 
 
                 }
