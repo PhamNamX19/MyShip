@@ -30,10 +30,6 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
             android.Manifest.permission.ACCESS_FINE_LOCATION
     };
 
-    //test
-    String datasent = "gui tu main_main";
-
-
     private ActionBarDrawerToggle toggle;
     private PagerAdapter adapter;
     private DrawerLayout drawerLayout;
@@ -111,7 +107,8 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
             for (String p : PERMISSION) {
                 if (checkSelfPermission(p) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(PERMISSION, 0);
-                    return false;
+                    //ro fix bug
+                    return true;
                 }
             }
         }
@@ -148,6 +145,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
                 R.string.app_name,
                 R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
+        Log.d("TAG","CLGT");
         toggle.syncState();
     }
 
@@ -174,6 +172,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     public void onPageSelected(int i) {
         if (i == 0) {
             FragmentNews.getInstance();
+            Log.d("TAG","CLGT");
         }
     }
 

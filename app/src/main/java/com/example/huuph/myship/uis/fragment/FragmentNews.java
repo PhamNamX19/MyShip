@@ -33,9 +33,9 @@ public class FragmentNews extends Fragment {
     private ListView lvNew;
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
-    private String tokens = "EAAGxzui9ezkBAN920EgPGyT1Vh4j7EUoljbJNuiALuRJP4myqDujGxSUfOZCfJyoSAhMb01XqKkDeNvtPFqWvytdIlXKRohfSaEdy0MJWLrMDZCyQKrmpllUgddwAGSVqZAYJNKEB9jZCeO1F9n1qDhx48W3icqiLhggE4uTwivTfkxH57LCmaatZBK9SjuQZD";
+    private String tokens = "EAAGxzui9ezkBAKc8eBt8gEQ0z36HZCQycfwLpWRasna5EXE5sWYI8LLXg0THhBjyZA9Uts8A0kLpycP0hti7Ly9IU8fALaFMSobAIcoi3jUNC84J1Avueonx2EwherZAvpWZA9aLZAQw8wRgXNK6YG68xBUxPmvpItwzGOm8hWdMuwpgE84s6nzUfUsSA99EYOZAqrrbMJBQZDZD";
 
-    private String idfeed;
+    private static String idfeed = "1";
     private String message;
     private String updatedTime;
     private String idUserPost;
@@ -74,6 +74,48 @@ public class FragmentNews extends Fragment {
                 final JsonElement jsonElement = response.body();
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
                 JsonArray datums = jsonObject.getAsJsonArray("data");
+//                int p = 0;
+//                while (p < datums.size()) {
+//                    JsonObject datal = datums.get(p).getAsJsonObject();
+//                    idfeed = datal.get("id").getAsString();
+//                    message = datal.get("message").getAsString();
+//                    updatedTime = datal.get("updated_time").getAsString();
+//                    Log.d("TAG", idfeed + message + updatedTime);
+//
+//                    Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
+//                    jsonElementCall.enqueue(new Callback<JsonElement>() {
+//                        @Override
+//                        public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+//                            JsonElement jsonElement = response.body();
+//                            JsonObject jsonObject1 = jsonElement.getAsJsonObject();
+//                            JsonObject from = jsonObject1.getAsJsonObject("from");
+//                            idUserPost = from.get("id").getAsString();
+//                            nameUserPost = from.get("name").getAsString();
+//
+//                            //log
+//                            Log.d("TAGG", idfeed + message + updatedTime);
+//                            datas = new Datum(nameUserPost, message, updatedTime);
+//                            dataNews.add(datas);
+//                            adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews, new NewLvAdapter.OnPostItemClickListener() {
+//                                @Override
+//                                public void onPostItemClick(int pos) {
+//                                    getActivity().startActivity(new Intent(getActivity(), WebViewFabook.class));
+//                                }
+//                            });
+//                            lvNew.setAdapter(adapter);
+//
+//
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<JsonElement> call, Throwable t) {
+//                            Log.d("TAG", "fail");
+//
+//                        }
+//                    });
+//                    p++;
+//                    Log.d("TAGGG", idfeed + message + updatedTime+"    "+p);
+//                }
 
 
                 for (int i = 0; i < datums.size(); i++) {
@@ -87,7 +129,6 @@ public class FragmentNews extends Fragment {
                     //log
                     Log.d("TAG", idfeed + message + updatedTime);
 
-                    //test @path
                     Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
                     jsonElementCall.enqueue(new Callback<JsonElement>() {
                         @Override
@@ -99,7 +140,7 @@ public class FragmentNews extends Fragment {
                             nameUserPost = from.get("name").getAsString();
 
                             //log
-                            Log.d("TAF", idfeed + message + updatedTime);
+                            Log.d("TAGG", idfeed + message + updatedTime);
                             datas = new Datum(nameUserPost, message, updatedTime);
                             dataNews.add(datas);
                             adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews, new NewLvAdapter.OnPostItemClickListener() {
@@ -119,6 +160,7 @@ public class FragmentNews extends Fragment {
 
                         }
                     });
+                    Log.d("TAGGG", idfeed + message + updatedTime);
 
 
                 }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.huuph.myship.R;
 import com.example.huuph.myship.data.model.Datum;
@@ -58,6 +59,7 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
             @Override
             public void onClick(View v) {
                 itemClickListener.onPostItemClick(position);
+                Toast.makeText(context, "adsad"+position, Toast.LENGTH_SHORT).show();
             }
         });
         return convertView;
