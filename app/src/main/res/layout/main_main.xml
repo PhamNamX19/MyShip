@@ -34,6 +34,7 @@
                 android:orientation="vertical">
 
                 <com.facebook.login.widget.ProfilePictureView
+                    android:layout_gravity="left"
                     android:id="@+id/profilePicture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -112,7 +113,7 @@
                 <TextView
                     android:id="@+id/tvHoTro"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity=""
                     android:layout_marginTop="3dp"
                     android:background="#fff"
@@ -121,12 +122,12 @@
                     android:drawablePadding="15dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="Hỗ Trợ"
+                    android:text="Hỗ Trợ (Chat với My Ship)"
                     android:textSize="@dimen/textSize_s" />
                 <TextView
                     android:id="@+id/tvDangXuat"
                     android:layout_width="match_parent"
-                    android:layout_height="35dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity=""
                     android:layout_marginTop="3dp"
                     android:background="#fff"
