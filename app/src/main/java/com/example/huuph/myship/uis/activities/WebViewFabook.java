@@ -2,6 +2,7 @@ package com.example.huuph.myship.uis.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -19,8 +20,9 @@ public class WebViewFabook extends AppCompatActivity {
         idfeed = getIntent().getStringExtra("idfeed");
 
         webView = findViewById(R.id.webView);
-        webView.loadUrl("https://www.facebook.com/" + idfeed + "");
+        webView.loadUrl("https://m.facebook.com/" + idfeed + "");
         webView.setWebViewClient(new WebViewClient());
+        Log.d("TT",idfeed);
 
 
     }

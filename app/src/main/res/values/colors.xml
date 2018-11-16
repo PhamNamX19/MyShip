@@ -9,4 +9,7 @@
     <color name="Centercolor">#768087</color>
     <color name="startcolor">#000</color>
     <color name="background">#ce3d8b</color>
+    <color name="text_color_d">#6d6d6d</color>
+    <color name="background_d">#ededed</color>
+
 </resources>
