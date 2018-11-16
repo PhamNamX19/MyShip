@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-
     <android.support.design.widget.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -34,10 +33,10 @@
                 android:orientation="vertical">
 
                 <com.facebook.login.widget.ProfilePictureView
-                    android:layout_gravity="left"
                     android:id="@+id/profilePicture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left"
                     android:layout_margin="15dp"></com.facebook.login.widget.ProfilePictureView>
 
                 <TextView
@@ -76,11 +75,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#dedede"
                 android:layout_gravity="center"
+                android:background="#dedede"
                 android:orientation="vertical">
 
-                <TextView
+                <Button
                     android:id="@+id/tvThongBao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -90,45 +89,50 @@
                     android:drawableLeft="@drawable/thongbao"
                     android:drawableRight="@drawable/next_image"
                     android:drawablePadding="19dp"
+                    android:gravity="center"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="Thông Báo"
-                    android:textSize="@dimen/textSize_s" />
+                    android:textSize="@dimen/textSize_s"
+                    android:onClick="ThongBao"
+                    />
 
-                <TextView
+                <Button
                     android:id="@+id/tvHuongDanSuDung"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity=""
                     android:layout_marginTop="3dp"
                     android:background="#fff"
                     android:drawableLeft="@drawable/smiles"
                     android:drawableRight="@drawable/next_image"
                     android:drawablePadding="20dp"
+                    android:gravity="center"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="Hướng dẫn sử dụng "
                     android:textSize="@dimen/textSize_s" />
 
-                <TextView
+                <Button
                     android:id="@+id/tvHoTro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity=""
+                    android:layout_gravity="center"
                     android:layout_marginTop="3dp"
                     android:background="#fff"
                     android:drawableLeft="@drawable/lienhe"
                     android:drawableRight="@drawable/next_image"
                     android:drawablePadding="15dp"
+                    android:gravity=""
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="Hỗ Trợ (Chat với My Ship)"
                     android:textSize="@dimen/textSize_s" />
-                <TextView
+
+                <Button
                     android:id="@+id/tvDangXuat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity=""
+                    android:layout_gravity="center"
                     android:layout_marginTop="3dp"
                     android:background="#fff"
                     android:drawableLeft="@drawable/logout"
@@ -138,7 +142,11 @@
                     android:paddingRight="10dp"
                     android:text="Đăng Xuất"
                     android:textColor="#f53b3b"
-                    android:textSize="@dimen/textSize_s" />
+                    android:textSize="@dimen/textSize_s"
+                    android:onClick="DangXuat"
+                    />
+
+
             </LinearLayout>
 
         </LinearLayout>
