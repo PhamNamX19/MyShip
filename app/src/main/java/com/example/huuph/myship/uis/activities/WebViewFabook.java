@@ -22,7 +22,8 @@ public class WebViewFabook extends AppCompatActivity {
         idfeed = getIntent().getStringExtra("idfeed");
 
         webView = findViewById(R.id.webView);
-        webView.loadUrl("https://m.facebook.com/" + idfeed + "");
+
+        webView.loadUrl("https://m.facebook.com/groups/546129785832997?view=permalink&id=" + idfeed + "&fs=2&focus_composer=0");
         webView.setWebViewClient(new WebViewClient());
         Log.d("TT", idfeed);
 
@@ -31,8 +32,7 @@ public class WebViewFabook extends AppCompatActivity {
 
     public void back(View view) {
         finish();
-        Intent intent = new Intent(this,main_main.class);
-        startActivity(intent);
+
     }
 
 

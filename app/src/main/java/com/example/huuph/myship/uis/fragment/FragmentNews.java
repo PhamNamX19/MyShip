@@ -98,7 +98,10 @@ public class FragmentNews extends Fragment {
                         @Override
                         public void onPostItemClick(int pos) {
                             Intent intent = new Intent(getActivity(), WebViewFabook.class);
-                            intent.putExtra("idfeed", dataNews.get(pos).getPostid());
+                            String id = dataNews.get(pos).getPostid();
+                            int vitri_ = id.indexOf("_");
+                            id = id.substring(vitri_+1);
+                            intent.putExtra("idfeed", id);
                             getActivity().startActivity(intent);
                         }
                     }, tokens);
