@@ -99,8 +99,8 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
             //gui du lieu token sang fragment
 
         } else {
-            tvUsername.setText("Vai Lozzx");
-            tvUserEmail.setText("XYZ.com");
+            tvUsername.setText("Khách");
+            tvUserEmail.setText(" ");
 
         }
     }

@@ -20,6 +20,11 @@ import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -36,8 +41,8 @@ public class FragmentNews extends Fragment {
     private ListView lvNew;
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
-    private String tokens = "EAAGxzui9ezkBAGm6sNcLP3OPOpBj5PWL9qPtD878XztcoNPEzQofCf4mZCvyUMZA2VTpH8cxWqp5jvUsF0sCpb8VI4VKttdOnsZB44JDSrMGD9V1zuKULcZBsW5cj58agnvwAr2IET0hcuy5xrpCg0lxhujVN3cS8BltKKxvPOoOgV34yhViwS0TnDdDkFQZD";
-
+    private String tokens = "EAAGxzui9ezkBAHZB6ZCQ5kzppOdrrq6rL7mABCZBB0fjn7IErf909dYwy0JHRGFjhZBd8O8KWF56zefOjupcDVDwGZC4TV2KFq3hOkNltrtw0pYXEuThAoofCHraZAysNLeTQwIkRLZCgjObAwmNXdNxxc5Y4ZCaEgPjrNOzRL0TVHSxwfy8L1UT8s57JVloaCYZD";
+    private DatabaseReference ShipReference;
 
     public static FragmentNews getInstance() {
         if (instance == null) {
@@ -56,6 +61,12 @@ public class FragmentNews extends Fragment {
         main_main activity = (main_main) getActivity();
         String token = activity.getToken();
         getDataFeed();
+//        //initial fire base real time database
+//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+//        ShipReference = firebaseDatabase.getReference("fir-7bfe4");
+//        getListNewShip();
+
+
         return view;
 
     }
@@ -70,8 +81,6 @@ public class FragmentNews extends Fragment {
                 final JsonElement jsonElement = response.body();
                 JsonObject jsonObject = jsonElement.getAsJsonObject();
                 JsonArray datums = jsonObject.getAsJsonArray("data");
-
-
                 for (int i = 0; i < datums.size(); i++) {
 
                     ///trycath
@@ -97,10 +106,31 @@ public class FragmentNews extends Fragment {
 
 
                 }
+
             }
 
             @Override
             public void onFailure(Call<JsonElement> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void getListNewShip() {
+        ShipReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                dataNews.clear();
+                for(DataSnapshot postSnapshot1 : dataSnapshot.getChildren()){
+                    Datum dataShip =postSnapshot1.getValue(Datum.class);
+                    dataNews.add(dataShip);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });

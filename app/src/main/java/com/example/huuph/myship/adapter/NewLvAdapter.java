@@ -84,6 +84,8 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
     }
 
 
+
+
     public class ViewHolder {
         TextView tvUser;
         TextView tvPost;
