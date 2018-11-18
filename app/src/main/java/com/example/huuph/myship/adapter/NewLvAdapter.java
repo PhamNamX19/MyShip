@@ -84,6 +84,8 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
     }
 
 
+
+
     public class ViewHolder {
         TextView tvUser;
         TextView tvPost;
@@ -96,20 +98,23 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
     }
 
     public void getUserInfo(final TextView tv, String idfeed, String tokens) {
-        Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
-        jsonElementCall.enqueue(new Callback<JsonElement>() {
-            @Override
-            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                JsonElement jsonElement = response.body();
-                JsonObject jsonObject1 = jsonElement.getAsJsonObject();
-                JsonObject from = jsonObject1.getAsJsonObject("from");
-                nameUserPost = from.get("name").getAsString();
-            }
-
-            @Override
-            public void onFailure(Call<JsonElement> call, Throwable t) {
-                Log.d("TAG", "fail");
-            }
-        });
+//        Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
+//        jsonElementCall.enqueue(new Callback<JsonElement>() {
+//            @Override
+//            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+//                JsonElement jsonElement = response.body();
+//                JsonObject jsonObject1 = jsonElement.getAsJsonObject();
+//                JsonObject from = jsonObject1.getAsJsonObject("from");
+//                nameUserPost = from.get("name").getAsString();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonElement> call, Throwable t) {
+//                Log.d("TAG", "fail");
+//            }
+//        });
+        nameUserPost = "NAMEAA";
+        tv.setText(nameUserPost);
     }
+
 }

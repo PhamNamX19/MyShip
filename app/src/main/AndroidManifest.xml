@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".FirebaseHelper.ShipApplication"
@@ -27,10 +29,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".FirebaseHelper.DebugFirebase"></activity>
-        <activity android:name=".uis.fragment.main_main"></activity>
-        <activity android:name=".uis.activities.WebViewFabook"></activity>
+        <activity android:name=".FirebaseHelper.DebugFirebase" />
+        <activity android:name=".uis.fragment.main_main" />
+        <activity android:name=".uis.activities.WebViewFabook" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -47,6 +48,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name=".uis.activities.ThongBao"></activity>
     </application>
 
 </manifest>
