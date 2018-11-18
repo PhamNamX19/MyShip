@@ -14,140 +14,145 @@
         android:layout_height="match_parent" />
 
     <android.support.design.widget.NavigationView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true">
 
-        <LinearLayout
+        <?xml version="1.0" encoding="utf-8"?>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <com.facebook.login.widget.ProfilePictureView
-                    android:id="@+id/profilePicture"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_margin="15dp"></com.facebook.login.widget.ProfilePictureView>
-
-                <TextView
-                    android:id="@+id/tvUsername"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Vũ Tiến Việt" />
-
-                <TextView
-                    android:id="@+id/tvUserEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:text="Vutienviet@gmail.com" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:background="@color/background_d"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:gravity="left"
-                    android:text="HỖ TRỢ"
-                    android:textColor="@color/text_color_d"
-                    android:textSize="15sp" />
-            </LinearLayout>
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="#dedede"
+                android:background="@android:color/white"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/tvThongBao"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity=""
-                    android:layout_marginTop="3dp"
-                    android:background="#fff"
-                    android:drawableLeft="@drawable/thongbao"
-                    android:drawableRight="@drawable/next_image"
-                    android:drawablePadding="19dp"
+                    android:layout_height="250dp"
+                    android:background="@color/colorPrimary"
                     android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Thông Báo"
-                    android:textSize="@dimen/textSize_s"
-                    android:onClick="ThongBao"
-                    />
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/tvHuongDanSuDung"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:background="#fff"
-                    android:drawableLeft="@drawable/smiles"
-                    android:drawableRight="@drawable/next_image"
-                    android:drawablePadding="20dp"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Hướng dẫn sử dụng "
-                    android:textSize="@dimen/textSize_s" />
+                    <com.facebook.login.widget.ProfilePictureView
+                        android:id="@+id/profilePicture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_margin="15dp"></com.facebook.login.widget.ProfilePictureView>
 
-                <Button
-                    android:id="@+id/tvHoTro"
+                    <TextView
+                        android:id="@+id/tvUsername"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Khách" />
+
+                    <TextView
+                        android:id="@+id/tvUserEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Vutienviet@gmail.com" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="3dp"
-                    android:background="#fff"
-                    android:drawableLeft="@drawable/lienhe"
-                    android:drawableRight="@drawable/next_image"
-                    android:drawablePadding="15dp"
-                    android:gravity=""
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Hỗ Trợ (Chat với My Ship)"
-                    android:textSize="@dimen/textSize_s" />
+                    android:background="@color/background_d"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/tvDangXuat"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="left"
+                        android:text="HỖ TRỢ"
+                        android:textColor="@color/text_color_d"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:layout_marginTop="3dp"
-                    android:background="#fff"
-                    android:drawableLeft="@drawable/logout"
-                    android:drawableRight="@drawable/next_image"
-                    android:drawablePadding="20dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="Đăng Xuất"
-                    android:textColor="#f53b3b"
-                    android:textSize="@dimen/textSize_s"
-                    android:onClick="DangXuat"
-                    />
+                    android:background="#dedede"
+                    android:orientation="vertical">
 
+                    <Button
+                        android:id="@+id/tvThongBao"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_marginTop="3dp"
+                        android:background="#fff"
+                        android:drawableLeft="@drawable/thongbao"
+                        android:drawableRight="@drawable/next_image"
+                        android:drawablePadding="19dp"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Thông Báo"
+                        android:textSize="@dimen/textSize_s"
+                        android:textStyle="normal" />
+
+                    <Button
+                        android:id="@+id/tvHuongDanSuDung"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:background="#fff"
+                        android:drawableLeft="@drawable/smiles"
+                        android:drawableRight="@drawable/next_image"
+                        android:drawablePadding="20dp"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Hướng dẫn sử dụng "
+                        android:textSize="@dimen/textSize_s" />
+
+                    <Button
+                        android:id="@+id/tvHoTro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity=""
+                        android:layout_marginTop="3dp"
+                        android:background="#fff"
+                        android:drawableLeft="@drawable/lienhe"
+                        android:drawableRight="@drawable/next_image"
+                        android:drawablePadding="15dp"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Hỗ Trợ"
+                        android:textSize="@dimen/textSize_s" />
+
+                    <Button
+                        android:id="@+id/tvDangXuat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity=""
+                        android:layout_marginTop="3dp"
+                        android:background="#fff"
+                        android:drawableLeft="@drawable/logout"
+                        android:drawableRight="@drawable/next_image"
+                        android:drawablePadding="20dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Đăng Xuất"
+                        android:textColor="#f53b3b"
+                        android:textSize="@dimen/textSize_s" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
+
 
         </LinearLayout>
 
