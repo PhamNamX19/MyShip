@@ -21,7 +21,7 @@
                 android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="layout"
+                android:text="Name"
                 android:textColor="#53d3e2"
                 android:textSize="12sp"
                 android:textStyle="bold" />
@@ -40,7 +40,7 @@
             android:id="@+id/tvPost"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:padding="5dp"
             android:textColor="#000000"
             android:text="Đây là bài đăng của người dùng" />
@@ -81,9 +81,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/selector_button_fb_google"
-                android:drawableLeft="@drawable/ic_hystory_black"
+                android:drawableLeft="@drawable/save_16"
                 android:paddingLeft="20dp"
-                android:text="Lịch Sử"
+                android:text="Lưu lại"
                 android:textAllCaps="false"
                 android:textSize="10sp" />
 
