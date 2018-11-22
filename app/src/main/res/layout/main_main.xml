@@ -30,7 +30,6 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="#2366aa"
-                android:gravity="center"
                 android:orientation="vertical">
 
                 <com.facebook.login.widget.ProfilePictureView
@@ -42,7 +41,7 @@
 
                 <TextView
                     android:id="@+id/tvUsername"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="Khách"
@@ -63,9 +62,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="2"
                 android:background="#dedede"
-                android:orientation="vertical"
-
-                >
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -75,7 +72,6 @@
                     android:gravity="left"
                     android:text="HỖ TRỢ"
                     android:textColor="@color/text_color_d"
-
                     android:textSize="15sp" />
 
                 <Button
@@ -92,10 +88,9 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="Thông Báo"
-                    android:textSize="@dimen/textSize_s"
-                    android:textStyle="normal"
                     android:textColor="@color/text_color_e"
-                    />
+                    android:textSize="@dimen/textSize_s"
+                    android:textStyle="normal" />
 
                 <Button
                     android:id="@+id/tvHuongDanSuDung"
@@ -103,7 +98,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:background="#fff"
-                    android:textColor="@color/text_color_e"
                     android:drawableLeft="@drawable/smiles"
                     android:drawableRight="@drawable/next_image"
                     android:drawablePadding="20dp"
@@ -111,6 +105,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="Hướng dẫn sử dụng "
+                    android:textColor="@color/text_color_e"
                     android:textSize="@dimen/textSize_s" />
 
                 <Button
@@ -120,7 +115,6 @@
                     android:layout_gravity=""
                     android:layout_marginTop="3dp"
                     android:background="#fff"
-                    android:textColor="@color/text_color_e"
                     android:drawableLeft="@drawable/lienhe"
                     android:drawableRight="@drawable/next_image"
                     android:drawablePadding="15dp"
@@ -128,6 +122,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="Hỗ Trợ"
+                    android:textColor="@color/text_color_e"
                     android:textSize="@dimen/textSize_s" />
 
                 <Button
