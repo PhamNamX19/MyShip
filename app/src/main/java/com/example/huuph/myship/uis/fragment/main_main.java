@@ -197,6 +197,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
 
     public void DangXuat(View view) {
             LoginManager.getInstance().logOut();
+            finish();
             Intent intent = new Intent(this,MainActivity.class);
             startActivity(intent);
 
