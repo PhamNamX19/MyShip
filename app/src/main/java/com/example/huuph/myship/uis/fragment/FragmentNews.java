@@ -36,7 +36,8 @@ public class FragmentNews extends Fragment {
     private ListView lvNew;
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
-    private String tokens = "EAAGxzui9ezkBAE1pbjnGw4DUBzrTWlhDvtkxWZCD7kUWCbWiZBnMdth8iLhhqV40IyanSpgzAY1ZB3mwsIcnwluZBrY72FZBZCqpzJsZBxZAZCu7IQJRBL8n4oWh0E4T9fBeokJHOPyKVExpFeOKRIWSfB5sJt6ta1900EubFihWP6YF9XDZB3qBdBhVZBLddLWYIUZD";
+    private String token;
+ //   private String tokens = "EAAGxzui9ezkBAE1pbjnGw4DUBzrTWlhDvtkxWZCD7kUWCbWiZBnMdth8iLhhqV40IyanSpgzAY1ZB3mwsIcnwluZBrY72FZBZCqpzJsZBxZAZCu7IQJRBL8n4oWh0E4T9fBeokJHOPyKVExpFeOKRIWSfB5sJt6ta1900EubFihWP6YF9XDZB3qBdBhVZBLddLWYIUZD";
 
 
     public static FragmentNews getInstance() {
@@ -54,7 +55,8 @@ public class FragmentNews extends Fragment {
         lvNew = view.findViewById(R.id.lvNew);
         dataNews = new ArrayList<>();
         main_main activity = (main_main) getActivity();
-        String token = activity.getToken();
+        token = activity.getToken();
+        Log.d("token","new"+token);
         getDataFeed();
         return view;
 
@@ -63,7 +65,7 @@ public class FragmentNews extends Fragment {
     //get data json
     private void getDataFeed() {
 
-        Call<JsonElement> call = RestClient.getAPIs().getDrirectionInfo(tokens);
+        Call<JsonElement> call = RestClient.getAPIs().getDrirectionInfo(token);
         call.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
@@ -92,10 +94,13 @@ public class FragmentNews extends Fragment {
                             @Override
                             public void onPostItemClick(int pos) {
                                 Intent intent = new Intent(getActivity(), WebViewFabook.class);
-                                intent.putExtra("idfeed", dataNews.get(pos).getPostid());
+                                String id = dataNews.get(pos).getPostid();
+                                int vitri_ = id.indexOf("_");
+                                id = id.substring(vitri_+1);
+                                intent.putExtra("idfeed", id);
                                 getActivity().startActivity(intent);
                             }
-                        }, tokens);
+                        }, token);
                         lvNew.setAdapter(adapter);
 
                     }

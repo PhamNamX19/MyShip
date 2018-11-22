@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.huuph.myship">
+    package="com.example.huuph.myship"
+
+    >
 
     <permission android:name="android.permission.INTERNET" />
 
@@ -20,18 +22,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".uis.activities.ForgotPass" />
-        <activity android:name=".uis.activities.Signup" />
-        //<activity android:name=".uis.activities.MainActivity">
+        <activity
+            android:name=".uis.activities.ForgotPass"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".uis.activities.Signup"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".uis.activities.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
-        <activity android:name=".FirebaseHelper.DebugFirebase" />
-        <activity android:name=".uis.fragment.main_main" />
-        <activity android:name=".uis.activities.WebViewFabook" />
+        <activity
+            android:name=".FirebaseHelper.DebugFirebase"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".uis.fragment.main_main"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".uis.activities.WebViewFabook"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
