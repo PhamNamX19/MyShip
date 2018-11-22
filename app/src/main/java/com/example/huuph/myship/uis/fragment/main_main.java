@@ -18,8 +18,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.example.huuph.myship.Manifest;
 import com.example.huuph.myship.uis.activities.MainActivity;
 import com.example.huuph.myship.uis.activities.ThongBao;
 import com.example.huuph.myship.uis.fragment.FragmentNews;

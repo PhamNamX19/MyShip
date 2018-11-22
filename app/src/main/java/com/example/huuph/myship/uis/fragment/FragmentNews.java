@@ -36,7 +36,7 @@ public class FragmentNews extends Fragment {
     private ListView lvNew;
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
-    private String tokens = "EAAGxzui9ezkBACAccwU3xWhPweXmcs5kkuOlgGWDLUYf5ioWVtSiIl2L5bS228ZAKGGGUkPlBUVF3lrz7tbpjP4fQZCxIegZAaigwjbDfr2OvXDR3PJ6OABFrfPl4uBen78HJCyZCG3kyZArZCD8dJM4ZCtCNHuGsa8ZANROZCSZBRQulEZCVpuLpT3E4aAyxSrlcsZD";
+    private String tokens = "EAAGxzui9ezkBAE1pbjnGw4DUBzrTWlhDvtkxWZCD7kUWCbWiZBnMdth8iLhhqV40IyanSpgzAY1ZB3mwsIcnwluZBrY72FZBZCqpzJsZBxZAZCu7IQJRBL8n4oWh0E4T9fBeokJHOPyKVExpFeOKRIWSfB5sJt6ta1900EubFihWP6YF9XDZB3qBdBhVZBLddLWYIUZD";
 
 
     public static FragmentNews getInstance() {
@@ -73,29 +73,32 @@ public class FragmentNews extends Fragment {
 
 
                 for (int i = 0; i < datums.size(); i++) {
-
-                    ///trycath
                     JsonObject datal = datums.get(i).getAsJsonObject();
-                    String idfeed = datal.get("id").getAsString();
-                    String message = datal.get("message").getAsString();
-                    String updatedTime = datal.get("updated_time").getAsString();
-                    Datum datas = new Datum(message, updatedTime, idfeed);
-                    dataNews.add(datas);
 
-                    //log
-                    Log.d("TAG", idfeed + message + updatedTime);
+                    if (datal.get("id")!= null &&
+                            datal.get("message") != null &&
+                            datal.get("updated_time")!= null) {
 
-                    adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews, new NewLvAdapter.OnPostItemClickListener() {
-                        @Override
-                        public void onPostItemClick(int pos) {
-                            Intent intent = new Intent(getActivity(), WebViewFabook.class);
-                            intent.putExtra("idfeed", dataNews.get(pos).getPostid());
-                            getActivity().startActivity(intent);
-                        }
-                    }, tokens);
-                    lvNew.setAdapter(adapter);
+                        String idfeed = datal.get("id").getAsString();
+                        String message = datal.get("message").getAsString();
+                        String updatedTime = datal.get("updated_time").getAsString();
+                        Datum datas = new Datum(message, updatedTime, idfeed);
+                        dataNews.add(datas);
 
+                        //log
+                        Log.d("TAG", idfeed + message + updatedTime);
 
+                        adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews, new NewLvAdapter.OnPostItemClickListener() {
+                            @Override
+                            public void onPostItemClick(int pos) {
+                                Intent intent = new Intent(getActivity(), WebViewFabook.class);
+                                intent.putExtra("idfeed", dataNews.get(pos).getPostid());
+                                getActivity().startActivity(intent);
+                            }
+                        }, tokens);
+                        lvNew.setAdapter(adapter);
+
+                    }
                 }
             }
 
