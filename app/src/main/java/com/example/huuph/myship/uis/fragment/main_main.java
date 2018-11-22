@@ -201,4 +201,10 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
             startActivity(intent);
 
     }
+
+    public void HoTro(View view) {
+    }
+
+    public void HuongDan(View view) {
+    }
 }

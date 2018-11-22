@@ -90,6 +90,7 @@
                     android:text="Thông Báo"
                     android:textColor="@color/text_color_e"
                     android:textSize="@dimen/textSize_s"
+                    android:onClick="ThongBao"
                     android:textStyle="normal" />
 
                 <Button
@@ -105,6 +106,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:text="Hướng dẫn sử dụng "
+                    android:onClick="HuongDan"
                     android:textColor="@color/text_color_e"
                     android:textSize="@dimen/textSize_s" />
 
@@ -123,6 +125,7 @@
                     android:paddingRight="10dp"
                     android:text="Hỗ Trợ"
                     android:textColor="@color/text_color_e"
+                    android:onClick="HoTro"
                     android:textSize="@dimen/textSize_s" />
 
                 <Button
@@ -139,6 +142,7 @@
                     android:paddingRight="10dp"
                     android:text="Đăng Xuất"
                     android:textColor="#f53b3b"
+                    android:onClick="DangXuat"
                     android:textSize="@dimen/textSize_s" />
 
 

@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
                 token = loginResult.getAccessToken().getToken();
+                Log.d("token",token);
                 //lay thong tin nguoi dung
                 result();
             }
@@ -196,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         String user = edLoginUser.getText().toString().trim();
         String pass = edLoginPass.getText().toString().trim();
         if (user.equals("") || pass.equals("")) {
-            Toast.makeText(this, "Please input yours info", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập thông tin", Toast.LENGTH_SHORT).show();
         } else {
             if (cbSave.isChecked()) {
                 saveData(user, pass);
@@ -208,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "Loged in");
                         // chuyen sang cativity main
-                        Toast.makeText(MainActivity.this, "Login successful. Please wait...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Đăng nhập thành công...", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, main_main.class);
                         startActivity(intent);
                     } else {
