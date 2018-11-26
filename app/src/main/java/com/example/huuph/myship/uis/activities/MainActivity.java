@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     //mail va name ...facebook
     String email, name, id_facebook;
     //ma token facebook
-    String token;
+    private String token = "EAAhqYFrQulMBAAjbwzgrPsfkErkkdsyKs1Mb8wbYWleYaXf2AcOCHHqZBo3tilbAI4qtyUIFifShBpQLgVjEk0i4ZB2LghwR2KEwgTlI5xXMR1GtIKM7AkBnyeAquLMpaDP6TxJeVKtg0MjJhL597EYv7xIOFvWAspcAcoscacNpir8q5skwmdOOrZClBEZD";
 
 
     @Override
@@ -208,6 +208,8 @@ public class MainActivity extends AppCompatActivity {
                         // chuyen sang cativity main
                         Toast.makeText(MainActivity.this, "Login successful. Please wait...", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, main_main.class);
+                        intent.putExtra("token", token);
+
                         startActivity(intent);
                     } else {
                         Log.d(TAG, "Login fail");

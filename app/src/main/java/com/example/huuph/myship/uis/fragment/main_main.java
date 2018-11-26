@@ -86,7 +86,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
 
     private void getInfo() {
 
-        if (getIntent().getStringExtra("name") != null) {
+        if (getIntent().getStringExtra("token") != null) {
             name = getIntent().getStringExtra("name");
             email = getIntent().getStringExtra("email");
             id_facebook = getIntent().getStringExtra("id_facebook");
