@@ -25,6 +25,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -64,14 +65,10 @@ public class MainActivity extends AppCompatActivity {
     String token;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-
-
         Initialization();
         setLogin_Button();
         //an button facebook mac dinh
@@ -86,12 +83,11 @@ public class MainActivity extends AppCompatActivity {
         btfacebook = (Button) findViewById(R.id.btfacebook);
         tvtes = findViewById(R.id.tvtes);
         cbSave = findViewById(R.id.checkbox_remember);
-
-
         sharedPreferences = getSharedPreferences("UserSP", Context.MODE_PRIVATE);
 
         //Đăng nhập lại mỗi khi vào ứng dụng
         onStart();
+        LoginManager.getInstance().logOut();
     }
 
     //luu du lieu vao sharepreference
@@ -128,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
                 token = loginResult.getAccessToken().getToken();
-                Log.d("token",token);
+                Log.d("token", token);
                 //lay thong tin nguoi dung
                 result();
             }
