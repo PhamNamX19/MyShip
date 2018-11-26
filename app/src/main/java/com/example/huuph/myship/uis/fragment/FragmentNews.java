@@ -36,8 +36,7 @@ public class FragmentNews extends Fragment {
     private ListView lvNew;
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
-    private String token;
- //   private String tokens = "EAAGxzui9ezkBAE1pbjnGw4DUBzrTWlhDvtkxWZCD7kUWCbWiZBnMdth8iLhhqV40IyanSpgzAY1ZB3mwsIcnwluZBrY72FZBZCqpzJsZBxZAZCu7IQJRBL8n4oWh0E4T9fBeokJHOPyKVExpFeOKRIWSfB5sJt6ta1900EubFihWP6YF9XDZB3qBdBhVZBLddLWYIUZD";
+    private String tokens = "EAAGxzui9ezkBALiZCoOWrxaWtiZCrZB09uKi0ZAR3KODZCmRV6y1GZAqzlHZBnJA3f4Gi9ELAGHZAeedUGvZAO5ajkGhguOJIkZAIWES1tAXKBb0SMCeGQfCejsd5ru5ZA31iOUm5ZBhfN7Ca3LTrVOKI9lAMAok3BfTcwxsyX9HZBqQ3r4cZCg5CzadNQ9uIZC3d7iO4M4njFZBNNnn2gZDZD";
 
 
     public static FragmentNews getInstance() {
@@ -55,8 +54,7 @@ public class FragmentNews extends Fragment {
         lvNew = view.findViewById(R.id.lvNew);
         dataNews = new ArrayList<>();
         main_main activity = (main_main) getActivity();
-        token = activity.getToken();
-        Log.d("token","new"+token);
+        String token = activity.getToken();
         getDataFeed();
         return view;
 
@@ -65,7 +63,7 @@ public class FragmentNews extends Fragment {
     //get data json
     private void getDataFeed() {
 
-        Call<JsonElement> call = RestClient.getAPIs().getDrirectionInfo(token);
+        Call<JsonElement> call = RestClient.getAPIs().getDrirectionInfo(tokens);
         call.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
@@ -75,35 +73,29 @@ public class FragmentNews extends Fragment {
 
 
                 for (int i = 0; i < datums.size(); i++) {
+
+                    ///trycath
                     JsonObject datal = datums.get(i).getAsJsonObject();
+                    String idfeed = datal.get("id").getAsString();
+                    String message = datal.get("message").getAsString();
+                    String updatedTime = datal.get("updated_time").getAsString();
+                    Datum datas = new Datum(message, updatedTime, idfeed);
+                    dataNews.add(datas);
 
-                    if (datal.get("id")!= null &&
-                            datal.get("message") != null &&
-                            datal.get("updated_time")!= null) {
+                    //log
+                    Log.d("TAG", idfeed + message + updatedTime);
 
-                        String idfeed = datal.get("id").getAsString();
-                        String message = datal.get("message").getAsString();
-                        String updatedTime = datal.get("updated_time").getAsString();
-                        Datum datas = new Datum(message, updatedTime, idfeed);
-                        dataNews.add(datas);
+                    adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews, new NewLvAdapter.OnPostItemClickListener() {
+                        @Override
+                        public void onPostItemClick(int pos) {
+                            Intent intent = new Intent(getActivity(), WebViewFabook.class);
+                            intent.putExtra("idfeed", dataNews.get(pos).getPostid());
+                            getActivity().startActivity(intent);
+                        }
+                    }, tokens);
+                    lvNew.setAdapter(adapter);
 
-                        //log
-                        Log.d("TAG", idfeed + message + updatedTime);
 
-                        adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews, new NewLvAdapter.OnPostItemClickListener() {
-                            @Override
-                            public void onPostItemClick(int pos) {
-                                Intent intent = new Intent(getActivity(), WebViewFabook.class);
-                                String id = dataNews.get(pos).getPostid();
-                                int vitri_ = id.indexOf("_");
-                                id = id.substring(vitri_+1);
-                                intent.putExtra("idfeed", id);
-                                getActivity().startActivity(intent);
-                            }
-                        }, token);
-                        lvNew.setAdapter(adapter);
-
-                    }
                 }
             }
 
