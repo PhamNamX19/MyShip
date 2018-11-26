@@ -40,13 +40,13 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
     private Context context;
     private int resource;
     private String idUserPost;
-    private String nameUserPost;
+    private String nameUserPost = "Names";
     private Datum datas;
     private List<Datum> listData;
     private OnPostItemClickListener itemClickListener;
     private String token;
 
-    public NewLvAdapter(@NonNull Context context, int resource, @NonNull List<Datum> objects, OnPostItemClickListener listener,String token) {
+    public NewLvAdapter(@NonNull Context context, int resource, @NonNull List<Datum> objects, OnPostItemClickListener listener, String token) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
@@ -71,7 +71,7 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         Datum dataNew = listData.get(position);
-        getUserInfo(viewHolder.tvUser,dataNew.getPostid() ,token );
+        getUserInfo(viewHolder.tvUser, dataNew.getPostid(), token);
         viewHolder.tvPost.setText(dataNew.getMessage());
         viewHolder.tvTimePost.setText(dataNew.getUpdatedTime());
         viewHolder.btBinhLuon.setOnClickListener(new View.OnClickListener() {
@@ -104,8 +104,13 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                 JsonElement jsonElement = response.body();
                 JsonObject jsonObject1 = jsonElement.getAsJsonObject();
-                JsonObject from = jsonObject1.getAsJsonObject("from");
-                nameUserPost = from.get("name").getAsString();
+
+                if (jsonObject1.getAsJsonObject("from") != null) {
+                    JsonObject from = jsonObject1.getAsJsonObject("from");
+                    String name = from.get("name").getAsString();
+                    Log.d("names", name);
+                    nameUserPost = name;
+                }
             }
 
             @Override
@@ -113,5 +118,7 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
                 Log.d("TAG", "fail");
             }
         });
+        tv.setText(nameUserPost);
     }
+
 }

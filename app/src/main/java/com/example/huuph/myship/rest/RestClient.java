@@ -23,14 +23,6 @@ public class RestClient {
         return retrofit.create(APIs.class);
     }
 }
-//    public static APIs.APIsgetUserPost APIsgetUserPost() {
-//        if (retrofit == null) {
-//            retrofit = new Retrofit.Builder()
-//                    .baseUrl(BASE_API1)
-//                    .addConverterFactory(GsonConverterFactory.create())
-//                    .build();
-//        }
-//        return retrofit.create(APIs.APIsgetUserPost.class);
-//    }
+
 
 

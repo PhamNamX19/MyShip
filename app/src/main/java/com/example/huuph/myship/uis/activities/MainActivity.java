@@ -1,5 +1,6 @@
 package com.example.huuph.myship.uis.activities;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +29,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
@@ -83,29 +85,30 @@ public class MainActivity extends AppCompatActivity {
         edLoginPass = findViewById(R.id.edLoginPass);
         btfacebook = (Button) findViewById(R.id.btfacebook);
         tvtes = findViewById(R.id.tvtes);
-        cbSave = findViewById(R.id.checkbox_remember);
+        cbSave = findViewById(R.id.checkbox_remenber);
 
-        sharedPreferences = getSharedPreferences("UserSP",Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("UserSP", Context.MODE_PRIVATE);
 
         //Đăng nhập lại mỗi khi vào ứng dụng
         onStart();
     }
+
     //luu du lieu vao sharepreference
     private void saveData(String username, String pass) {
         editor = sharedPreferences.edit();
-        editor.putString("user",username);
-        editor.putString("pass",pass);
-        editor.putBoolean("remember",cbSave.isChecked());
+        editor.putString("user", username);
+        editor.putString("pass", pass);
+        editor.putBoolean("remember", cbSave.isChecked());
         editor.commit();
     }
+
     //sharepreference va tai du lieu
-    private void loadData(){
-        if (sharedPreferences.getBoolean("remember",false)){
-            edLoginUser.setText(sharedPreferences.getString("user",""));
-            edLoginPass.setText(sharedPreferences.getString("pass",""));
+    private void loadData() {
+        if (sharedPreferences.getBoolean("remember", false)) {
+            edLoginUser.setText(sharedPreferences.getString("user", ""));
+            edLoginPass.setText(sharedPreferences.getString("pass", ""));
             cbSave.setChecked(true);
-        }
-        else {
+        } else {
             cbSave.setChecked(false);
         }
 
@@ -140,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
                 //TODO lỗi
             }
         });
-
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -193,29 +195,26 @@ public class MainActivity extends AppCompatActivity {
 
         String user = edLoginUser.getText().toString().trim();
         String pass = edLoginPass.getText().toString().trim();
-        if(user.equals("")||pass.equals("")){
+        if (user.equals("") || pass.equals("")) {
             Toast.makeText(this, "Please input yours info", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            if(cbSave.isChecked()){
-                saveData(user,pass);
-                Log.d(TAG,"Saved");
+        } else {
+            if (cbSave.isChecked()) {
+                saveData(user, pass);
+                Log.d(TAG, "Saved");
             }
-            mAuth.signInWithEmailAndPassword(user,pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(user, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Log.d(TAG,"Loged in");
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "Loged in");
                         // chuyen sang cativity main
                         Toast.makeText(MainActivity.this, "Login successful. Please wait...", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this,main_main.class);
+                        Intent intent = new Intent(MainActivity.this, main_main.class);
                         startActivity(intent);
-                    }
-                    else {
-                        Toast.makeText(MainActivity.this, "Login fail", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG,"Login fail");
-                        Log.d(TAG,task.toString());
-                        Log.d(TAG,task.getException().toString());
+                    } else {
+                        Log.d(TAG, "Login fail");
+                        Log.d(TAG, task.toString());
+                        Log.d(TAG, task.getException().toString());
                     }
                 }
             });

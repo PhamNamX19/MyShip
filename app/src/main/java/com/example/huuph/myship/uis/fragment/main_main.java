@@ -1,6 +1,7 @@
 package com.example.huuph.myship.uis.fragment;
 
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.Build;
@@ -15,17 +16,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
-
-import com.example.huuph.myship.Manifest;
+import com.example.huuph.myship.uis.activities.MainActivity;
+import com.example.huuph.myship.uis.activities.ThongBao;
 import com.example.huuph.myship.uis.fragment.FragmentNews;
 import com.example.huuph.myship.adapter.PageAdapter;
 import com.example.huuph.myship.R;
 import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.facebook.login.widget.ProfilePictureView;
 
 public class main_main extends AppCompatActivity implements ViewPager.OnPageChangeListener {
-    private String[] PERMISSION = {
+     private String[] PERMISSION = {
             android.Manifest.permission.ACCESS_COARSE_LOCATION,
             android.Manifest.permission.ACCESS_FINE_LOCATION
     };
@@ -49,6 +52,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_main);
 
@@ -95,8 +99,8 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
             //gui du lieu token sang fragment
 
         } else {
-            tvUsername.setText("Vai Lozzx");
-            tvUserEmail.setText("XYZ.com");
+            tvUsername.setText("Khách");
+            tvUserEmail.setText(" ");
 
         }
     }
@@ -183,5 +187,24 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
 
     public String getToken() {
         return token;
+    }
+
+    public void ThongBao(View view) {
+        Intent intent = new Intent(this,ThongBao.class);
+        startActivity(intent);
+    }
+
+    public void DangXuat(View view) {
+            LoginManager.getInstance().logOut();
+            finish();
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+
+    }
+
+    public void HoTro(View view) {
+    }
+
+    public void HuongDan(View view) {
     }
 }

@@ -3,6 +3,7 @@ package com.example.huuph.myship.uis.activities;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -58,7 +59,7 @@ public class Signup extends AppCompatActivity {
         String repass = edRePass.getText().toString().trim();
         if (checkData(user, pass, repass)) {
 
-            registerUser(user,pass);
+            registerUser(user, pass);
         }
 
 
@@ -85,11 +86,19 @@ public class Signup extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Log.d("TAG","Da gui mail");
+                            Log.d("TAG", "Da gui mail");
                             Toast.makeText(Signup.this,
                                     "Đã gửi email xác minh đến " + firebaseUser.getEmail(),
+                                    Toast.LENGTH_LONG).show();
+                            try {
+                                Thread.sleep(3000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            Intent intent = new Intent(Signup.this, MainActivity.class);
+                            startActivity(intent);
 
-                                    Toast.LENGTH_SHORT).show();
+
                         } else {
                             Log.e("TAG", "sendEmailVerification", task.getException());
                             Toast.makeText(Signup.this,
