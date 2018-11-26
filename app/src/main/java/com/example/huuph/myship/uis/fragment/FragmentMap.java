@@ -85,7 +85,7 @@ public class FragmentMap extends Fragment   {
                     googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
                 }
 
-                 else {
+                else {
 
                     Toast.makeText(getActivity(), "location not found", Toast.LENGTH_SHORT).show();
                 }

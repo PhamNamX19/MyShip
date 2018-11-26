@@ -43,16 +43,24 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
     private String nameUserPost;
     private Datum datas;
     private List<Datum> listData;
-    private OnPostItemClickListener itemClickListener;
+    private OnPostItemClickListener itemFaceListener;
+    private OnPostItemClickListener itemCallListener;
+    private OnPostItemClickListener itemSaveListener;
     private String token;
 
-    public NewLvAdapter(@NonNull Context context, int resource, @NonNull List<Datum> objects, OnPostItemClickListener listener,String token) {
+    public NewLvAdapter(@NonNull Context context, int resource, @NonNull List<Datum> objects
+            , OnPostItemClickListener listenerFace
+            ,OnPostItemClickListener listenerCall
+            ,OnPostItemClickListener listenerSave
+            ,String token) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
         this.listData = objects;
         this.token = token;
-        this.itemClickListener = listener;
+        this.itemFaceListener = listenerFace;
+        this.itemCallListener = listenerCall;
+        this.itemSaveListener = listenerSave;
     }
 
     @NonNull
@@ -66,6 +74,8 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
             viewHolder.tvUser = convertView.findViewById(R.id.tvName);
             viewHolder.tvTimePost = convertView.findViewById(R.id.tvTimePost);
             viewHolder.btBinhLuon = convertView.findViewById(R.id.btBinhLuan);
+            viewHolder.btCall = convertView.findViewById(R.id.btCall);
+            viewHolder.btSave = convertView.findViewById(R.id.btSave);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -74,11 +84,25 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
         getUserInfo(viewHolder.tvUser,dataNew.getPostid() ,token );
         viewHolder.tvPost.setText(dataNew.getMessage());
         viewHolder.tvTimePost.setText(dataNew.getUpdatedTime());
+        //add listener
         viewHolder.btBinhLuon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                itemClickListener.onPostItemClick(position);
+                itemFaceListener.onPostItemClick(position);
                // Toast.makeText(context, "adsad"+position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        //add listener
+        viewHolder.btCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemCallListener.onPostItemClick(position);
+            }
+        });
+        viewHolder.btSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                itemSaveListener.onPostItemClick(position);
             }
         });
         return convertView;
@@ -91,6 +115,8 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
         TextView tvPost;
         TextView tvTimePost;
         Button btBinhLuon;
+        Button btCall;
+        Button btSave;
     }
 
     public interface OnPostItemClickListener {
@@ -98,20 +124,21 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
     }
 
     public void getUserInfo(final TextView tv, String idfeed, String tokens) {
-        Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
-        jsonElementCall.enqueue(new Callback<JsonElement>() {
-            @Override
-            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                JsonElement jsonElement = response.body();
-                JsonObject jsonObject1 = jsonElement.getAsJsonObject();
-                JsonObject from = jsonObject1.getAsJsonObject("from");
-                nameUserPost = from.get("name").getAsString();
-            }
-
-            @Override
-            public void onFailure(Call<JsonElement> call, Throwable t) {
-                Log.d("TAG", "fail");
-            }
-        });
+//        Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
+//        jsonElementCall.enqueue(new Callback<JsonElement>() {
+//            @Override
+//            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+//                JsonElement jsonElement = response.body();
+//                JsonObject jsonObject1 = jsonElement.getAsJsonObject();
+//                JsonObject from = jsonObject1.getAsJsonObject("from");
+//                nameUserPost = from.get("name").getAsString();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonElement> call, Throwable t) {
+//                Log.d("TAG", "fail");
+//            }
+//        });
+        tv.setText("Doan Huu Phuoc");
     }
 }

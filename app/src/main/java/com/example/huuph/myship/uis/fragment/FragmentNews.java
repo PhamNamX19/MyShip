@@ -19,10 +19,8 @@ import com.example.huuph.myship.data.model.Datum;
 import com.example.huuph.myship.rest.RestClient;
 import com.example.huuph.myship.uis.activities.WebViewFabook;
 import com.example.huuph.myship.ult.StringHandle;
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -58,8 +56,7 @@ public class FragmentNews extends Fragment {
         lvNew = view.findViewById(R.id.lvNew);
         dataNews = new ArrayList<>();
         main_main activity = (main_main) getActivity();
-        //token = activity.getToken();
-        token = "EAADgqSanbEQBAO6NJwr5n6jZCjxoGvYn8hHe9AIyZChXOBpVKpLAFxAqJXzs4YfGJqBFs7I5ibgzMZAuHLeQ5XkZCcHS0k5xmGz5oMJneB6DPcIRtYzZBZAskO83brQtZANgTpQ2YTYaaZAUHN5mKiYgQMKRqE7Xnrr1ZA83u0q13n0gEvWzpSxx6ZCbuW2EuHYPfc5ZCVyQezvrAZDZD";
+        token = activity.getToken();
         Log.d("token", "new" + token);
         getDataFeed();
         return view;
@@ -88,7 +85,19 @@ public class FragmentNews extends Fragment {
                         String idfeed = datal.get("id").getAsString();
                         String message = datal.get("message").getAsString();
                         String updatedTime = datal.get("updated_time").getAsString();
+                        //2018-11-26T04:14:52+0000
+                        //2018-11-26T04:14:52
+                        //format day
+                        String day = updatedTime.substring(8, 10) + "-" + updatedTime.substring(5, 7) + "-" + updatedTime.substring(0, 4);
+                        //format time
+                        int vitri_T = updatedTime.indexOf("T");
+                        String hour = updatedTime.substring(vitri_T + 1, vitri_T + 3);
+                        int h = Integer.parseInt(hour);
+                        h = h + 7;
+                        hour = h + "";
+                        updatedTime = day + "  " + hour + updatedTime.substring(vitri_T + 3, vitri_T + 6);
                         Datum datas = new Datum(message, updatedTime, idfeed);
+                        WriteDatabase(message, updatedTime, idfeed);
                         dataNews.add(datas);
 
                         //log
@@ -138,6 +147,18 @@ public class FragmentNews extends Fragment {
 
             }
         });
+
+    }
+
+    public void WriteDatabase(String message, String updatedTime, String postid) {
+
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference().child("POST");
+        Datum data1 = new Datum(message, updatedTime, postid);
+        // myRef.push().setValue(data1);
+        myRef.child(postid).setValue(data1);
+
 
     }
 

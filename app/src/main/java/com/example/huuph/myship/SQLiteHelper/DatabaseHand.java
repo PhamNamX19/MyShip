@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +14,13 @@ import java.util.List;
 public class DatabaseHand extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "saveID";
     private static final int DATABASE_VERSION = 1;
-    private static final String TABLE_NAME = "tableID";
 
+    private static final String TABLE_NAME = "tableID";
     private static final String KEY_IDs = "ids";
     private static final String KEY_IDPost = "idPost";
 
-    private Context context;
-
-
     public DatabaseHand(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, 1);
-        this.context = context;
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -52,21 +49,21 @@ public class DatabaseHand extends SQLiteOpenHelper {
 
     public List<String> getAllIDPost() {
         List<String> IDPosts = new ArrayList<>();
-        String QUERRY = " SELECT * FROM " + TABLE_NAME;
-        SQLiteDatabase db = this.getWritableDatabase();
+        String QUERRY = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(QUERRY, null);
-        String IDPost;
 
-        if (cursor.moveToFirst()) {
-            do {
+        while(cursor.isAfterLast() == false) {
 
-                IDPost = cursor.getString(1);
-                IDPosts.add(IDPost);
+            String IDPost = cursor.getString(1);
+            IDPosts.add(IDPost);
 
-            } while (cursor.moveToNext());
+            Log.d("TAGids",IDPosts.toString());
+            cursor.moveToNext();
         }
         cursor.close();
         db.close();
+
         return IDPosts;
     }
 }
