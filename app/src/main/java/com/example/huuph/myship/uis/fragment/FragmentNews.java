@@ -96,7 +96,7 @@ public class FragmentNews extends Fragment {
                         hour = h + "";
                         updatedTime = day + "  " + hour + updatedTime.substring(vitri_T + 3, vitri_T + 6);
                         Datum datas = new Datum(message, updatedTime, idfeed);
-                        // WriteDatabase(message, updatedTime, idfeed);
+                        WriteDatabase(message, updatedTime, idfeed);
                         dataNews.add(datas);
 
                         //log
