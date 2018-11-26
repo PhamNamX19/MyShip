@@ -20,12 +20,13 @@ public class WebViewFabook extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view_fabook);
         idfeed = getIntent().getStringExtra("idfeed");
-
+        Log.d("idfeds", idfeed);
         webView = findViewById(R.id.webView);
-
-        webView.loadUrl("https://m.facebook.com/groups/546129785832997?view=permalink&id=" + idfeed + "&fs=2&focus_composer=0");
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        webView.loadUrl("https://m.facebook.com/groups/546129785832997?view=permalink&id=" + idfeed + "&__tn__=%2As-R");
         webView.setWebViewClient(new WebViewClient());
-        Log.d("TT", idfeed);
 
 
     }

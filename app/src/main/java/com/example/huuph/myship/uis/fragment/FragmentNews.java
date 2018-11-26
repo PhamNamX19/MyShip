@@ -99,6 +99,7 @@ public class FragmentNews extends Fragment {
                                 int vitri_ = id.indexOf("_");
                                 id = id.substring(vitri_ + 1);
                                 intent.putExtra("idfeed", id);
+
                                 getActivity().startActivity(intent);
                             }
                         }, token);

@@ -85,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
         edLoginPass = findViewById(R.id.edLoginPass);
         btfacebook = (Button) findViewById(R.id.btfacebook);
         tvtes = findViewById(R.id.tvtes);
-        cbSave = findViewById(R.id.checkbox_remenber);
+        cbSave = findViewById(R.id.checkbox_remember);
+
 
         sharedPreferences = getSharedPreferences("UserSP", Context.MODE_PRIVATE);
 
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
                 token = loginResult.getAccessToken().getToken();
+                Log.d("token",token);
                 //lay thong tin nguoi dung
                 result();
             }
@@ -196,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
         String user = edLoginUser.getText().toString().trim();
         String pass = edLoginPass.getText().toString().trim();
         if (user.equals("") || pass.equals("")) {
-            Toast.makeText(this, "Please input yours info", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập thông tin", Toast.LENGTH_SHORT).show();
         } else {
             if (cbSave.isChecked()) {
                 saveData(user, pass);

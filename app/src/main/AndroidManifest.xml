@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.huuph.myship">
+    package="com.example.huuph.myship"
+
+    >
 
     <permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".FirebaseHelper.ShipApplication"
@@ -18,19 +22,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".uis.activities.ForgotPass" />
-        <activity android:name=".uis.activities.Signup" />
-        <activity android:name=".uis.activities.MainActivity">
+        <activity
+            android:name=".uis.activities.ForgotPass"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".uis.activities.Signup"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".uis.activities.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
             </intent-filter>
         </activity>
-
-        <activity android:name=".FirebaseHelper.DebugFirebase"></activity>
-        <activity android:name=".uis.fragment.main_main"></activity>
-        <activity android:name=".uis.activities.WebViewFabook"></activity>
+        <activity
+            android:name=".FirebaseHelper.DebugFirebase"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".uis.fragment.main_main"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".uis.activities.WebViewFabook"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -41,12 +57,13 @@
              Note that the API key is linked to the encryption key used to sign the APK.
              You need a different API key for each encryption key, including the release key that is used to
              sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name=".uis.activities.ThongBao"/>
     </application>
 
 </manifest>

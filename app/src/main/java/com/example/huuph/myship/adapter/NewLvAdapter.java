@@ -78,7 +78,7 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
             @Override
             public void onClick(View v) {
                 itemClickListener.onPostItemClick(position);
-                Toast.makeText(context, "adsad"+position, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(context, "adsad"+position, Toast.LENGTH_SHORT).show();
             }
         });
         return convertView;
