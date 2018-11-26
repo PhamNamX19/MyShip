@@ -84,8 +84,19 @@ public class FragmentNews extends Fragment {
                         String idfeed = datal.get("id").getAsString();
                         String message = datal.get("message").getAsString();
                         String updatedTime = datal.get("updated_time").getAsString();
+                        //2018-11-26T04:14:52+0000
+                        //2018-11-26T04:14:52
+                        //format day
+                        String day = updatedTime.substring(8, 10) + "-" + updatedTime.substring(5, 7) + "-" + updatedTime.substring(0, 4);
+                        //format time
+                        int vitri_T = updatedTime.indexOf("T");
+                        String hour = updatedTime.substring(vitri_T + 1, vitri_T + 3);
+                        int h = Integer.parseInt(hour);
+                        h = h + 7;
+                        hour = h + "";
+                        updatedTime = day + "  " + hour + updatedTime.substring(vitri_T + 3, vitri_T + 6);
                         Datum datas = new Datum(message, updatedTime, idfeed);
-                       // WriteDatabase(message, updatedTime, idfeed);
+                        // WriteDatabase(message, updatedTime, idfeed);
                         dataNews.add(datas);
 
                         //log
@@ -119,7 +130,6 @@ public class FragmentNews extends Fragment {
     }
 
     public void WriteDatabase(String message, String updatedTime, String postid) {
-
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
