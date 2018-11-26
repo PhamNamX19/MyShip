@@ -85,7 +85,7 @@ public class FragmentNews extends Fragment {
                         String message = datal.get("message").getAsString();
                         String updatedTime = datal.get("updated_time").getAsString();
                         Datum datas = new Datum(message, updatedTime, idfeed);
-                        WriteDatabase(message, updatedTime, idfeed);
+                       // WriteDatabase(message, updatedTime, idfeed);
                         dataNews.add(datas);
 
                         //log
