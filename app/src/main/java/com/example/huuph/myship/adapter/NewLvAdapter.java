@@ -40,7 +40,7 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
     private Context context;
     private int resource;
     private String idUserPost;
-    private String nameUserPost = "Names";
+    private String nameUserPost;
     private Datum datas;
     private List<Datum> listData;
     private OnPostItemClickListener itemClickListener;

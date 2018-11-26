@@ -240,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("name", name);
                     intent.putExtra("id_facebook", id_facebook);
                     intent.putExtra("token", token);
+                    finish();
                     startActivity(intent);
 
                 } catch (JSONException e) {
