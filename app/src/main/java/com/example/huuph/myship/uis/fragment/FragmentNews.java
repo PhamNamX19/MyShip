@@ -1,6 +1,7 @@
 package com.example.huuph.myship.uis.fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,10 +13,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.huuph.myship.R;
+import com.example.huuph.myship.SQLiteHelper.DatabaseHand;
 import com.example.huuph.myship.adapter.NewLvAdapter;
 import com.example.huuph.myship.data.model.Datum;
 import com.example.huuph.myship.rest.RestClient;
 import com.example.huuph.myship.uis.activities.WebViewFabook;
+import com.example.huuph.myship.ult.StringHandle;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -37,7 +40,7 @@ public class FragmentNews extends Fragment {
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
     private String token;
- //   private String tokens = "EAAGxzui9ezkBAE1pbjnGw4DUBzrTWlhDvtkxWZCD7kUWCbWiZBnMdth8iLhhqV40IyanSpgzAY1ZB3mwsIcnwluZBrY72FZBZCqpzJsZBxZAZCu7IQJRBL8n4oWh0E4T9fBeokJHOPyKVExpFeOKRIWSfB5sJt6ta1900EubFihWP6YF9XDZB3qBdBhVZBLddLWYIUZD";
+    //   private String tokens = "EAAGxzui9ezkBAE1pbjnGw4DUBzrTWlhDvtkxWZCD7kUWCbWiZBnMdth8iLhhqV40IyanSpgzAY1ZB3mwsIcnwluZBrY72FZBZCqpzJsZBxZAZCu7IQJRBL8n4oWh0E4T9fBeokJHOPyKVExpFeOKRIWSfB5sJt6ta1900EubFihWP6YF9XDZB3qBdBhVZBLddLWYIUZD";
 
 
     public static FragmentNews getInstance() {
@@ -55,8 +58,9 @@ public class FragmentNews extends Fragment {
         lvNew = view.findViewById(R.id.lvNew);
         dataNews = new ArrayList<>();
         main_main activity = (main_main) getActivity();
-        token = activity.getToken();
-        Log.d("token","new"+token);
+        //token = activity.getToken();
+        token = "EAADgqSanbEQBAO6NJwr5n6jZCjxoGvYn8hHe9AIyZChXOBpVKpLAFxAqJXzs4YfGJqBFs7I5ibgzMZAuHLeQ5XkZCcHS0k5xmGz5oMJneB6DPcIRtYzZBZAskO83brQtZANgTpQ2YTYaaZAUHN5mKiYgQMKRqE7Xnrr1ZA83u0q13n0gEvWzpSxx6ZCbuW2EuHYPfc5ZCVyQezvrAZDZD";
+        Log.d("token", "new" + token);
         getDataFeed();
         return view;
 
@@ -77,9 +81,9 @@ public class FragmentNews extends Fragment {
                 for (int i = 0; i < datums.size(); i++) {
                     JsonObject datal = datums.get(i).getAsJsonObject();
 
-                    if (datal.get("id")!= null &&
+                    if (datal.get("id") != null &&
                             datal.get("message") != null &&
-                            datal.get("updated_time")!= null) {
+                            datal.get("updated_time") != null) {
 
                         String idfeed = datal.get("id").getAsString();
                         String message = datal.get("message").getAsString();
@@ -90,17 +94,39 @@ public class FragmentNews extends Fragment {
                         //log
                         Log.d("TAG", idfeed + message + updatedTime);
 
-                        adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews, new NewLvAdapter.OnPostItemClickListener() {
-                            @Override
-                            public void onPostItemClick(int pos) {
-                                Intent intent = new Intent(getActivity(), WebViewFabook.class);
-                                String id = dataNews.get(pos).getPostid();
-                                int vitri_ = id.indexOf("_");
-                                id = id.substring(vitri_+1);
-                                intent.putExtra("idfeed", id);
-                                getActivity().startActivity(intent);
-                            }
-                        }, token);
+                        adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews,
+                                new NewLvAdapter.OnPostItemClickListener() {
+                                    @Override
+                                    public void onPostItemClick(int pos) {
+                                        Intent intent = new Intent(getActivity(), WebViewFabook.class);
+                                        String id = dataNews.get(pos).getPostid();
+                                        int vitri_ = id.indexOf("_");
+                                        id = id.substring(vitri_ + 1);
+                                        intent.putExtra("idfeed", id);
+                                        getActivity().startActivity(intent);
+                                    }
+                                },
+                                new NewLvAdapter.OnPostItemClickListener() {
+                                    @Override
+                                    public void onPostItemClick(int pos) {
+                                        String message = dataNews.get(pos).getMessage();
+                                        String phone = StringHandle.searchPhone(message);
+                                        phone = "tel:"+phone.trim();
+                                        Intent callIntent = new Intent(Intent.ACTION_DIAL,Uri.parse(phone));
+                                        startActivity(callIntent);
+                                        Log.d("TAG", "clicked Call " + phone);
+                                    }
+                                },
+                                new NewLvAdapter.OnPostItemClickListener() {
+                                    @Override
+                                    public void onPostItemClick(int pos) {
+                                        String idPost = dataNews.get(pos).getPostid();
+                                        DatabaseHand database = new DatabaseHand(getContext());
+                                        database.saveIDPost(idPost);
+                                        Log.d("TAG","Saved IDPost "+ idPost);
+                                    }
+                                },
+                                token);
                         lvNew.setAdapter(adapter);
 
                     }

@@ -1,6 +1,7 @@
 package com.example.huuph.myship.uis.fragment;
 
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Binder;
@@ -178,6 +179,9 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         if (i == 0) {
             FragmentNews.getInstance();
             Log.d("TAG","CLGT");
+        }
+        if (i==2){
+            FragmentFavorite.getInstance();
         }
     }
 
