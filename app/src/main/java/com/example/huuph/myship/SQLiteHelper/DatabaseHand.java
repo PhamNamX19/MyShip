@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHandle extends SQLiteOpenHelper {
+public class DatabaseHand extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "saveID";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "tableID";
@@ -21,7 +21,7 @@ public class DatabaseHandle extends SQLiteOpenHelper {
     private Context context;
 
 
-    public DatabaseHandle(@Nullable Context context) {
+    public DatabaseHand(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
         this.context = context;
     }

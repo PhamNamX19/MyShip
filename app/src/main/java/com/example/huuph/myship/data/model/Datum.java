@@ -16,6 +16,9 @@ public class Datum {
     @Expose
     private String postid;
 
+    public Datum() {
+    }
+
     public Datum(String message, String updatedTime, String postid) {
         this.message = message;
         this.updatedTime = updatedTime;
