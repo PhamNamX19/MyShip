@@ -14,7 +14,7 @@ public class ThongBao extends AppCompatActivity {
         setContentView(R.layout.activity_thong_bao);
 
     }
-    public void back(View view) {
+    public void Back(View view) {
         finish();
 
     }
