@@ -137,6 +137,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         // main = findViewById(R.id.main);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(this);
+        viewPager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(viewPager);
 
         drawerLayout.addDrawerListener(drawerToggle);
