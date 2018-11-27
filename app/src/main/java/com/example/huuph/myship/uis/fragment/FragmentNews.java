@@ -131,7 +131,7 @@ public class FragmentNews extends Fragment {
                                     public void onPostItemClick(int pos) {
                                         String idPost = dataNews.get(pos).getPostid();
                                         DatabaseHand database = new DatabaseHand(getContext());
-                                        database.saveIDPost(idPost);
+                                        database.insertIdPost(idPost);
                                         Log.d("TAG","Saved IDPost "+ idPost);
                                     }
                                 },

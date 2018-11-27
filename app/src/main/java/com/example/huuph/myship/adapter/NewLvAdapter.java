@@ -54,10 +54,12 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
             ,OnPostItemClickListener listenerSave
             ,String token) {
         super(context, resource, objects);
+
         this.context = context;
         this.resource = resource;
         this.listData = objects;
         this.token = token;
+
         this.itemFaceListener = listenerFace;
         this.itemCallListener = listenerCall;
         this.itemSaveListener = listenerSave;

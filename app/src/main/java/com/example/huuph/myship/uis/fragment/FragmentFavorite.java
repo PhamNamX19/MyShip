@@ -1,5 +1,6 @@
 package com.example.huuph.myship.uis.fragment;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,18 +14,23 @@ import android.widget.Toast;
 
 import com.example.huuph.myship.R;
 import com.example.huuph.myship.SQLiteHelper.DatabaseHand;
+import com.example.huuph.myship.UserManager;
 import com.example.huuph.myship.adapter.FavoriteLvAdapter;
 import com.example.huuph.myship.data.model.Datum;
+import com.example.huuph.myship.rest.RestClient;
+import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
 
 public class FragmentFavorite extends Fragment {
     private static FragmentFavorite instance;
     private ListView lvFavorite;
     private List<Datum> favorites;
     private FavoriteLvAdapter adapter;
-    private String tokens = "EAADgqSanbEQBAO6NJwr5n6jZCjxoGvYn8hHe9AIyZChXOBpVKpLAFxAqJXzs4YfGJqBFs7I5ibgzMZAuHLeQ5XkZCcHS0k5xmGz5oMJneB6DPcIRtYzZBZAskO83brQtZANgTpQ2YTYaaZAUHN5mKiYgQMKRqE7Xnrr1ZA83u0q13n0gEvWzpSxx6ZCbuW2EuHYPfc5ZCVyQezvrAZDZD";
+    private String tokens = "EAADgqSanbEQBAKO2GRtZA0ZCrqvslvXg5HG1Otz8U2y1DFZAgh3YahLeeI2aSQiD4oAXYkEj8uxujxYjYdODBhDtvrC0fQx5ZCWqBYRfJsxApGwIgtLP8ZBbRVBsZBRx0DueU6Wie1efINGZAxk8kfYMOMFoeN5YkotLsm4vQzsTbuBRNP75fTtWZArAwGiltrYZD";
 
 
     public static FragmentFavorite getInstance() {
@@ -45,21 +51,34 @@ public class FragmentFavorite extends Fragment {
 
     private void getDataSaved() {
         //get data freom database
+        favorites= new ArrayList<>();
+        Datum data = new Datum();
         DatabaseHand database = new DatabaseHand(getContext());
-        List<String> idPosts = database.getAllIDPost();
-        Log.d("TAGids",idPosts.toString());
-        for (String id : idPosts) {
-            Log.d("TAG", "id");
+        Cursor cursor = database.selectidPost();
+        if (cursor.moveToFirst()){
+            do{
+                String idPost = cursor.getString(cursor.getColumnIndex("idPost"));
+                data.setPostid(idPost);
+                favorites.add(data);
+            }while(cursor.moveToNext());
         }
-//
-//            try {
-//            for (String id : idPosts) {
-//                Log.d("TAG id","id");
-//
-//            }
-//        } catch (Exception e) {
-//            Log.d("TAG", e.getMessage());
-//        }
+        cursor.close();
+
+        adapter = new FavoriteLvAdapter(getContext(),R.layout.item_lv_favorite,favorites,tokens);
+        lvFavorite.setAdapter(adapter);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //        Datum data1 = new Datum("Đơn hàng 13 quán thánh đến 254 minh khai. Sdt 01665168295 giá 30k*1","2018-11-14T13:07:13+0000","546129785832997_591759137936728");
@@ -72,7 +91,5 @@ public class FragmentFavorite extends Fragment {
 //        favorites.add(data3);
 //        favorites.add(data4);
 //        favorites.add(data5);
-//        adapter = new FavoriteLvAdapter(getContext(),R.layout.item_lv_favorite,favorites,tokens);
-//        lvFavorite.setAdapter(adapter);
     }
 }

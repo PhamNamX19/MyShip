@@ -70,8 +70,7 @@ public class FavoriteLvAdapter extends ArrayAdapter<Datum> {
         }
         Datum dataNew = list.get(position);
         getUserInfo(viewHolder.tvName,dataNew.getPostid() ,token );
-        viewHolder.tvTime.setText(dataNew.getUpdatedTime());
-        viewHolder.tvPost.setText(dataNew.getMessage());
+        getPost(viewHolder.tvPost,viewHolder.tvTime,dataNew.getPostid(),token);
 
         return convertView;
     }
@@ -81,8 +80,29 @@ public class FavoriteLvAdapter extends ArrayAdapter<Datum> {
         private TextView tvTime;
         private TextView tvPost;
     }
-    public void getUserInfo(final TextView tv, String idfeed, String tokens) {
-//        Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
+    private void getPost(final TextView tvPost, final TextView tvTime, String idfeed, String token){
+        Call<JsonElement> call = RestClient.getAPIs().getPost(idfeed,token);
+        call.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                JsonElement jsonElement = response.body();
+                JsonObject jsonObject = jsonElement.getAsJsonObject();
+                Log.d("TAG",jsonObject.toString());
+                String message = jsonObject.get("message").getAsString();
+                String  time = jsonObject.get("created_time").getAsString();
+                tvPost.setText(message);
+                tvTime.setText(time);
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                Log.d("TAG","fail call getPost");
+            }
+        });
+
+    }
+    private void getUserInfo(final TextView tv, String idfeed, String tokens) {
+//        Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", token);
 //        jsonElementCall.enqueue(new Callback<JsonElement>() {
 //            @Override
 //            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
@@ -95,7 +115,7 @@ public class FavoriteLvAdapter extends ArrayAdapter<Datum> {
 //
 //            @Override
 //            public void onFailure(Call<JsonElement> call, Throwable t) {
-//                Log.d("TAG", "fail");
+//                Log.d("TAG", "fail call getUserInfo");
 //            }
 //        });
         tv.setText("Doan Huu Phuoc");
