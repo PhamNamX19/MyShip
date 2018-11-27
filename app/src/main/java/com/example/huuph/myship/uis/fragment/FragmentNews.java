@@ -59,8 +59,8 @@ public class FragmentNews extends Fragment {
         token = activity.getToken();
         Log.d("token", "new" + token);
         getDataFeed();
-        return view;
 
+        return view;
     }
 
     //get data json
@@ -120,8 +120,8 @@ public class FragmentNews extends Fragment {
                                     public void onPostItemClick(int pos) {
                                         String message = dataNews.get(pos).getMessage();
                                         String phone = StringHandle.searchPhone(message);
-                                        phone = "tel:"+phone.trim();
-                                        Intent callIntent = new Intent(Intent.ACTION_DIAL,Uri.parse(phone));
+                                        phone = "tel:" + phone.trim();
+                                        Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse(phone));
                                         startActivity(callIntent);
                                         Log.d("TAG", "clicked Call " + phone);
                                     }
@@ -132,11 +132,13 @@ public class FragmentNews extends Fragment {
                                         String idPost = dataNews.get(pos).getPostid();
                                         DatabaseHand database = new DatabaseHand(getContext());
                                         database.insertIdPost(idPost);
-                                        Log.d("TAG","Saved IDPost "+ idPost);
+                                        Log.d("TAG", "Saved IDPost " + idPost);
                                     }
                                 },
                                 token);
+
                         lvNew.setAdapter(adapter);
+                        lvNew.invalidateViews();
 
                     }
                 }

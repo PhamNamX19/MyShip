@@ -102,22 +102,26 @@ public class FavoriteLvAdapter extends ArrayAdapter<Datum> {
 
     }
     private void getUserInfo(final TextView tv, String idfeed, String tokens) {
-//        Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", token);
-//        jsonElementCall.enqueue(new Callback<JsonElement>() {
-//            @Override
-//            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-//                JsonElement jsonElement = response.body();
-//                JsonObject jsonObject1 = jsonElement.getAsJsonObject();
-//                Log.d("TEST",jsonObject1.toString());
-//                JsonObject from = jsonObject1.getAsJsonObject("from");
-//                nameUserPost = from.get("name").getAsString();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<JsonElement> call, Throwable t) {
-//                Log.d("TAG", "fail call getUserInfo");
-//            }
-//        });
-        tv.setText("Doan Huu Phuoc");
+        Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
+        jsonElementCall.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                JsonElement jsonElement = response.body();
+                JsonObject jsonObject1 = jsonElement.getAsJsonObject();
+
+                if (jsonObject1.getAsJsonObject("from") != null) {
+                    JsonObject from = jsonObject1.getAsJsonObject("from");
+                    String name = from.get("name").getAsString();
+                    Log.d("names", name);
+                    nameUserPost = name;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                Log.d("TAG", "fail");
+            }
+        });
+        tv.setText(nameUserPost);
     }
 }

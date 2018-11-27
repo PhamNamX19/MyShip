@@ -39,11 +39,11 @@ public class PageAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "News";
+                return "Trang chủ";
             case 1:
                 return "Map";
             case 2:
-                return "Favorite";
+                return "Lịch Sử";
         }
         return super.getPageTitle(position);
     }

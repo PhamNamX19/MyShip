@@ -60,9 +60,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         if (!checkPermission()) {
             return;
         } else {
-
             anhxa();
-
             initPager();
             setUpActionBar();
             initSliding();
@@ -81,8 +79,6 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         tvUsername = findViewById(R.id.tvUsername);
         tvUserEmail = findViewById(R.id.tvUserEmail);
         profilePicture = findViewById(R.id.profilePicture);
-
-
     }
 
     private void getInfo() {
@@ -176,6 +172,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     @Override
     public void onPageSelected(int i) {
         if (i == 0) {
+
             FragmentNews.getInstance();
             Log.d("TAG","CLGT");
         }

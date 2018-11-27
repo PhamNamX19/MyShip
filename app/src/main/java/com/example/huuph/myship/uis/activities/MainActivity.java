@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     //mail va name ...facebook
     String email, name, id_facebook;
     //ma token facebook
-    private String token = "EAADgqSanbEQBAKO2GRtZA0ZCrqvslvXg5HG1Otz8U2y1DFZAgh3YahLeeI2aSQiD4oAXYkEj8uxujxYjYdODBhDtvrC0fQx5ZCWqBYRfJsxApGwIgtLP8ZBbRVBsZBRx0DueU6Wie1efINGZAxk8kfYMOMFoeN5YkotLsm4vQzsTbuBRNP75fTtWZArAwGiltrYZD";
+    private String token = "EAAGxzui9ezkBAESMN5uhskrQgsrsZBqFwZAX8K8L7ZBGuq4T4Bl7TpPZBz6wIZBIAb3WxjL397TopUHu3WawkbhVxanjRR7v2DHAAYgSShUh0LZAfYPCcHDGHP8DvdUQBYsI4t2zmplxAf6jDWZBSKlTVqRPdjLTZCSPaxn2aPKZBGQFRITDrWzkEf7aaKuj7H6AZD";
 
 
     @Override
@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Initialization() {
-        Log.d("anhxa", "anhxathanhcong");
         edLoginUser = findViewById(R.id.edLoginUser);
         edLoginPass = findViewById(R.id.edLoginPass);
         btfacebook = (Button) findViewById(R.id.btfacebook);
@@ -206,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "Loged in");
                         // chuyen sang cativity main
-                        Toast.makeText(MainActivity.this, "Login successful. Please wait...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Đăng nhập thành công.Xin hãy đợi...", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, main_main.class);
                         intent.putExtra("token", token);
 
