@@ -30,7 +30,7 @@ public class FragmentFavorite extends Fragment {
     private ListView lvFavorite;
     private List<Datum> favorites;
     private FavoriteLvAdapter adapter;
-    private String tokens = "EAADgqSanbEQBAKO2GRtZA0ZCrqvslvXg5HG1Otz8U2y1DFZAgh3YahLeeI2aSQiD4oAXYkEj8uxujxYjYdODBhDtvrC0fQx5ZCWqBYRfJsxApGwIgtLP8ZBbRVBsZBRx0DueU6Wie1efINGZAxk8kfYMOMFoeN5YkotLsm4vQzsTbuBRNP75fTtWZArAwGiltrYZD";
+    private String tokens = "EAADgqSanbEQBAC9hOn7WvWqzLUhmiVpmlA8oJJFxyjCMr2PTXwSwGNMzJyL92g5mBZAQ3lvTeO8Im7YKIaZCa09cHpZBXTh6neyfgiOuuKOhUPtdkhhfZBHy68t1BR5uUfckRCxNkUAuJjMWMGZAVCAZCtnpByGx5iVMha9PdgS7uOBIWwZCE1buNNFMGyTbZCsZD";
 
 
     public static FragmentFavorite getInstance() {

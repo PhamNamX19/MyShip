@@ -15,6 +15,7 @@ public class StringHandle {
         String outString = null;
 
         inString.trim();
+        inString=inString.replace('\n',' ');
         points = search0(inString);
         for (int point : points) {
             if(inString.indexOf(' ',point)==-1){

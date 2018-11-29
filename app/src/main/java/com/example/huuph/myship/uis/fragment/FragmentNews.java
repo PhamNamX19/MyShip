@@ -3,17 +3,22 @@ package com.example.huuph.myship.uis.fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.huuph.myship.R;
 import com.example.huuph.myship.SQLiteHelper.DatabaseHand;
+import com.example.huuph.myship.adapter.GestureMyShip;
 import com.example.huuph.myship.adapter.NewLvAdapter;
 import com.example.huuph.myship.data.model.Datum;
 import com.example.huuph.myship.rest.RestClient;
@@ -38,6 +43,9 @@ public class FragmentNews extends Fragment {
     private List<Datum> dataNews;
     private NewLvAdapter adapter;
     private String token;
+    private SwipeRefreshLayout refreshLayout;
+
+    private GestureDetector gestureDetector;
     //   private String tokens = "EAAGxzui9ezkBAE1pbjnGw4DUBzrTWlhDvtkxWZCD7kUWCbWiZBnMdth8iLhhqV40IyanSpgzAY1ZB3mwsIcnwluZBrY72FZBZCqpzJsZBxZAZCu7IQJRBL8n4oWh0E4T9fBeokJHOPyKVExpFeOKRIWSfB5sJt6ta1900EubFihWP6YF9XDZB3qBdBhVZBLddLWYIUZD";
 
 
@@ -55,10 +63,24 @@ public class FragmentNews extends Fragment {
         View view = inflater.inflate(R.layout.ui_news, container, false);
         lvNew = view.findViewById(R.id.lvNew);
         dataNews = new ArrayList<>();
+        refreshLayout = view.findViewById(R.id.swipe_refresh);
         main_main activity = (main_main) getActivity();
         token = activity.getToken();
         Log.d("token", "new" + token);
         getDataFeed();
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                        getDataFeed();
+                        Log.d("TAG","refreshed layout");
+                    }
+                },2000);
+            }
+        });
         return view;
 
     }
@@ -120,7 +142,7 @@ public class FragmentNews extends Fragment {
                                     public void onPostItemClick(int pos) {
                                         String message = dataNews.get(pos).getMessage();
                                         String phone = StringHandle.searchPhone(message);
-                                        phone = "tel:"+phone.trim();
+                                        phone = "tel:"+phone;
                                         Intent callIntent = new Intent(Intent.ACTION_DIAL,Uri.parse(phone));
                                         startActivity(callIntent);
                                         Log.d("TAG", "clicked Call " + phone);
@@ -137,6 +159,7 @@ public class FragmentNews extends Fragment {
                                 },
                                 token);
                         lvNew.setAdapter(adapter);
+                        lvNew.smoothScrollToPosition(0);
 
                     }
                 }
