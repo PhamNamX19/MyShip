@@ -46,11 +46,22 @@
             />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lvFavorite"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refreshFavo"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"></ListView>
+        android:layout_weight="10"
+        >
+        <ListView
+            android:id="@+id/lvFavorite"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="New"
+            android:textStyle="bold" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>
 

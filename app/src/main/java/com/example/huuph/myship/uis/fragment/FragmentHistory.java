@@ -2,10 +2,13 @@ package com.example.huuph.myship.uis.fragment;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,29 +18,27 @@ import android.widget.Toast;
 
 import com.example.huuph.myship.R;
 import com.example.huuph.myship.SQLiteHelper.DatabaseHand;
-import com.example.huuph.myship.UserManager;
 import com.example.huuph.myship.adapter.FavoriteLvAdapter;
 import com.example.huuph.myship.data.model.Datum;
-import com.example.huuph.myship.rest.RestClient;
-import com.google.gson.JsonElement;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-
-public class FragmentFavorite extends Fragment {
-    private static FragmentFavorite instance;
+public class FragmentHistory extends Fragment {
+    private static FragmentHistory instance;
     private ListView lvFavorite;
     private List<Datum> favorites;
     private FavoriteLvAdapter adapter;
     private Button btXoaTatCa;
     private String token;
+    private SwipeRefreshLayout refreshLayout;
+
+    private GestureDetector gestureDetector;
 
 
-    public static FragmentFavorite getInstance() {
+    public static FragmentHistory getInstance() {
         if (instance == null) {
-            instance = new FragmentFavorite();
+            instance = new FragmentHistory();
         }
         return instance;
     }
@@ -49,17 +50,35 @@ public class FragmentFavorite extends Fragment {
         token = activity.getToken();
         View view = inflater.inflate(R.layout.ui_favorite, container, false);
         lvFavorite = view.findViewById(R.id.lvFavorite);
+        refreshLayout = view.findViewById(R.id.swipe_refreshFavo);
         btXoaTatCa = view.findViewById(R.id.btxoatatca);
         btXoaTatCa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Todo Xoa tat ca item da luu
-
+                DatabaseHand database = new DatabaseHand(getContext());
+                database.XoaAll();
+                getDataSaved();
                 lvFavorite.invalidateViews();
                 Toast.makeText(getActivity(), "DaXoa", Toast.LENGTH_LONG).show();
             }
+
+
         });
         getDataSaved();
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.setRefreshing(false);
+                        getDataSaved();
+                        Log.d("TAG","refreshed layout");
+                    }
+                },2000);
+            }
+        });
         return view;
     }
 
@@ -80,6 +99,7 @@ public class FragmentFavorite extends Fragment {
 
         adapter = new FavoriteLvAdapter(getContext(), R.layout.item_lv_favorite, favorites, token);
         lvFavorite.setAdapter(adapter);
+        lvFavorite.smoothScrollToPosition(0);
 
 
 //        Datum data1 = new Datum("Đơn hàng 13 quán thánh đến 254 minh khai. Sdt 01665168295 giá 30k*1","2018-11-14T13:07:13+0000","546129785832997_591759137936728");

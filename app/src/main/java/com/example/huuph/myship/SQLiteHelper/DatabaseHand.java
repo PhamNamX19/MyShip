@@ -12,11 +12,13 @@ public class DatabaseHand {
     private final String TB_NAME = "tableID";
     private final int DB_VERSION = 1;
     private SQLiteDatabase database;
-    public class OpenHelper extends SQLiteOpenHelper{
+
+    public class OpenHelper extends SQLiteOpenHelper {
 
         public OpenHelper(Context context) {
             super(context, DB_NAME, null, DB_VERSION);
         }
+
         @Override
         public void onCreate(SQLiteDatabase db) {
             String quer = "CREATE TABLE IF NOT EXISTS " +
@@ -32,16 +34,24 @@ public class DatabaseHand {
         }
 
     }
+
     //insert
-    public void insertIdPost(String idPost){
+    public void insertIdPost(String idPost) {
         ContentValues values = new ContentValues();
-        values.put("idPost",idPost);
-        database.insertOrThrow(TB_NAME,null,values);
+        values.put("idPost", idPost);
+        database.insertOrThrow(TB_NAME, null, values);
     }
-    public Cursor selectidPost(){
-        return database.query(TB_NAME,null,null,null,null,null,null);
+
+    //xoa tat ca
+    public void XoaAll() {
+        database.delete(TB_NAME,null, null);
     }
-    public DatabaseHand(Context context){
+
+    public Cursor selectidPost() {
+        return database.query(TB_NAME, null, null, null, null, null, null);
+    }
+
+    public DatabaseHand(Context context) {
         OpenHelper helper = new OpenHelper(context);
         database = helper.getWritableDatabase();
     }

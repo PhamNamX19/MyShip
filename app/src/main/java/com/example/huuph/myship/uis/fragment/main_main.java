@@ -1,10 +1,8 @@
 package com.example.huuph.myship.uis.fragment;
 
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,10 +19,8 @@ import android.view.View;
 import android.widget.TextView;
 import com.example.huuph.myship.uis.activities.MainActivity;
 import com.example.huuph.myship.uis.activities.ThongBao;
-import com.example.huuph.myship.uis.fragment.FragmentNews;
 import com.example.huuph.myship.adapter.PageAdapter;
 import com.example.huuph.myship.R;
-import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.ProfilePictureView;
 
@@ -177,7 +173,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
             Log.d("TAG","CLGT");
         }
         if (i==2){
-            FragmentFavorite.getInstance();
+            FragmentHistory.getInstance();
         }
     }
 

@@ -5,11 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.huuph.myship.uis.fragment.FragmentFavorite;
+import com.example.huuph.myship.uis.fragment.FragmentHistory;
 import com.example.huuph.myship.uis.fragment.FragmentNews;
 import com.example.huuph.myship.uis.fragment.FragmentMap;
-
-import static com.example.huuph.myship.uis.fragment.FragmentNews.getInstance;
 
 public class PageAdapter extends FragmentPagerAdapter {
     public PageAdapter(FragmentManager fm) {
@@ -24,7 +22,7 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 1:
                 return FragmentMap.getInstance();
             case 2:
-                return FragmentFavorite.getInstance();
+                return FragmentHistory.getInstance();
         }
         return null;
     }
