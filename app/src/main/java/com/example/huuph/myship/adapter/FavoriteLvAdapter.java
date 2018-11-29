@@ -69,8 +69,8 @@ public class FavoriteLvAdapter extends ArrayAdapter<Datum> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         Datum dataNew = list.get(position);
-        getUserInfo(viewHolder.tvName,dataNew.getPostid() ,token );
         getPost(viewHolder.tvPost,viewHolder.tvTime,dataNew.getPostid(),token);
+        getUserInfo(viewHolder.tvName,dataNew.getPostid() ,token );
 
         return convertView;
     }
