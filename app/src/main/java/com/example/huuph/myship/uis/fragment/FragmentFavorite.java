@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -79,19 +80,6 @@ public class FragmentFavorite extends Fragment {
 
         adapter = new FavoriteLvAdapter(getContext(), R.layout.item_lv_favorite, favorites, token);
         lvFavorite.setAdapter(adapter);
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //        Datum data1 = new Datum("Đơn hàng 13 quán thánh đến 254 minh khai. Sdt 01665168295 giá 30k*1","2018-11-14T13:07:13+0000","546129785832997_591759137936728");
