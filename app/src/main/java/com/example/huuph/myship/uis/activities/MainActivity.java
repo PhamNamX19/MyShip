@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     //mail va name ...facebook
     String email, name, id_facebook;
     //ma token facebook
-    private String token = "EAADgqSanbEQBAC9hOn7WvWqzLUhmiVpmlA8oJJFxyjCMr2PTXwSwGNMzJyL92g5mBZAQ3lvTeO8Im7YKIaZCa09cHpZBXTh6neyfgiOuuKOhUPtdkhhfZBHy68t1BR5uUfckRCxNkUAuJjMWMGZAVCAZCtnpByGx5iVMha9PdgS7uOBIWwZCE1buNNFMGyTbZCsZD";
+    private String token = "EAADgqSanbEQBAKO2GRtZA0ZCrqvslvXg5HG1Otz8U2y1DFZAgh3YahLeeI2aSQiD4oAXYkEj8uxujxYjYdODBhDtvrC0fQx5ZCWqBYRfJsxApGwIgtLP8ZBbRVBsZBRx0DueU6Wie1efINGZAxk8kfYMOMFoeN5YkotLsm4vQzsTbuBRNP75fTtWZArAwGiltrYZD";
 
 
     @Override

@@ -30,7 +30,8 @@ public class FragmentFavorite extends Fragment {
     private ListView lvFavorite;
     private List<Datum> favorites;
     private FavoriteLvAdapter adapter;
-    private String tokens = "EAADgqSanbEQBAC9hOn7WvWqzLUhmiVpmlA8oJJFxyjCMr2PTXwSwGNMzJyL92g5mBZAQ3lvTeO8Im7YKIaZCa09cHpZBXTh6neyfgiOuuKOhUPtdkhhfZBHy68t1BR5uUfckRCxNkUAuJjMWMGZAVCAZCtnpByGx5iVMha9PdgS7uOBIWwZCE1buNNFMGyTbZCsZD";
+    private Button btXoaTatCa;
+    private String token;
 
 
     public static FragmentFavorite getInstance() {
@@ -43,28 +44,40 @@ public class FragmentFavorite extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        main_main activity = (main_main) getActivity();
+        token = activity.getToken();
         View view = inflater.inflate(R.layout.ui_favorite, container, false);
         lvFavorite = view.findViewById(R.id.lvFavorite);
+        btXoaTatCa = view.findViewById(R.id.btxoatatca);
+        btXoaTatCa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Todo Xoa tat ca item da luu
+
+                lvFavorite.invalidateViews();
+                Toast.makeText(getActivity(), "DaXoa", Toast.LENGTH_LONG).show();
+            }
+        });
         getDataSaved();
         return view;
     }
 
     private void getDataSaved() {
         //get data freom database
-        favorites= new ArrayList<>();
+        favorites = new ArrayList<>();
         Datum data = new Datum();
         DatabaseHand database = new DatabaseHand(getContext());
         Cursor cursor = database.selectidPost();
-        if (cursor.moveToFirst()){
-            do{
+        if (cursor.moveToFirst()) {
+            do {
                 String idPost = cursor.getString(cursor.getColumnIndex("idPost"));
                 data.setPostid(idPost);
                 favorites.add(data);
-            }while(cursor.moveToNext());
+            } while (cursor.moveToNext());
         }
         cursor.close();
 
-        adapter = new FavoriteLvAdapter(getContext(),R.layout.item_lv_favorite,favorites,tokens);
+        adapter = new FavoriteLvAdapter(getContext(), R.layout.item_lv_favorite, favorites, token);
         lvFavorite.setAdapter(adapter);
 
 
@@ -92,4 +105,5 @@ public class FragmentFavorite extends Fragment {
 //        favorites.add(data4);
 //        favorites.add(data5);
     }
+
 }

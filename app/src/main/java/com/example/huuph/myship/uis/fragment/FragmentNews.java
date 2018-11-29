@@ -154,12 +154,14 @@ public class FragmentNews extends Fragment {
                                         String idPost = dataNews.get(pos).getPostid();
                                         DatabaseHand database = new DatabaseHand(getContext());
                                         database.insertIdPost(idPost);
-                                        Log.d("TAG","Saved IDPost "+ idPost);
+                                        Log.d("TAG", "Saved IDPost " + idPost);
                                     }
                                 },
                                 token);
+
                         lvNew.setAdapter(adapter);
                         lvNew.smoothScrollToPosition(0);
+                        lvNew.invalidateViews();
 
                     }
                 }

@@ -94,16 +94,7 @@ public class FragmentMap extends Fragment   {
         });
         mMapView = (MapView) view.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
-
-
-
-
-
-
-
         mMapView.onResume(); // needed to get the map to display immediately
-
-
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
         } catch (Exception e) {
