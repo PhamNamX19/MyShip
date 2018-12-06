@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     //mail va name ...facebook
     String email, name, id_facebook;
     //ma token facebook
-    private String token = "EAAezF1ZAFw8EBALPBCZCidxxF2NW6ZCV4opM73az9saDfzIHYo2oGhaKOzRvAq4DQ74P5RGaOVmeXZCsEZBKOjLgO3ttdJTV1xKhZB36I1dRBavOZCi8KZB07vRuImZB4JHor8uBoqcis9R7QB6HOZC13Bz3MlWKx6n1D1cEvZBi4WQmP0XmH6qfDtGJ8m0DylKZCC1v7dZA66sqmvwZDZD";
+    private String token = "EAAGxzui9ezkBAPFd1ruZBZB4Ywvt6S5WvwZAR8drX6eIVp5E3zsctLchZBcZCoSl5cZARvShIi94F0npXxZBi4uCaXzA0LZBvgclEYgXTpRalLGAwT7TyR0kGUzr4SmPg9YpgIWClDwuZCwlzwd2NIw4YjkqIZCKGQRVJxttXKC5bZAzc1wz0Y0vRcQJ50JiI0bP5cZD";
 
 
     @Override
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO đăng nhập fb thành công
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
-                token = loginResult.getAccessToken().getToken();
+               // token = loginResult.getAccessToken().getToken();
                 Log.d("token", token);
                 //lay thong tin nguoi dung
                 result();
@@ -208,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Đăng nhập thành công.Xin hãy đợi...", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, main_main.class);
                         intent.putExtra("token", token);
+                        intent.putExtra("LoginEmail","false");
 
                         startActivity(intent);
                     } else {
@@ -239,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("name", name);
                     intent.putExtra("id_facebook", id_facebook);
                     intent.putExtra("token", token);
+                    intent.putExtra("LoginEmail","true");
                     finish();
                     startActivity(intent);
 

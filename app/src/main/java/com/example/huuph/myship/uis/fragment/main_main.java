@@ -58,7 +58,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class main_main extends AppCompatActivity implements ViewPager.OnPageChangeListener {
-     private String[] PERMISSION = {
+    private String[] PERMISSION = {
             android.Manifest.permission.ACCESS_COARSE_LOCATION,
             android.Manifest.permission.ACCESS_FINE_LOCATION
     };
@@ -84,7 +84,8 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
 
     String email, name, id_facebook;
     String token;
-     ProfilePictureView profilePicture;
+    String testLoginEmail;
+    ProfilePictureView profilePicture;
 
 
     @Override
@@ -105,9 +106,6 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
             setUpActionBar();
             initSliding();
             getInfo();
-
-
-
         }
 
 
@@ -117,12 +115,12 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
 
-
     private void anhxa() {
         profilePicture = (ProfilePictureView) findViewById(R.id.profilePicture);
         tvUsername = findViewById(R.id.tvUsername);
         tvUserEmail = findViewById(R.id.tvUserEmail);
         profilePicture = findViewById(R.id.profilePicture);
+        imageView = findViewById(R.id.v);
     }
 
     private void getInfo() {
@@ -132,12 +130,20 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
             email = getIntent().getStringExtra("email");
             id_facebook = getIntent().getStringExtra("id_facebook");
             token = getIntent().getStringExtra("token");
+            testLoginEmail = getIntent().getStringExtra("LoginEmail");
+
             Log.d("JSONs", "ten" + name + "email" + email + "idfb:" + id_facebook);
             Log.d("TOKENS", token);
             tvUsername.setText(name);
             tvUserEmail.setText(email);
             profilePicture.setProfileId(id_facebook);
             //gui du lieu token sang fragment
+            //an avatar
+            if (testLoginEmail.equals("true")) {
+                imageView.setVisibility(imageView.GONE);
+            } else {
+                profilePicture.setVisibility(profilePicture.GONE);
+            }
 
         } else {
             tvUsername.setText("Khách");
@@ -181,8 +187,6 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         viewPager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(viewPager);
         drawerLayout.addDrawerListener(drawerToggle);
-        imageView=findViewById(R.id.v);
-
 
 
     }
@@ -193,7 +197,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
                 R.string.app_name,
                 R.string.app_name);
         drawerLayout.addDrawerListener(toggle);
-        Log.d("TAG","CLGT");
+        Log.d("TAG", "CLGT");
         toggle.syncState();
     }
 
@@ -221,9 +225,9 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
         if (i == 0) {
 
             FragmentNews.getInstance();
-            Log.d("TAG","CLGT");
+            Log.d("TAG", "CLGT");
         }
-        if (i==2){
+        if (i == 2) {
             FragmentHistory.getInstance();
         }
     }
@@ -238,15 +242,15 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
     public void ThongBao(View view) {
-        Intent intent = new Intent(this,ThongBao.class);
+        Intent intent = new Intent(this, ThongBao.class);
         startActivity(intent);
     }
 
     public void DangXuat(View view) {
-            LoginManager.getInstance().logOut();
-            finish();
-            Intent intent = new Intent(this,MainActivity.class);
-            startActivity(intent);
+        LoginManager.getInstance().logOut();
+        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
 
     }
 
@@ -257,30 +261,24 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
 
-
-
-
-
     public void selectImage(View view) {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
     }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null )
-        {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
             filePath = data.getData();
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
 
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -288,13 +286,12 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
     public void Upload(View view) {
-        if(filePath != null)
-        {
+        if (filePath != null) {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
-            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -307,21 +304,21 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
                                     .getTotalByteCount());
-                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                            progressDialog.setMessage("Uploaded " + (int) progress + "%");
                         }
                     });
         }
     }
 
-    public void Download(View view)  {
+    public void Download(View view) {
 
 
     }
