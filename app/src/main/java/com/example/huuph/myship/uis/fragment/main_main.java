@@ -85,6 +85,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     String email, name, id_facebook;
     String token;
     String testLoginEmail;
+    String user;
     ProfilePictureView profilePicture;
 
 
@@ -131,6 +132,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
             id_facebook = getIntent().getStringExtra("id_facebook");
             token = getIntent().getStringExtra("token");
             testLoginEmail = getIntent().getStringExtra("LoginEmail");
+
 
             Log.d("JSONs", "ten" + name + "email" + email + "idfb:" + id_facebook);
             Log.d("TOKENS", token);

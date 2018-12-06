@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
@@ -61,14 +63,22 @@ public class MainActivity extends AppCompatActivity {
 
     //mail va name ...facebook
     String email, name, id_facebook;
+    String user;
     //ma token facebook
     private String token = "EAAGxzui9ezkBAPFd1ruZBZB4Ywvt6S5WvwZAR8drX6eIVp5E3zsctLchZBcZCoSl5cZARvShIi94F0npXxZBi4uCaXzA0LZBvgclEYgXTpRalLGAwT7TyR0kGUzr4SmPg9YpgIWClDwuZCwlzwd2NIw4YjkqIZCKGQRVJxttXKC5bZAzc1wz0Y0vRcQJ50JiI0bP5cZD";
-
+    String[] perms = {"android.permission.FINE_LOCATION", "android.permission.CAMERA", "android.permission.ACCESS_COARSE_LOCATION", "android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        int permsRequestCode = 200;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(perms, permsRequestCode);
+
+        }
+
+
         Initialization();
         setLogin_Button();
         //an button facebook mac dinh
@@ -122,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO đăng nhập fb thành công
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
-               // token = loginResult.getAccessToken().getToken();
+                // token = loginResult.getAccessToken().getToken();
                 Log.d("token", token);
                 //lay thong tin nguoi dung
                 result();
@@ -190,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
 
-        String user = edLoginUser.getText().toString().trim();
+        user = edLoginUser.getText().toString().trim();
         String pass = edLoginPass.getText().toString().trim();
         if (user.equals("") || pass.equals("")) {
             Toast.makeText(this, "Vui lòng nhập thông tin", Toast.LENGTH_SHORT).show();
@@ -208,7 +218,8 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Đăng nhập thành công.Xin hãy đợi...", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, main_main.class);
                         intent.putExtra("token", token);
-                        intent.putExtra("LoginEmail","false");
+                        intent.putExtra("LoginEmail", "false");
+                        intent.putExtra("email", user);
 
                         startActivity(intent);
                     } else {
@@ -240,7 +251,8 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("name", name);
                     intent.putExtra("id_facebook", id_facebook);
                     intent.putExtra("token", token);
-                    intent.putExtra("LoginEmail","true");
+                    intent.putExtra("LoginEmail", "true");
+
                     finish();
                     startActivity(intent);
 
@@ -283,5 +295,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void LoginGoogle(View view) {
         Toast.makeText(MainActivity.this, "Chức năng đang xây dựng", Toast.LENGTH_SHORT).show();
+    }
+
+    //xin quyen
+    @Override
+    public void onRequestPermissionsResult(int permsRequestCode, String[] permissions, int[] grantResults) {
+
+        switch (permsRequestCode) {
+
+            case 200:
+
+                boolean fineloction = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                boolean cameraAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                boolean coarselocation = grantResults[2] == PackageManager.PERMISSION_GRANTED;
+                boolean readstorage = grantResults[3] == PackageManager.PERMISSION_GRANTED;
+                boolean writestorage = grantResults[4] == PackageManager.PERMISSION_GRANTED;
+
+                break;
+
+        }
+
     }
 }
