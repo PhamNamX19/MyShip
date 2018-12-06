@@ -17,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.huuph.myship.R;
+import com.example.huuph.myship.adapter.DirectionPointListener;
+import com.example.huuph.myship.adapter.GetPathFromLocation;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import android.support.v4.app.FragmentActivity;
 import android.widget.EditText;
@@ -30,9 +32,12 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,12 +45,15 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class FragmentMap extends Fragment   {
     private static FragmentMap instance;
     MapView mMapView;
     private GoogleMap googleMap;
     private FusedLocationProviderClient client;
+
 
 
     private Context context;
@@ -83,6 +91,25 @@ public class FragmentMap extends Fragment   {
                     LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
                     googleMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
                     googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                    LatLng source = new LatLng(20.9835893, 105.79761588);
+                    LatLng destination = new LatLng(address.getLatitude(), address.getLongitude());
+
+                    new GetPathFromLocation(source, destination, new DirectionPointListener() {
+                        @Override
+                        public void onPath(PolylineOptions polyLine) {
+                            googleMap.addPolyline(polyLine);
+                        }
+                    }).execute();
+                    googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                        @Override
+                        public boolean onMarkerClick(Marker marker) {
+
+                            marker.remove();
+                            return true;
+                        }
+                    });
+
+
                 }
 
                 else {
@@ -119,6 +146,8 @@ public class FragmentMap extends Fragment   {
 
 
 
+
+
                 // For zooming automatically to the location of the marker
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
@@ -132,6 +161,9 @@ public class FragmentMap extends Fragment   {
                 googleMap.getUiSettings().setZoomControlsEnabled(true);
                 googleMap.getUiSettings().setCompassEnabled(true);
 
+
+
+
             }
         });
 
@@ -139,6 +171,7 @@ public class FragmentMap extends Fragment   {
         return view;
 
     }
+
 
 
 
