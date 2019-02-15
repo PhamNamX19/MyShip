@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.huuph.myship.R;
 import com.example.huuph.myship.SQLiteHelper.DatabaseHand;
@@ -68,23 +69,19 @@ public class FragmentNews extends Fragment {
         token = activity.getToken();
         Log.d("token", "new" + token);
         getDataFeed();
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        refreshLayout.setOnRefreshListener(() -> new Handler().postDelayed(new Runnable() {
             @Override
-            public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshLayout.setRefreshing(false);
-                        getDataFeed();
-                        Log.d("TAG","refreshed layout");
-                    }
-                },2000);
+            public void run() {
+                refreshLayout.setRefreshing(false);
+                getDataFeed();
+                Log.d("TAG","refreshed layout");
             }
-        });
+        },2000));
         return view;
 
     }
 
+    //get data json
     //get data json
     private void getDataFeed() {
 
@@ -107,8 +104,7 @@ public class FragmentNews extends Fragment {
                         String idfeed = datal.get("id").getAsString();
                         String message = datal.get("message").getAsString();
                         String updatedTime = datal.get("updated_time").getAsString();
-                        //2018-11-26T04:14:52+0000
-                        //2018-11-26T04:14:52
+
                         //format day
                         String day = updatedTime.substring(8, 10) + "-" + updatedTime.substring(5, 7) + "-" + updatedTime.substring(0, 4);
                         //format time
@@ -126,36 +122,28 @@ public class FragmentNews extends Fragment {
                         Log.d("TAG", idfeed + message + updatedTime);
 
                         adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews,
-                                new NewLvAdapter.OnPostItemClickListener() {
-                                    @Override
-                                    public void onPostItemClick(int pos) {
-                                        Intent intent = new Intent(getActivity(), WebViewFabook.class);
-                                        String id = dataNews.get(pos).getPostid();
-                                        int vitri_ = id.indexOf("_");
-                                        id = id.substring(vitri_ + 1);
-                                        intent.putExtra("idfeed", id);
-                                        getActivity().startActivity(intent);
-                                    }
+                                pos -> {
+                                    Intent intent = new Intent(getActivity(), WebViewFabook.class);
+                                    String id = dataNews.get(pos).getPostid();
+                                    int vitri_ = id.indexOf("_");
+                                    id = id.substring(vitri_ + 1);
+                                    intent.putExtra("idfeed", id);
+                                    getActivity().startActivity(intent);
                                 },
-                                new NewLvAdapter.OnPostItemClickListener() {
-                                    @Override
-                                    public void onPostItemClick(int pos) {
-                                        String message = dataNews.get(pos).getMessage();
-                                        String phone = StringHandle.searchPhone(message);
-                                        phone = "tel:"+phone;
-                                        Intent callIntent = new Intent(Intent.ACTION_DIAL,Uri.parse(phone));
-                                        startActivity(callIntent);
-                                        Log.d("TAG", "clicked Call " + phone);
-                                    }
+                                pos -> {
+                                    String message1 = dataNews.get(pos).getMessage();
+                                    String phone = StringHandle.searchPhone(message1);
+                                    phone = "tel:"+phone;
+                                    Intent callIntent = new Intent(Intent.ACTION_DIAL,Uri.parse(phone));
+                                    startActivity(callIntent);
+                                    Log.d("TAG", "clicked Call " + phone);
                                 },
-                                new NewLvAdapter.OnPostItemClickListener() {
-                                    @Override
-                                    public void onPostItemClick(int pos) {
-                                        String idPost = dataNews.get(pos).getPostid();
-                                        DatabaseHand database = new DatabaseHand(getContext());
-                                        database.insertIdPost(idPost);
-                                        Log.d("TAG", "Saved IDPost " + idPost);
-                                    }
+                                pos -> {
+                                    String idPost = dataNews.get(pos).getPostid();
+                                    DatabaseHand database = new DatabaseHand(getContext());
+                                    database.insertIdPost(idPost);
+                                    Toast.makeText(getActivity(), "Đã lưu", Toast.LENGTH_SHORT).show();
+                                    Log.d("TAG", "Saved IDPost " + idPost);
                                 },
                                 token);
 

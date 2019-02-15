@@ -89,6 +89,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     ProfilePictureView profilePicture;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -257,9 +258,11 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
     public void HoTro(View view) {
+        Toast.makeText(this,"chức năng đang xây dựng",Toast.LENGTH_LONG).show();
     }
 
     public void HuongDan(View view) {
+        Toast.makeText(this,"chức năng đang xây dựng",Toast.LENGTH_LONG).show();
     }
 
 
@@ -288,6 +291,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
     public void Upload(View view) {
+
         if (filePath != null) {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
