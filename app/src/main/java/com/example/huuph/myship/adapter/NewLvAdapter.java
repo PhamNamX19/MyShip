@@ -83,9 +83,10 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         Datum dataNew = listData.get(position);
-        getUserInfo(viewHolder.tvUser, dataNew.getPostid(), token);
+     //   getUserInfo(viewHolder.tvUser, dataNew.getPostid(), token);
         viewHolder.tvPost.setText(dataNew.getMessage());
         viewHolder.tvTimePost.setText(dataNew.getUpdatedTime());
+        viewHolder.tvUser.setText(dataNew.getName());
         //add listener
         viewHolder.btBinhLuon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,28 +125,28 @@ public class NewLvAdapter extends ArrayAdapter<Datum> {
     public interface OnPostItemClickListener {
         void onPostItemClick(int pos);
     }
-
-    public void getUserInfo(final TextView tv, String idfeed, String tokens) {
-        Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
-        jsonElementCall.enqueue(new Callback<JsonElement>() {
-            @Override
-            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                JsonElement jsonElement = response.body();
-                JsonObject jsonObject1 = jsonElement.getAsJsonObject();
-
-                if (jsonObject1.getAsJsonObject("from") != null) {
-                    JsonObject from = jsonObject1.getAsJsonObject("from");
-                    String name = from.get("name").getAsString();
-                    Log.d("names", name);
-                    nameUserPost = name;
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonElement> call, Throwable t) {
-                Log.d("TAG", "fail");
-            }
-        });
-        tv.setText(nameUserPost);
-    }
+//
+//    public void getUserInfo(final TextView tv, String idfeed, String tokens) {
+//        Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
+//        jsonElementCall.enqueue(new Callback<JsonElement>() {
+//            @Override
+//            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+//                JsonElement jsonElement = response.body();
+//                JsonObject jsonObject1 = jsonElement.getAsJsonObject();
+//
+//                if (jsonObject1.getAsJsonObject("from") != null) {
+//                    JsonObject from = jsonObject1.getAsJsonObject("from");
+//                    String name = from.get("name").getAsString();
+//                    Log.d("names", name);
+//                    nameUserPost = name;
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<JsonElement> call, Throwable t) {
+//                Log.d("TAG", "fail");
+//            }
+//        });
+//        tv.setText(nameUserPost);
+//    }
 }

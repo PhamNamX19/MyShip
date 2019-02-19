@@ -45,4 +45,9 @@ public class PageAdapter extends FragmentPagerAdapter {
         }
         return super.getPageTitle(position);
     }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
 }

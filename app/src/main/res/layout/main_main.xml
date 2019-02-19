@@ -57,7 +57,7 @@
                         android:layout_margin="15dp"
                         android:onClick="selectImage"
                         android:padding="20dp"
-                        android:src="@drawable/thungrac" />
+                        android:src="@drawable/avatardefault" />
 
 
                 </FrameLayout>

@@ -89,7 +89,6 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     ProfilePictureView profilePicture;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -109,11 +108,7 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
             initSliding();
             getInfo();
         }
-
-
         //nhan thong tin nguoi dung
-
-
     }
 
 
@@ -258,11 +253,11 @@ public class main_main extends AppCompatActivity implements ViewPager.OnPageChan
     }
 
     public void HoTro(View view) {
-        Toast.makeText(this,"chức năng đang xây dựng",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "chức năng đang xây dựng", Toast.LENGTH_LONG).show();
     }
 
     public void HuongDan(View view) {
-        Toast.makeText(this,"chức năng đang xây dựng",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "chức năng đang xây dựng", Toast.LENGTH_LONG).show();
     }
 
 

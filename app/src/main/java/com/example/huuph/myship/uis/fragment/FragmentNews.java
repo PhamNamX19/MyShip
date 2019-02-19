@@ -114,42 +114,20 @@ public class FragmentNews extends Fragment {
                         h = h + 7;
                         hour = h + "";
                         updatedTime = day + "  " + hour + updatedTime.substring(vitri_T + 3, vitri_T + 6);
-                        Datum datas = new Datum(message, updatedTime, idfeed);
-                        WriteDatabase(message, updatedTime, idfeed);
+                        Datum datas = new Datum();
+
+
+                        datas.setPostid(idfeed);
+                        datas.setUpdatedTime(updatedTime);
+                        datas.setMessage(message);
+                        // WriteDatabase(message, updatedTime, idfeed);
                         dataNews.add(datas);
+                        getUserInfo(idfeed,token,i);
 
                         //log
                         Log.d("TAG", idfeed + message + updatedTime);
 
-                        adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews,
-                                pos -> {
-                                    Intent intent = new Intent(getActivity(), WebViewFabook.class);
-                                    String id = dataNews.get(pos).getPostid();
-                                    int vitri_ = id.indexOf("_");
-                                    id = id.substring(vitri_ + 1);
-                                    intent.putExtra("idfeed", id);
-                                    getActivity().startActivity(intent);
-                                },
-                                pos -> {
-                                    String message1 = dataNews.get(pos).getMessage();
-                                    String phone = StringHandle.searchPhone(message1);
-                                    phone = "tel:"+phone;
-                                    Intent callIntent = new Intent(Intent.ACTION_DIAL,Uri.parse(phone));
-                                    startActivity(callIntent);
-                                    Log.d("TAG", "clicked Call " + phone);
-                                },
-                                pos -> {
-                                    String idPost = dataNews.get(pos).getPostid();
-                                    DatabaseHand database = new DatabaseHand(getContext());
-                                    database.insertIdPost(idPost);
-                                    Toast.makeText(getActivity(), "Đã lưu", Toast.LENGTH_SHORT).show();
-                                    Log.d("TAG", "Saved IDPost " + idPost);
-                                },
-                                token);
 
-                        lvNew.setAdapter(adapter);
-                        lvNew.smoothScrollToPosition(0);
-                        lvNew.invalidateViews();
 
                     }
                 }
@@ -163,16 +141,67 @@ public class FragmentNews extends Fragment {
 
     }
 
-    public void WriteDatabase(String message, String updatedTime, String postid) {
+    public void WriteDatabase(String message, String updatedTime, String postid, String name) {
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference().child("POST");
-        Datum data1 = new Datum(message, updatedTime, postid);
+        Datum data1 = new Datum(message, updatedTime, postid,name);
         // myRef.push().setValue(data1);
         myRef.child(postid).setValue(data1);
 
 
+    }
+
+    synchronized public void getUserInfo(String idfeed, String tokens,int pos) {
+        Call<JsonElement> jsonElementCall = RestClient.getAPIs().getUserid(idfeed, "from", tokens);
+        jsonElementCall.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                JsonElement jsonElement = response.body();
+                JsonObject jsonObject1 = jsonElement.getAsJsonObject();
+
+                if (jsonObject1.getAsJsonObject("from") != null) {
+                    JsonObject from = jsonObject1.getAsJsonObject("from");
+                    String name = from.get("name").getAsString();
+                    dataNews.get(pos).setName(name);
+                    adapter = new NewLvAdapter(getContext(), R.layout.item_listview, dataNews,
+                            pos -> {
+                                Intent intent = new Intent(getActivity(), WebViewFabook.class);
+                                String id = dataNews.get(pos).getPostid();
+                                int vitri_ = id.indexOf("_");
+                                id = id.substring(vitri_ + 1);
+                                intent.putExtra("idfeed", id);
+                                getActivity().startActivity(intent);
+                            },
+                            pos -> {
+                                String message1 = dataNews.get(pos).getMessage();
+                                String phone = StringHandle.searchPhone(message1);
+                                phone = "tel:"+phone;
+                                Intent callIntent = new Intent(Intent.ACTION_DIAL,Uri.parse(phone));
+                                startActivity(callIntent);
+                                Log.d("TAG", "clicked Call " + phone);
+                            },
+                            pos -> {
+                                String idPost = dataNews.get(pos).getPostid();
+                                DatabaseHand database = new DatabaseHand(getContext());
+                                database.insertIdPost(idPost);
+                                Toast.makeText(getActivity(), "Đã lưu", Toast.LENGTH_SHORT).show();
+                                Log.d("TAG", "Saved IDPost " + idPost);
+                            },
+                            token);
+
+                    lvNew.setAdapter(adapter);
+                    lvNew.smoothScrollToPosition(0);
+                    lvNew.invalidateViews();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                Log.d("TAG", "fail");
+            }
+        });
     }
 
 
