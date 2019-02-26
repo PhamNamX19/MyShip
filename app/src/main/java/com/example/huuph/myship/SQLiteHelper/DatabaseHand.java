@@ -28,7 +28,7 @@ public class DatabaseHand {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-            String quer = "DROP TABLE IF EXISTS MonHoc";
+            String quer = "DROP TABLE IF EXISTS idPOST";
             db.execSQL(quer);
             onCreate(db);
         }
