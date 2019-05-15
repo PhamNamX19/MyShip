@@ -25,7 +25,7 @@ public class WebViewFabook extends AppCompatActivity {
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        webView.loadUrl("https://m.facebook.com/groups/546129785832997?view=permalink&id=" + idfeed + "&__tn__=%2As-R");
+        webView.loadUrl("https://m.facebook.com/groups/339156823381001?view=permalink&id=" + idfeed + "&__tn__=%2As-R");
         webView.setWebViewClient(new WebViewClient());
 
 

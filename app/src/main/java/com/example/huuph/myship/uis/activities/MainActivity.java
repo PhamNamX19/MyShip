@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+
     private CallbackManager callbackManager;
     private LoginButton loginButton;
     private String TAG = "TEST";
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     String email, name, id_facebook;
     String user;
     //ma token facebook
-    private String token = "EAAGxzui9ezkBAClPDClOoJh2ODEPjyT5Tt7JMrA0NfRkPaYBtzPTzQlc0yNHpZBEHk8zzEBCfeZB4N7eyr0JZCly8vJJwqAANbBSjOZBL8f78y6vqzDijI3oeDphSV4f9xBiPHmsflHys6MSRcH67eJl9uVIPK3eTHEKEHJUY08Xx9ZBZB9M5RsR4CX6z5XgUZD";
+    private String token = "EAAezF1ZAFw8EBAH0QvgMjR7Ac34LAmT7IfFxHr6vwOvEtDCPUNlsXgLRBoKlLIpjdLZCUAMYZBgWhGTcxSPDHk97npfEgcPmS5joxKhZBMINHYUIqFZBdUkRX7WOhbRVrKWvEuaHw7P6aZBTBCP31FZC0HRD1Y0x4384ytZBU21s9nmSNd3H1dZBZA3DsSIyXpDhv6oAQKErseugZDZD";
     String[] perms = {"android.permission.FINE_LOCATION", "android.permission.CAMERA", "android.permission.ACCESS_COARSE_LOCATION", "android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"};
 
     @Override
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         int permsRequestCode = 200;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(perms, permsRequestCode);
+
         }
 
 
@@ -130,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO đăng nhập fb thành công
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
-                token = loginResult.getAccessToken().getToken();
+                // token = loginResult.getAccessToken().getToken();
                 Log.d("token", token);
                 //lay thong tin nguoi dung
                 result();
@@ -149,14 +151,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mAuth = FirebaseAuth.getInstance();
-        mAuthListener = firebaseAuth -> {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user != null) {
-                //dang nhap thanh cong
-                //todo lay thong tin avatar, mail
-                Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
-            } else {
-                Log.d(TAG, "onAuthStateChanged:signed_out");
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    //dang nhap thanh cong
+                    //todo lay thong tin avatar, mail
+                    Log.d(TAG, "onAuthStateChanged:signed_in" + user.getUid());
+                } else {
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
             }
         };
     }
@@ -234,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCompleted(JSONObject object, GraphResponse response) {
 
                 //xuất ra log thông tin id, name, mail khi đăng nhập thành công
-                     Log.d("JSON", response.getJSONObject().toString());
+                Log.d("JSON", response.getJSONObject().toString());
 
                 //thấy thông tin
                 try {
@@ -305,6 +310,7 @@ public class MainActivity extends AppCompatActivity {
                 boolean coarselocation = grantResults[2] == PackageManager.PERMISSION_GRANTED;
                 boolean readstorage = grantResults[3] == PackageManager.PERMISSION_GRANTED;
                 boolean writestorage = grantResults[4] == PackageManager.PERMISSION_GRANTED;
+
                 break;
 
         }

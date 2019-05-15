@@ -29,6 +29,7 @@ public class GetPathFromLocation extends AsyncTask<String, Void, PolylineOptions
         this.source = source;
         this.destination = destination;
         this.resultCallback = resultCallback;
+
     }
 
     public String getUrl(LatLng origin, LatLng dest) {

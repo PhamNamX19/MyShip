@@ -34,7 +34,7 @@ public class FavoriteLvAdapter extends ArrayAdapter<Datum> {
 
     private Context context;
     private List<Datum> list;
-    private String nameUserPost ="HoangBinh";
+    private String nameUserPost ="Vũ Tiến Việt";
     private String token;
 
 
